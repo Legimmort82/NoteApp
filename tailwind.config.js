@@ -8,13 +8,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "total":"#F8EEE2",
-        "sidebar": "#D74A4A",
-        "home-page-card": "#FEDBC8",
-        "total-dark":"#231E40",
-        "sidebar-dark": "#201739",
-        "home-page-card-dark": "#40677D",
-
+        Primary:{
+          "500": "#D9614C",
+          "100": "#F8EEE2"
+        },
+        "dark": "#231E40" 
       },
     },
   },
