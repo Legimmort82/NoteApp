@@ -1,6 +1,7 @@
 import darkchangeimg from "@/assets/icons/dark-change.svg";
 import { darkModeContext } from "@/context/DarkModeContext";
 import Image from "next/image";
+import Link from "next/link";
 import { useContext } from "react";
 
 export default function Register() {
@@ -52,9 +53,9 @@ export default function Register() {
                 Create Account
               </button>
 
-              <a className="text-Primary-500 font-bold text-[16px]" href="#">
+              <Link  className="text-Primary-500 font-bold text-[16px]" href="login">
                 Already have an account?
-              </a>
+              </Link>
             </form>
           </div>
 

@@ -6,17 +6,21 @@ import image4w from "@/icons/w4.svg";
 import image5w from "@/icons/w5.svg";
 import image6w from "@/icons/w6.svg";
 import image7w from "@/icons/w7.svg";
+import { darkModeContext } from "@/context/DarkModeContext";
+import { useContext } from "react";
 
 const Layout = ({ children }) => {
+  const { dark, setDark } = useContext(darkModeContext);
+  console.log(dark);
   return (
-    <div className="flex">
-      <div className="bg-sidebar dark:bg-sidebar-dark w-[100px] h-screen  flex flex-col justify-around items-center ">
+    <div className={`flex ${dark && "dark"}`}>
+      <div className="bg-Primary-500 dark:bg-dark-500 w-[100px] h-screen  flex flex-col justify-around items-center ">
         <Image className="w-[40px] h-[40px]" src={image1w} />
         <Image className="w-[40px] h-[40px]" src={image3w} />
         <Image className="w-[40px] h-[40px]" src={image2w} />
         <Image className="w-[40px] h-[40px]" src={image4w} />
         <Image className="w-[40px] h-[40px]" src={image5w} />
-        <Image className="w-[40px] h-[40px]" src={image6w} />
+        <Image className="w-[40px] h-[40px]" src={image6w} onClick={()=>{setDark(!dark)}}/>
         <Image className="w-[40px] h-[40px]" src={image7w} />
       </div>
       <div>{children}</div>
