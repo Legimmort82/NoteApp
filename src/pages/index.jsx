@@ -1,4 +1,3 @@
-
 import image1r from "@/icons/r1.svg";
 import image2r from "@/icons/r2.svg";
 import image3r from "@/icons/r3.svg";
