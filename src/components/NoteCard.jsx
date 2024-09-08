@@ -11,9 +11,9 @@ function NoteCard({folderName, date, img1, img2, img3}) {
             <div className="flex justify-between items-center">
                 <p className="text-gray-500 text-[18px]">Folder Name this desc .....</p>
                 <div className="flex">
-                    <Image className="w-[30px] pl-2" src={img1} />
-                    <Image className="w-[30px] pl-2" src={img2} />
-                    <Image className="w-[30px] pl-2" src={img3} />
+                    <Image className="w-[25px] ml-2 cursor-pointer" src={img1} />
+                    <Image className="w-[25px] ml-2 cursor-pointer" src={img2} />
+                    <Image className="w-[25px] ml-2 cursor-pointer" src={img3} />
                 </div>
             </div>
         </div>

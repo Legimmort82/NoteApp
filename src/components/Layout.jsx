@@ -8,18 +8,34 @@ import image7w from "@/icons/w7.svg";
 import Image from "next/image";
 import { darkModeContext } from "@/context/DarkModeContext";
 import { useContext } from "react";
+import Link from "next/link";
 
 const Layout = ({ children }) => {
   const { dark, setDark } = useContext(darkModeContext);
  
   return (
     <div className={`flex ${dark && "dark"}`}>
-      <div className="bg-Primary-500 dark:bg-dark-500 w-[100px] h-screen flex flex-col justify-around items-center sticky">
-        <Image className="w-[40px] h-[40px] cursor-pointer" src={image1w} />
-        <Image className="w-[40px] h-[40px] cursor-pointer" src={image3w} />
-        <Image className="w-[40px] h-[40px] cursor-pointer" src={image2w} />
-        <Image className="w-[40px] h-[40px] cursor-pointer" src={image4w} />
-        <Image className="w-[40px] h-[40px] cursor-pointer" src={image5w} />
+      <div className="bg-Primary-700 dark:bg-dark-500 w-[100px] h-screen flex flex-col justify-around items-center sticky">
+        <Link href={"allnotes"}>
+          <Image className="w-[40px] h-[40px] cursor-pointer" src={image1w} />
+        </Link>
+
+        <Link href={"addnotes"}>
+          <Image className="w-[40px] h-[40px] cursor-pointer" src={image2w} />
+        </Link>
+
+        <Link href={"folders"}>
+          <Image className="w-[40px] h-[40px] cursor-pointer" src={image3w} />
+        </Link>
+
+        <Link href={"trashes"}>
+          <Image className="w-[40px] h-[40px] cursor-pointer" src={image4w} />
+        </Link>
+
+        <Link href={"favorites"}>
+          <Image className="w-[40px] h-[40px] cursor-pointer" src={image5w} />
+        </Link>
+
         <Image className="w-[40px] h-[40px] cursor-pointer" src={image6w} onClick={()=>{setDark(!dark)}}/>
         <Image className="w-[40px] h-[40px] cursor-pointer" src={image7w} />
       </div>
