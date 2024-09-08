@@ -12,16 +12,13 @@ import dividerdown from "@/icons/Divider-down.svg";
 import Image from "next/image";
 import HomePageCard from "@/components/HomePageCard";
 import Layout from "@/components/Layout";
-import { useContext } from "react";
-import { darkModeContext } from "@/context/DarkModeContext";
 
 
 export default function Home() {
 
-
   return (
     <Layout>
-      <div className="bg-Primary-100 dark:bg-dark-300 h-screen flex relative overflow-clip">
+      <div className="bg-Primary-100 dark:bg-dark-300 h-screen relative overflow-clip">
         <div className="bg-Primary-500 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] shadow-md shadow-gray-400 "></div>
 
         <div className="pl-[20px] pr-[20px] flex flex-col items-center">

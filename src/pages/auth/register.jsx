@@ -10,8 +10,8 @@ export default function Register() {
   return (
     <>
     <div className={`${dark && "dark"}`}>
-      <div className="flex flex-col bg-Primary-100 items-center bg-total dark:bg-dark h-screen">
-        <div className="mb-7">
+      <div className="flex flex-col bg-Primary-100 items-center dark:bg-dark-300 h-screen">
+        <div className="mb-12">
           <h1 className="text-Primary-500 text-[90px] font-bold">Note Smart</h1>
         </div>
 
@@ -22,7 +22,7 @@ export default function Register() {
           }}
         >
           <Image 
-            className="w-[ 60px] h-[60px]"
+            className="w-[ 60px] h-[60px] cursor-pointer"
             src={darkchangeimg}
             alt="logo"
           />
@@ -34,17 +34,17 @@ export default function Register() {
               <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                 Email Address
               </label>
-              <input className="rounded-md h-10 mb-8 w-[100%]" type="email" />
+              <input className="rounded-md h-12 mb-8 w-[100%]" type="email" />
 
               <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                 Password
               </label>
-              <input className="rounded-md h-10 mb-8 w-[100%]" type="text" />
+              <input className="rounded-md h-12 mb-8 w-[100%]" type="text" />
 
               <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                 Confirm Password
               </label>
-              <input className="rounded-md h-10 mb-8 w-[100%]" type="text" />
+              <input className="rounded-md h-12 mb-8 w-[100%]" type="text" />
 
               <button
                 className=" text-white py-3 px-[90px] bg-Primary-500 rounded-md mb-3"

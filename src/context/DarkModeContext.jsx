@@ -9,6 +9,7 @@ const DarkModeProvider = ({ children }) => {
     dark,
     setDark,
   };
+  
   return (
     <darkModeContext.Provider value={values}>
       {children}

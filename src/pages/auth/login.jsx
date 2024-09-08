@@ -10,7 +10,7 @@ export default function Login() {
   return (
     <div className={`${dark && "dark"}`}>
       <div
-        className={`  flex flex-col items-center bg-Primary-100 dark:bg-dark h-screen relative `}
+        className={`  flex flex-col items-center bg-Primary-100 dark:bg-dark-300 h-screen relative `}
       >
         <div
           className="absolute top-[50px] right-[130px]"
@@ -19,13 +19,13 @@ export default function Login() {
           }}
         >
           <Image
-            className="w-[ 60px] h-[60px]"
+            className="w-[ 60px] h-[60px] cursor-pointer"
             src={darkchangeimg}
             alt="logo"
           />
         </div>
 
-        <div className="mb-7">
+        <div className="mb-12">
           <h1 className="text-Primary-500 text-[90px] font-bold">Note Smart</h1>
         </div>
 
@@ -35,12 +35,12 @@ export default function Login() {
               <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                 Email Address
               </label>
-              <input className="rounded-md h-10 mb-8 w-[100%]" type="email" />
+              <input className="rounded-md h-12 mb-8 w-[100%]" type="email" />
 
               <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                 Password
               </label>
-              <input className="rounded-md h-10 mb-8 w-[100%]" type="text" />
+              <input className="rounded-md h-12 mb-8 w-[100%]" type="text" />
 
               <button
                 className="bg-Primary-500 text-white py-3 px-[110px] rounded-md mb-3"
