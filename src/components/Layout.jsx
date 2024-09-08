@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
         <Image className="w-[40px] h-[40px] cursor-pointer" src={image6w} onClick={()=>{setDark(!dark)}}/>
         <Image className="w-[40px] h-[40px] cursor-pointer" src={image7w} />
       </div>
-      <div>{children}</div>
+      <div className="flex-1">{children}</div>
     </div>
   );
 };
