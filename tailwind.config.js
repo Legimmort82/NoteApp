@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         Primary:{
+          "800": "#BE2020",
           "700": "#D74A4A",
           "600": "#DF6363",
           "500": "#D9614C",
@@ -21,6 +22,16 @@ module.exports = {
           "500": "#201739",
           "300": "#231E40",
           "100": "#40677D"
+        },
+        note: {
+          "red" : "#C92626",
+          "purple": "#700B47",
+          "yellow": "#C1C52B",
+          "green": "#70B857",
+          "ligh-blie": "#35CEF0",
+          "orange": "#EB7635",
+          "pink": "#CA38AA",
+          "dark-blue": "#374FA6"
         },
       },
     },
