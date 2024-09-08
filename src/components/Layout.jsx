@@ -16,23 +16,23 @@ const Layout = ({ children }) => {
   return (
     <div className={`flex ${dark && "dark"}`}>
       <div className="bg-Primary-700 dark:bg-dark-500 w-[90px] h-screen flex flex-col justify-around items-center sticky">
-        <Link href={"allnotes"}>
+        <Link href={"/note/allnotes"}>
           <Image className="w-[40px] h-[40px] cursor-pointer" src={image1w} />
         </Link>
 
-        <Link href={"addnotes"}>
+        <Link href={"/note/addnotes"}>
           <Image className="w-[40px] h-[40px] cursor-pointer" src={image2w} />
         </Link>
 
-        <Link href={"folders"}>
+        <Link href={"/note/folders"}>
           <Image className="w-[40px] h-[40px] cursor-pointer" src={image3w} />
         </Link>
 
-        <Link href={"trashes"}>
+        <Link href={"/note/trashes"}>
           <Image className="w-[40px] h-[40px] cursor-pointer" src={image4w} />
         </Link>
 
-        <Link href={"favorites"}>
+        <Link href={"/note/favorites"}>
           <Image className="w-[40px] h-[40px] cursor-pointer" src={image5w} />
         </Link>
 
