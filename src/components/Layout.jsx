@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
  
   return (
     <div className={`flex ${dark && "dark"}`}>
-      <div className="bg-Primary-700 dark:bg-dark-500 w-[90px] h-screen flex flex-col justify-around items-center sticky">
+      <div className="bg-Primary-700 dark:bg-[#0C071C] min-w-[90px] h-screen flex flex-col justify-around items-center sticky left-0 top-0">
         <Link href={"/note/allnotes"}>
           <Image className="w-[40px] h-[40px] cursor-pointer" src={image1w} alt=""/>
         </Link>

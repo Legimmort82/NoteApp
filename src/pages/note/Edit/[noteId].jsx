@@ -1,12 +1,19 @@
-import Layout from "@/components/Layout";
-import Image from "next/image";
+import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
+import { useParams } from "next/navigation";
 import notedate from "@/assets/icons/note-date.svg";
 import arrowimg from "@/assets/icons/arrow.svg";
-import { useContext, useState } from "react";
-import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
+import Layout from "@/components/Layout";
+import Image from "next/image";
 
-function addnotes() {
-  const { createNote, notes } = useContext(darkModeNoteContext);
+import { useContext, useEffect, useState } from "react";
+
+const EditNote = () => {
+  const params = useParams();
+  const { createNote, notes, updateNote } = useContext(darkModeNoteContext);
+  const findNote = notes.find((note) => note.id == params?.noteId);
+
+  // console.log(findNote);
+
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
@@ -19,9 +26,16 @@ function addnotes() {
   const handelDesc = (e) => {
     setDesc(e.target.value);
   };
+  useEffect(() => {
+    if (findNote) {
+      setDesc(findNote.description);
+      setTag(findNote.tag);
+      setTitle(findNote.title);
+    }
+  }, [findNote]);
   const handleSubmit = () => {
-    createNote({
-      id: notes.length + 1,
+    updateNote(params.noteId, {
+      id: params.noteId,
       title: title,
       date:
         new Date().getFullYear() +
@@ -47,10 +61,10 @@ function addnotes() {
             <div className="pb-14">
               <input
                 type="text"
-                onChange={handelTitle}
                 value={title}
+                onChange={handelTitle}
                 placeholder="Type your title here..."
-                className="bg-Primary-100 px-2 outline-none w-full border-b-[5px] h-11 border-b-Primary-600 placeholder:text-[30px] pb-3 text-[30px] font-semibold dark:bg-dark-300 dark:text-white"
+                className="bg-Primary-100 px-2 outline-none w-full border-b-[5px] h-11 pb-3  border-b-Primary-600 text-[30px] font-semibold placeholder:text-[30px] dark:bg-dark-300 dark:text-white"
               />
 
               <div className=" flex justify-end items-center mt-3">
@@ -61,7 +75,7 @@ function addnotes() {
                   <div className="w-8 h-8 rounded-[50%] bg-Primary-800 ml-5"></div>
                 </div>
 
-                <button className="bg-Primary-300 text-[18px] text-gray-600 font-semibold rounded-md py-[2px] px-10 ml-[65px]">
+                <button className="bg-Primary-300 text-[18px] text-gray-500 font-semibold rounded-md py-[2px] px-10 ml-[65px]">
                   TagName
                 </button>
 
@@ -101,7 +115,7 @@ function addnotes() {
                   <div className="bg-Primary-400 flex items-center justify-between rounded-md py-3 px-4 w-[33%]">
                     <p className="text-[20px] font-semibold">Folder Name</p>
                     <Image
-                      className="cursor-pointer w-4 h-4"
+                      className="cursor-pointer w-6 h-6"
                       src={arrowimg}
                       alt=""
                     />
@@ -118,7 +132,7 @@ function addnotes() {
                     value={tag}
                     onChange={handelTag}
                     placeholder="Work"
-                    className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 border-b-Primary-600 text-[26px] font-medium text-gray-700 placeholder:text-[30px] dark:bg-dark-300 dark:text-white"
+                    className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 text-[26px] font-medium text-gray-700 border-b-Primary-600 placeholder:text-[30px] dark:bg-dark-300 dark:text-white"
                   />
 
                   {/* <p className="text-gray-400 text-[26px] font-semibold">Work</p>
@@ -128,10 +142,10 @@ function addnotes() {
             </div>
 
             <textarea
+              className="bg-Primary-100 resize-none text-[24px] rounded-lg border-[3px] w-[100%] h-[400px] border-Primary-500 border-solid placeholder:text-gray-400  placeholder:font-medium p-4 dark:bg-dark-300 dark:text-white"
+              type="text"
               value={desc}
               onChange={handelDesc}
-              className="bg-Primary-100 resize-none text-[24px] rounded-lg border-[3px] w-[100%] h-[400px] border-Primary-500 border-solid placeholder:text-gray-400  placeholder:font-medium p-4 dark:bg-dark-300 dark:text-white "
-              type="text"
               placeholder="Type your content here ..."
             />
             <button
@@ -145,6 +159,5 @@ function addnotes() {
       </Layout>
     </>
   );
-}
-
-export default addnotes;
+};
+export default EditNote;
