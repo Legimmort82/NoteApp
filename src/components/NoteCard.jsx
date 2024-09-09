@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-function NoteCard({ title, description, date, img1, img2, img3 ,color,id}) { //add folderName
-;
+function NoteCard({ title, description, date, img1, img2, img3 ,color,id}) { //TODO: add folderName
+
   return (
     <div className={`flex bg-white flex-col justify-between w-[30%] rounded-md px-4 py-3`} style={{borderLeft:`8px solid ${color}`,borderColor: color}}>
       <div className="flex justify-between items-center mb-5">
