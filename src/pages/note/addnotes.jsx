@@ -12,8 +12,7 @@ function addnotes() {
 
         <div className="pl-36 pr-40 py-7">
             <div className="pb-14">
-                <h2 className="text-gray-400 text-[40px] font-semibold mb-1">Type your title here ...</h2>
-                <hr className="h-[6px]  bg-Primary-600" />
+                <input type="text" placeholder="Type your title here..." className="bg-Primary-100 w-full border-b-[5px] h-11 border-b-Primary-600 placeholder:text-[30px]" />
 
                 <div className=" flex justify-end items-center mt-3">
                     <div className="flex items-center">
@@ -39,7 +38,7 @@ function addnotes() {
                         <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-yellow"></div>
                         <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-green"></div>
                         <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-purple"></div>
-                        <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-ligh-blie"></div>
+                        <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-light-blue"></div>
                         <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-orange"></div>
                         <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-pink"></div>
                         <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-dark-blue"></div>
@@ -59,8 +58,10 @@ function addnotes() {
                     <p className="text-[26px] font-semibold dark:text-white">Write your tag :</p>
 
                     <div className="mt-8">
-                        <p className="text-gray-400 text-[26px] font-semibold">Work</p>
-                        <hr className="h-[4.5px]  bg-Primary-600 text-gray-500" />
+                        <input type="text" placeholder="Work" className="bg-Primary-100 w-full border-b-[5px] h-11 border-b-Primary-600 placeholder:text-[30px]" />
+
+                        {/* <p className="text-gray-400 text-[26px] font-semibold">Work</p>
+                        <hr className="h-[4.5px]  bg-Primary-600 text-gray-500" /> */}
                     </div>
                 </div>
             </div>

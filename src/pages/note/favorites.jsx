@@ -1,10 +1,15 @@
 import Layout from "@/components/Layout";
 import trashimg from "@/assets/icons/trash.svg"
 import favoriteimg from "@/assets/icons/favorite.svg"
-import viewimg from "@/assets/icons/view.svg"
+import editimg from "@/assets/icons/edit.svg"
 import NoteCard from "@/components/NoteCard";
+import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
+import { useContext } from "react";
 
 function favorites() {
+  const {notes, setNotes} = useContext(darkModeNoteContext)
+
+  const notesFilter = notes.filter((note) => note.isFavorite == true)
   return (
     <>
     <Layout>
@@ -15,29 +20,20 @@ function favorites() {
           <h1 className="py-7  text-Primary-500 text-[55px] font-bold">Favorites</h1>
 
           <div className="flex justify-between">
-            <NoteCard 
-              folderName={"Folder Name"}
-              date={"2024/04/03"}
-              img1={viewimg}
-              img2={favoriteimg}
-              img3={trashimg}
-            />
-
-            <NoteCard 
-              folderName={"Folder Name"}
-              date={"2024/04/03"}
-              img1={viewimg}
-              img2={favoriteimg}
-              img3={trashimg}
-            />
-
-            <NoteCard 
-              folderName={"Folder Name"}
-              date={"2024/04/03"}
-              img1={viewimg}
-              img2={favoriteimg}
-              img3={trashimg}
-            />
+            {notesFilter.map((item) => {
+              const truncateText = item.description.slice(0,25).concat('...')
+              return (
+                <NoteCard
+                key={item.id}
+                folderName={item.folder}
+                date={item.date}
+                description={truncateText}
+                img1={editimg} 
+                img2={favoriteimg}
+                img3={trashimg}
+              />
+              );
+            })}
           </div>
         </div>  
     </div>

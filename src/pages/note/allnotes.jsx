@@ -1,10 +1,14 @@
 import Layout from "@/components/Layout";
 import trashimg from "@/assets/icons/trash.svg"
 import notfavoriteimg from "@/assets/icons/not-favorite.svg"
-import viewimg from "@/assets/icons/view.svg"
+import editimg from "@/assets/icons/edit.svg"
 import NoteCard from "@/components/NoteCard";
+import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
+import { useContext } from "react";
 
 function allnotes() {
+  const {notes, setNotes} = useContext(darkModeNoteContext)
+
   return (
     <>
     <Layout>
@@ -15,29 +19,20 @@ function allnotes() {
           <h1 className="py-7  text-Primary-500 text-[55px] font-bold">Allnotes</h1>
 
           <div className="flex justify-between">
-            <NoteCard 
-              folderName={"Folder Name"}
-              date={"2024/04/03"}
-              img1={viewimg}
-              img2={notfavoriteimg}
-              img3={trashimg}
-            />
-
-            <NoteCard 
-              folderName={"Folder Name"}
-              date={"2024/04/03"}
-              img1={viewimg}
-              img2={notfavoriteimg}
-              img3={trashimg}
-            />
-
-            <NoteCard 
-              folderName={"Folder Name"}
-              date={"2024/04/03"}
-              img1={viewimg}
-              img2={notfavoriteimg}
-              img3={trashimg}
-            />
+          {notes.map((item) => {
+            const truncateText = item.description.slice(0,25).concat('...')
+              return (
+                <NoteCard
+                  key={item.id}
+                  folderName={item.folder}
+                  date={item.date}
+                  description={truncateText}
+                  img1={editimg} 
+                  img2={notfavoriteimg}
+                  img3={trashimg}
+              />
+              );
+            })}
           </div>
         </div>  
     </div>

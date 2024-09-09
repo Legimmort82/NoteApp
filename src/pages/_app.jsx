@@ -1,11 +1,11 @@
-import { DarkModeProvider } from "@/context/DarkModeContext";
+import { DarkModeNoteProvider } from "@/context/DarkModeNoteContext";
 import "@/styles/globals.css";
 
 const App = ({ Component, pageProps }) => {
   return (
-    <DarkModeProvider>
+    <DarkModeNoteProvider>
       <Component {...pageProps} />
-    </DarkModeProvider>
+    </DarkModeNoteProvider>
   );
 };
 export default App;

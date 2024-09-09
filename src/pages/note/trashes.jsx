@@ -1,10 +1,16 @@
 import Layout from "@/components/Layout"
 import NoteCard from "@/components/NoteCard"
 import refreshimg from "@/assets/icons/refresh.svg"
-import viewimg from "@/assets/icons/view.svg"
+import editimg from "@/assets/icons/edit.svg"
+import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
+import { useContext } from "react";
 
 
 function trashes() {
+  const {notes, setNotes} = useContext(darkModeNoteContext);
+
+  const notesFilter = notes.filter((note) => note.isTrash == true)
+
   return (
     <>
     <Layout>
@@ -15,26 +21,20 @@ function trashes() {
           <h1 className="py-7  text-Primary-500 text-[55px] font-bold">Trashes</h1>
 
           <div className="flex justify-between">
-            <NoteCard 
-              folderName={"Folder Name"}
-              date={"2024/04/03"}
-              img1={viewimg}
-              img2={refreshimg}
-            />
-
-            <NoteCard 
-              folderName={"Folder Name"}
-              date={"2024/04/03"}
-              img1={viewimg}
-              img2={refreshimg}
-            />
-
-            <NoteCard 
-              folderName={"Folder Name"}
-              date={"2024/04/03"}
-              img1={viewimg}
-              img2={refreshimg}
-            />
+          {notesFilter.map((item) => {
+              const truncateText = item.description.slice(0,25).concat('...')
+              return (
+                <NoteCard
+                key={item.id}
+                folderName={item.folder}
+                date={item.date}
+                description={truncateText}
+                img1={editimg} 
+                img2={refreshimg}
+                img3={""}
+              />
+              );
+            })}
           </div>
         </div>  
     </div>    

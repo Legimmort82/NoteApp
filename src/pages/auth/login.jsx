@@ -1,11 +1,11 @@
 import darkchangeimg from "@/assets/icons/dark-change.svg";
-import { darkModeContext } from "@/context/DarkModeContext";
+import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 
 export default function Login() {
-  const { dark ,setDark} = useContext(darkModeContext);
+  const { dark ,setDark} = useContext(darkModeNoteContext);
   
   return (
     <div className={`${dark && "dark"}`}>
