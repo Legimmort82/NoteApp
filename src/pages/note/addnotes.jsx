@@ -33,7 +33,7 @@ function addnotes() {
         "/" +
         String(new Date().getDate()).padStart(2, "0"),
       description: desc,
-      color: "#C1C52B",
+      color: selectColor,
       tag: tag,
       isFavorite: false,
       isTrash: false,
