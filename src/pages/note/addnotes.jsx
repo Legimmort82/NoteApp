@@ -5,6 +5,7 @@ import arrowimg from "@/assets/icons/arrow.svg";
 import { useContext, useState } from "react";
 import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
 import { CirclePicker } from "react-color";
+import FolderCard from "@/components/FolderCard";
 
 function addnotes() {
   const { createNote, notes } = useContext(darkModeNoteContext);
@@ -111,14 +112,19 @@ function addnotes() {
                     Select your Folder:
                   </p>
 
-                  <div className="bg-Primary-400 flex items-center justify-between rounded-md py-3 px-4 w-[33%]">
+                  <FolderCard 
+                    folderName={"Folder Name"}
+                    img={arrowimg}
+                  />
+
+                  {/* <div className="bg-Primary-400 flex items-center justify-between rounded-md py-3 px-4 w-[33%]">
                     <p className="text-[20px] font-semibold">Folder Name</p>
                     <Image
                       className="cursor-pointer w-4 h-4"
                       src={arrowimg}
                       alt=""
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 <p className="text-[26px] font-semibold dark:text-white">
@@ -131,7 +137,7 @@ function addnotes() {
                     value={tag}
                     onChange={handelTag}
                     placeholder="Work"
-                    className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 border-b-Primary-600 text-[26px] font-medium text-gray-700 placeholder:text-[30px] dark:bg-dark-300 dark:text-white"
+                    className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 border-b-Primary-600 text-[26px] font-medium text-gray-500 placeholder:text-[30px] dark:bg-dark-300 dark:text-gray-300"
                   />
 
                 </div>

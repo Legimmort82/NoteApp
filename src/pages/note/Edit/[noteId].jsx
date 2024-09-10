@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import Image from "next/image";
 import { CirclePicker } from "react-color";
 import { useContext, useEffect, useState } from "react";
+import FolderCard from "@/components/FolderCard";
 
 const EditNote = () => {
   const params = useParams();
@@ -103,22 +104,10 @@ const EditNote = () => {
 
                 <CirclePicker
                   color={selectColor}
+                  onChangeComplete={color => setSelectColor(color.hex)}
                   circleSize={50}
                   width="100%"
-                  
-                  onChangeComplete={color => setSelectColor(color.hex)}
                 />
-
-                {/* <div className="flex flex-wrap gap-12">
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-red"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-yellow"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-green"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-purple"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-light-blue"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-orange"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-pink"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-dark-blue"></div>
-                </div> */}
               </div>
 
               <div className="flex flex-col w-[50%]">
@@ -127,14 +116,10 @@ const EditNote = () => {
                     Select your Folder:
                   </p>
 
-                  <div className="bg-Primary-400 flex items-center justify-between rounded-md py-3 px-4 w-[33%]">
-                    <p className="text-[20px] font-semibold">Folder Name</p>
-                    <Image
-                      className="cursor-pointer w-6 h-6"
-                      src={arrowimg}
-                      alt=""
-                    />
-                  </div>
+                  <FolderCard 
+                    folderName={"Folder Name"}
+                    img={arrowimg}
+                  />
                 </div>
 
                 <p className="text-[26px] font-semibold dark:text-white">
@@ -147,7 +132,7 @@ const EditNote = () => {
                     value={tag}
                     onChange={handelTag}
                     placeholder="Work"
-                    className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 text-[26px] font-medium text-gray-700 border-b-Primary-600 placeholder:text-[30px] dark:bg-dark-300 dark:text-white"
+                    className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 text-[26px] font-medium text-gray-500 border-b-Primary-600 placeholder:text-[30px] dark:bg-dark-300 dark:text-gray-300"
                   />
 
                   {/* <p className="text-gray-400 text-[26px] font-semibold">Work</p>

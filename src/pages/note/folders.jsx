@@ -17,7 +17,7 @@ function folders() {
         <div className="px-24">
           <h1 className="py-7  text-Primary-500 text-[55px] font-bold">Folders</h1>
 
-          <div className="flex justify-between flex-wrap">
+          <div className="flex flex-wrap gap-x-10">
             <FolderCard
               folderName={"Folder Name"} 
               img={arrowimg} 
