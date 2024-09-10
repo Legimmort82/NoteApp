@@ -17,27 +17,27 @@ const Layout = ({ children }) => {
     <div className={`flex ${dark && "dark"}`}>
       <div className="bg-Primary-700 dark:bg-[#0C071C] min-w-[90px] h-screen flex flex-col justify-around items-center sticky left-0 top-0">
         <Link href={"/note/allnotes"}>
-          <Image className="w-[40px] h-[40px] cursor-pointer" src={image1w} alt=""/>
+          <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image1w} alt=""/>
         </Link>
 
         <Link href={"/note/addnotes"}>
-          <Image className="w-[40px] h-[40px] cursor-pointer" src={image2w} alt=""/>
+          <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image2w} alt=""/>
         </Link>
 
         <Link href={"/note/folders"}>
-          <Image className="w-[40px] h-[40px] cursor-pointer" src={image3w} alt=""/>
+          <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image3w} alt=""/>
         </Link>
 
         <Link href={"/note/trashes"}>
-          <Image className="w-[40px] h-[40px] cursor-pointer" src={image4w} alt=""/>
+          <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image4w} alt=""/>
         </Link>
 
         <Link href={"/note/favorites"}>
-          <Image className="w-[40px] h-[40px] cursor-pointer" src={image5w} alt=""/>
+          <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image5w} alt=""/>
         </Link>
 
-        <Image className="w-[40px] h-[40px] cursor-pointer" src={image6w} onClick={()=>{setDark(!dark)}} alt=""/>
-        <Image className="w-[40px] h-[40px] cursor-pointer" src={image7w} alt=""/>
+        <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image6w} onClick={()=>{setDark(!dark)}} alt=""/>
+        <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image7w} alt=""/>
       </div>
       <div className="flex-1">{children}</div>
     </div>

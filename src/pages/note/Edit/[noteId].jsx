@@ -58,6 +58,12 @@ const EditNote = () => {
     });
   };
 
+  const date = new Date().getFullYear() +
+    "/" +
+    String(new Date().getMonth() + 1).padStart(2, "0") +
+    "/" +
+    String(new Date().getDate()).padStart(2, "0");
+
 
   return (
     <>
@@ -83,13 +89,10 @@ const EditNote = () => {
                   <div className="w-8 h-8 rounded-[50%] ml-3" style={{backgroundColor: selectColor}}></div>
                 </div>
 
-                <button className="bg-Primary-300 text-[18px] text-gray-500 font-semibold rounded-md py-[2px] px-10 ml-[65px]">
-                  TagName
-                </button>
-
                 <div className="flex ml-[65px]">
                   <p className="text-gray-500 text-[17px] font-medium mr-2 dark:text-white">
-                    2022/01/05
+                    {/* 2022/01/05 */}
+                    {date}
                   </p>
                   <Image src={notedate} alt="" />
                 </div>
