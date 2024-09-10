@@ -1,12 +1,31 @@
 import darkchangeimg from "@/assets/icons/dark-change.svg";
 import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
+import { auth } from "@/context/Firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 export default function Login() {
-  const { dark ,setDark} = useContext(darkModeNoteContext);
-  
+  const { dark, setDark } = useContext(darkModeNoteContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    signInWithEmailAndPassword(auth, email, password)
+      .then((data) => {
+        console.log(data);
+        // Signed up
+        // const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        console.log(error.message);
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // ..
+      });
+  };
   return (
     <div className={`${dark && "dark"}`}>
       <div
@@ -31,16 +50,26 @@ export default function Login() {
 
         <div className="flex justify-evenly">
           <div className="mr-12 w-[30%] mt-[70px]">
-            <form className="flex flex-col items-center ">
+            <form className="flex flex-col items-center " onSubmit={handleSubmit}>
               <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                 Email Address
               </label>
-              <input className="rounded-md h-12 mb-8 w-[100%]" type="email" />
+              <input
+                className="rounded-md h-12 mb-8 w-[100%]"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
 
               <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                 Password
               </label>
-              <input className="rounded-md h-12 mb-8 w-[100%]" type="text" />
+              <input
+                className="rounded-md h-12 mb-8 w-[100%]"
+                type="text"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
               <button
                 className="bg-Primary-500 text-white py-3 px-[110px] rounded-md mb-3"
