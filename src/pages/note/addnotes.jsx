@@ -10,7 +10,7 @@ function addnotes() {
   const { createNote, notes } = useContext(darkModeNoteContext);
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
-  const [desc, setDesc] = useState("");
+  const [desc, setDesc] = useState("");          
 
   const handelTitle = (e) => {
     setTitle(e.target.value);
@@ -88,8 +88,8 @@ function addnotes() {
 
                 <CirclePicker
                   color={selectColor}
-                  circleSize={54}
-                  width="500px"
+                  circleSize={50}
+                  width="100%"
                   onChangeComplete={color => setSelectColor(color.hex)}
                 />
 
