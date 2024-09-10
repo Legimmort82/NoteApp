@@ -12,7 +12,6 @@ const EditNote = () => {
   const params = useParams();
   const { createNote, notes, updateNote } = useContext(darkModeNoteContext);
   const findNote = notes.find((note) => note.id == params?.noteId);
-
   // console.log(findNote);
 
   const [selectColor, setSelectColor] = useState("#F44336")

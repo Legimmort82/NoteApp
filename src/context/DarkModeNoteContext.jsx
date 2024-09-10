@@ -50,7 +50,7 @@ const DarkModeNoteProvider = ({ children }) => {
   }, []);
 
   const createNote = (newNote) => {
-    console.log(newNote);
+    // console.log(newNote);
     setNotes([...notes, newNote]);
     localStorage.setItem("Notes", JSON.stringify([...notes, newNote]));
     // console.log(notes);
