@@ -4,7 +4,7 @@ import notedate from "@/assets/icons/note-date.svg";
 import arrowimg from "@/assets/icons/arrow.svg";
 import Layout from "@/components/Layout";
 import Image from "next/image";
-
+import { CirclePicker } from "react-color";
 import { useContext, useEffect, useState } from "react";
 
 const EditNote = () => {
@@ -17,6 +17,7 @@ const EditNote = () => {
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
+
   const handelTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -26,6 +27,7 @@ const EditNote = () => {
   const handelDesc = (e) => {
     setDesc(e.target.value);
   };
+
   useEffect(() => {
     if (findNote) {
       setDesc(findNote.description);
@@ -33,6 +35,7 @@ const EditNote = () => {
       setTitle(findNote.title);
     }
   }, [findNote]);
+  
   const handleSubmit = () => {
     updateNote(params.noteId, {
       id: params.noteId,
@@ -51,10 +54,13 @@ const EditNote = () => {
       folder: null,
     });
   };
+
+  const [selectColor, setSelectColor] = useState("#F44336")
+
   return (
     <>
       <Layout>
-        <div className="bg-Primary-100 dark:bg-dark-300  relative overflow-clip">
+        <div className="bg-Primary-100 dark:bg-dark-300 h-screen relative overflow-clip">
           <div className="bg-Primary-700 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] shadow-md shadow-gray-400 dark:shadow-none" />
 
           <div className="pl-36 pr-40 py-7">
@@ -72,7 +78,7 @@ const EditNote = () => {
                   <p className="font-medium text-[18px] dark:text-white">
                     Color :
                   </p>
-                  <div className="w-8 h-8 rounded-[50%] bg-Primary-800 ml-5"></div>
+                  <div className="w-8 h-8 rounded-[50%] ml-3" style={{backgroundColor: selectColor}}></div>
                 </div>
 
                 <button className="bg-Primary-300 text-[18px] text-gray-500 font-semibold rounded-md py-[2px] px-10 ml-[65px]">
@@ -94,7 +100,12 @@ const EditNote = () => {
                   Pick a color :
                 </p>
 
-                <div className="flex flex-wrap gap-12">
+                <CirclePicker
+                  color={selectColor}
+                  onChangeComplete={color => setSelectColor(color.hex)}
+                />
+
+                {/* <div className="flex flex-wrap gap-12">
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-red"></div>
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-yellow"></div>
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-green"></div>
@@ -103,7 +114,7 @@ const EditNote = () => {
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-orange"></div>
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-pink"></div>
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-dark-blue"></div>
-                </div>
+                </div> */}
               </div>
 
               <div className="flex flex-col w-[50%]">
@@ -150,7 +161,7 @@ const EditNote = () => {
             />
             <button
               onClick={handleSubmit}
-              className="bg-Primary-800 px-6 py-2 rounded-lg text-white mt-3"
+              className="bg-Primary-800 px-8 py-2 rounded-lg text-white font-medium mt-3"
             >
               Save / Edit
             </button>

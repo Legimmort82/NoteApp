@@ -4,12 +4,14 @@ import notedate from "@/assets/icons/note-date.svg";
 import arrowimg from "@/assets/icons/arrow.svg";
 import { useContext, useState } from "react";
 import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
+import { CirclePicker } from "react-color";
 
 function addnotes() {
   const { createNote, notes } = useContext(darkModeNoteContext);
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
+
   const handelTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -19,6 +21,7 @@ function addnotes() {
   const handelDesc = (e) => {
     setDesc(e.target.value);
   };
+  
   const handleSubmit = () => {
     createNote({
       id: notes.length + 1,
@@ -37,10 +40,13 @@ function addnotes() {
       folder: null,
     });
   };
+
+  const [selectColor, setSelectColor] = useState("#F44336")
+
   return (
     <>
       <Layout>
-        <div className="bg-Primary-100 dark:bg-dark-300  relative overflow-clip">
+        <div className="bg-Primary-100 dark:bg-dark-300 h-screen  relative overflow-clip">
           <div className="bg-Primary-700 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] shadow-md shadow-gray-400 dark:shadow-none" />
 
           <div className="pl-36 pr-40 py-7">
@@ -58,7 +64,7 @@ function addnotes() {
                   <p className="font-medium text-[18px] dark:text-white">
                     Color :
                   </p>
-                  <div className="w-8 h-8 rounded-[50%] bg-Primary-800 ml-5"></div>
+                  <div className="w-8 h-8 rounded-[50%] ml-3" style={{backgroundColor: selectColor}}></div>
                 </div>
 
                 <button className="bg-Primary-300 text-[18px] text-gray-600 font-semibold rounded-md py-[2px] px-10 ml-[65px]">
@@ -80,7 +86,12 @@ function addnotes() {
                   Pick a color :
                 </p>
 
-                <div className="flex flex-wrap gap-12">
+                <CirclePicker
+                  color={selectColor}
+                  onChangeComplete={color => setSelectColor(color.hex)}
+                />
+
+                {/* <div className="flex flex-wrap gap-10">
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-red"></div>
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-yellow"></div>
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-green"></div>
@@ -89,7 +100,7 @@ function addnotes() {
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-orange"></div>
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-pink"></div>
                   <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-dark-blue"></div>
-                </div>
+                </div> */}
               </div>
 
               <div className="flex flex-col w-[50%]">
@@ -121,8 +132,6 @@ function addnotes() {
                     className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 border-b-Primary-600 text-[26px] font-medium text-gray-700 placeholder:text-[30px] dark:bg-dark-300 dark:text-white"
                   />
 
-                  {/* <p className="text-gray-400 text-[26px] font-semibold">Work</p>
-                        <hr className="h-[4.5px]  bg-Primary-600 text-gray-500" /> */}
                 </div>
               </div>
             </div>
@@ -136,7 +145,7 @@ function addnotes() {
             />
             <button
               onClick={handleSubmit}
-              className="bg-Primary-800 px-6 py-2 rounded-lg text-white mt-3"
+              className="bg-Primary-800 px-8 py-2 rounded-lg text-white font-medium mt-3"
             >
               Save / Edit
             </button>
