@@ -103,8 +103,8 @@ const EditNote = () => {
 
                 <CirclePicker
                   color={selectColor}
-                  circleSize={54}
-                  width="500px"
+                  circleSize={50}
+                  width="100%"
                   
                   onChangeComplete={color => setSelectColor(color.hex)}
                 />
