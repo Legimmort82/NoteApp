@@ -88,6 +88,8 @@ function addnotes() {
 
                 <CirclePicker
                   color={selectColor}
+                  circleSize={54}
+                  width="500px"
                   onChangeComplete={color => setSelectColor(color.hex)}
                 />
 

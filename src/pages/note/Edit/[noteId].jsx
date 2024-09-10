@@ -14,6 +14,7 @@ const EditNote = () => {
 
   // console.log(findNote);
 
+  const [selectColor, setSelectColor] = useState("#F44336")
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
@@ -33,6 +34,7 @@ const EditNote = () => {
       setDesc(findNote.description);
       setTag(findNote.tag);
       setTitle(findNote.title);
+      setSelectColor(findNote.color)
     }
   }, [findNote]);
   
@@ -55,7 +57,6 @@ const EditNote = () => {
     });
   };
 
-  const [selectColor, setSelectColor] = useState("#F44336")
 
   return (
     <>
@@ -102,6 +103,9 @@ const EditNote = () => {
 
                 <CirclePicker
                   color={selectColor}
+                  circleSize={54}
+                  width="500px"
+                  
                   onChangeComplete={color => setSelectColor(color.hex)}
                 />
 
