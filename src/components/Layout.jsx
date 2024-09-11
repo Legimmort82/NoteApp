@@ -51,10 +51,6 @@ const Layout = ({ children }) => {
         <Tippy content="Dark | Light" placement="right" delay={200}>
           <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image6w} onClick={()=>{setDark(!dark)}} alt=""/>
         </Tippy>
-
-        <Tippy content="Account" placement="right"  delay={200}>    
-          <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image7w} alt=""/>
-        </Tippy>
       </div>
       <div className="flex-1">{children}</div>
     </div>

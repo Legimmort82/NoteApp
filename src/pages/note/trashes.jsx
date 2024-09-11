@@ -42,7 +42,7 @@ function trashes() {
               Trashes
             </h1>
 
-            <div className="flex justify-between">
+            <div className="flex flex-wrap gap-x-10 gap-y-6">
               {notesFilter.map((item) => {
                 const truncatedDesc = truncateText(item.description, 25);
                 const truncatedTitle = truncateText(item.title, 12);
