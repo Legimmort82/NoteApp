@@ -16,8 +16,8 @@ const Layout = ({ children }) => {
   const { dark, setDark } = useContext(darkModeNoteContext);
  
   return (
-    <div className={`flex ${dark && "dark"}`}>
-      <div className="bg-Primary-700 dark:bg-[#0C071C] min-w-[90px] h-screen flex flex-col justify-around items-center sticky left-0 top-0">
+    <div className={`lg:flex-row lg:gap-2  flex flex-col-reverse relative ${dark && "dark"}`}>
+      <div className="bg-Primary-700 dark:bg-[#0C071C] min-w-[90px] min-h-[60px] lg:h-screen flex justify-between items-center px-2 lg:flex lg:flex-col lg:justify-around  lg:sticky  lg:top-0 lg:left-0  sticky bottom-0 right-0 left-0">
         <Link href={"/note/allnotes"}>
           <Tippy content="All Notes" placement="right" delay={200}>
             <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image1w} alt=""/>
@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
           <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image6w} onClick={()=>{setDark(!dark)}} alt=""/>
         </Tippy>
       </div>
-      <div className="flex-1">{children}</div>
+      <div className="">{children}</div>
     </div>
   );
 };

@@ -11,51 +11,53 @@ import dividerdown from "@/icons/Divider-down.svg";
 import Image from "next/image";
 import HomePageCard from "@/components/HomePageCard";
 import Layout from "@/components/Layout";
+import Link from "next/link";
 
 
 export default function Home() {
 
   return (
     <Layout>
-      <div className="bg-Primary-100 dark:bg-dark-300 h-screen relative overflow-clip">
+      <div className="bg-Primary-100 dark:bg-dark-300 h-screen  relative overflow-auto flex-col items-center justify-between">
         <div className="bg-Primary-700 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] shadow-md shadow-gray-400 "></div>
+          <h1 className="lg:text-[80px] text-[40px] font-bold mb-8 dark:text-white text-center">Welcome to Note Smart</h1>
 
-        <div className="pl-[20px] pr-[20px] flex flex-col items-center">
-          <h1 className="text-[80px] font-bold mb-3 dark:text-white">Welcome to Note Smart</h1>
+        <div className="pl-[20px] pr-[20px] flex flex-col items-center justify-center">
 
-          <div>
-            <div className="flex justify-between items-center">
+          <div className="flex flex-col justify-center px-4 lg:px-0">
+            <div className="lg:flex-row gap-3 flex flex-col lg:justify-between items-center">
               <HomePageCard
                 img={image1r}
+                link={"/note/allnotes"}
                 text="Click on the notes icon to see all of your created notes"
               />
-              <Image className="w-[90px] h-[90px]" src={dartimg} />
+              <Image className="w-[90px] h-[90px] lg:block hidden" src={dartimg} />
               <HomePageCard
                 img={image2r}
+                link={"/note/addnotes"}
                 text="Click on the new note icon to create a new one and mange it"
               />
             </div>
-            <Image src={dividertop} />
-            <div className="flex justify-between items-center mb-[28px]">
+            <Image src={dividertop} className="lg:block hidden" />
+            <div className="lg:flex-row gap-3 flex flex-col lg:justify-center mt-3 items-center mb-3 lg:mb-[28px]">
               <HomePageCard
-                img={image3r}
-                text="Click on the folder icon to see notes by categories that you made"
-              />
-              <Image className="w-[90px] h-[90px]" src={star} />
-              <HomePageCard
-                img={image4r}
-                text="Click on the recycle bin icon to restore notes you were removed before"
+                img={image5r}
+                link={"/note/favorites"}
+                text="Click on the favorite icon to see your favorites ones in the app"
               />
             </div>
 
-            <Image src={dividerdown} />
+            <Image src={dividerdown} className="lg:block hidden"/>
 
-            <div className="flex justify-between items-center">
-              <HomePageCard
-                img={image5r}
-                text="Click on the favorite icon to see your favorites ones in the app"
-              />
-              <Image className="w-[90px] h-[90px]" src={dartimg} />
+            <div className="lg:flex-row gap-3 flex flex-col lg:justify-between  items-center mb-6">
+                <HomePageCard
+                  img={image4r}
+                  link={"/note/trashes"}
+                  text="Click on the recycle bin icon to restore notes you were removed before"
+                />
+              
+              <Image className="w-[90px] h-[90px] lg:block hidden " src={dartimg} />
+
               <HomePageCard
                 img={image6r}
                 text="Toggle dark mode or light mode as you like"
