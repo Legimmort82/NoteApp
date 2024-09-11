@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import trashimg from "@/assets/icons/trash.svg"
 import notfavoriteimg from "@/assets/icons/not-favorite.svg"
+import favoriteimg from "@/assets/icons/favorite.svg";
 import editimg from "@/assets/icons/edit.svg"
 import NoteCard from "@/components/NoteCard";
 import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
@@ -9,7 +10,11 @@ import { useContext } from "react";
 function allnotes() {
   const {notes, setNotes} = useContext(darkModeNoteContext)
 
+  const notesFilter = notes.filter((note) => note.isTrash != true)
+
   return (
+
+    
     <>
     <Layout>
     <div className="bg-Primary-100 dark:bg-dark-300 h-screen relative overflow-clip">
@@ -19,7 +24,7 @@ function allnotes() {
           <h1 className="py-7  text-Primary-500 text-[55px] font-bold">Allnotes</h1>
 
           <div className="flex flex-wrap gap-9">
-          {notes.map((item) => {
+          {notesFilter.map((item) => {
             const truncateText = item.description.slice(0,25).concat('...')
             const truncateTitle = item.title.slice(0,15).concat('...')
               return (
@@ -30,7 +35,7 @@ function allnotes() {
                   date={item.date}
                   description={truncateText}
                   img1={editimg} 
-                  img2={notfavoriteimg}
+                  img2={item.isFavorite ? favoriteimg : notfavoriteimg}
                   img3={trashimg}
                   color={item.color}
               />

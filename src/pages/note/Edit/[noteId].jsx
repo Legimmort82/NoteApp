@@ -18,6 +18,7 @@ const EditNote = () => {
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
+  const [date, setDate] = useState("");
 
   const handelTitle = (e) => {
     setTitle(e.target.value);
@@ -34,7 +35,8 @@ const EditNote = () => {
       setDesc(findNote.description);
       setTag(findNote.tag);
       setTitle(findNote.title);
-      setSelectColor(findNote.color)
+      setSelectColor(findNote.color);
+      setDate(findNote.date) 
     }
   }, [findNote]);
   
@@ -56,12 +58,6 @@ const EditNote = () => {
       folder: null,
     });
   };
-
-  const date = new Date().getFullYear() +
-    "/" +
-    String(new Date().getMonth() + 1).padStart(2, "0") +
-    "/" +
-    String(new Date().getDate()).padStart(2, "0");
 
 
   return (
