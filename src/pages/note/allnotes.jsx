@@ -25,7 +25,7 @@ function allnotes() {
           <h1 className="py-7  text-Primary-500 text-[55px] font-bold">Allnotes</h1>
 
           <div className="flex flex-wrap gap-9">
-          {notes.map((item) => {
+          {notesFilter.map((item) => {
             const truncatedDesc = truncateText(item.description , 25)
             const truncatedTitle = truncateText(item.title , 12)
 
