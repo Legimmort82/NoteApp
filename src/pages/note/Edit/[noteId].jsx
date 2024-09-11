@@ -5,21 +5,39 @@ import arrowimg from "@/assets/icons/arrow.svg";
 import Layout from "@/components/Layout";
 import Image from "next/image";
 import { CirclePicker } from "react-color";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FolderCard from "@/components/FolderCard";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import { db } from "@/context/Firebase";
 
 const EditNote = () => {
   const params = useParams();
-  const { createNote, notes, updateNote } = useContext(darkModeNoteContext);
-  const findNote = notes.find((note) => note.id == params?.noteId);
-  // console.log(findNote);
-
-  const [selectColor, setSelectColor] = useState("#F44336")
+  const NoteCollection = collection(db, "Notes");
+  const [selectColor, setSelectColor] = useState("#F44336");
+  const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
   const [date, setDate] = useState("");
+  const findNote = notes.find((note) => note.id == params?.noteId);
+  console.log(typeof(findNote?.id));
+  console.log(NoteCollection?.name);
+  useEffect(() => {
+    const getNotes = async () => {
+      try {
+        const noteData = await getDocs(NoteCollection);
+        const filteredData = noteData.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setNotes(filteredData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
+    getNotes();
+  }, []);
   const handelTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -36,29 +54,50 @@ const EditNote = () => {
       setTag(findNote.tag);
       setTitle(findNote.title);
       setSelectColor(findNote.color);
-      setDate(findNote.date) 
+      setDate(findNote.date);
     }
   }, [findNote]);
-  
-  const handleSubmit = () => {
-    updateNote(params.noteId, {
-      id: params.noteId,
-      title: title,
-      date:
-        new Date().getFullYear() +
-        "/" +
-        String(new Date().getMonth() + 1).padStart(2, "0") +
-        "/" +
-        String(new Date().getDate()).padStart(2, "0"),
-      description: desc,
-      color: selectColor,
-      tag: tag,
-      isFavorite: false,
-      isTrash: false,
-      folder: null,
-    });
-  };
 
+  const handleSubmit = async (id) => {
+
+    try {
+      const NoteDoc = doc(db, "Notes", findNote.id);
+      await updateDoc(NoteDoc, {
+        // id: params.noteId,
+        title: title,
+        date:
+          new Date().getFullYear() +
+          "/" +
+          String(new Date().getMonth() + 1).padStart(2, "0") +
+          "/" +
+          String(new Date().getDate()).padStart(2, "0"),
+        description: desc,
+        color: selectColor,
+        tag: tag,
+        isFavorite: false,
+        isTrash: false,
+        folder: null,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    // updateNote(params.noteId, {
+    //   id: params.noteId,
+    //   title: title,
+    //   date:
+    //     new Date().getFullYear() +
+    //     "/" +
+    //     String(new Date().getMonth() + 1).padStart(2, "0") +
+    //     "/" +
+    //     String(new Date().getDate()).padStart(2, "0"),
+    //   description: desc,
+    //   color: selectColor,
+    //   tag: tag,
+    //   isFavorite: false,
+    //   isTrash: false,
+    //   folder: null,
+    // });
+  };
 
   return (
     <>
@@ -81,7 +120,10 @@ const EditNote = () => {
                   <p className="font-medium text-[18px] dark:text-white">
                     Color :
                   </p>
-                  <div className="w-8 h-8 rounded-[50%] ml-3" style={{backgroundColor: selectColor}}></div>
+                  <div
+                    className="w-8 h-8 rounded-[50%] ml-3"
+                    style={{ backgroundColor: selectColor }}
+                  ></div>
                 </div>
 
                 <div className="flex ml-[65px]">
@@ -102,7 +144,7 @@ const EditNote = () => {
 
                 <CirclePicker
                   color={selectColor}
-                  onChangeComplete={color => setSelectColor(color.hex)}
+                  onChangeComplete={(color) => setSelectColor(color.hex)}
                   circleSize={50}
                   width="100%"
                 />
@@ -114,10 +156,7 @@ const EditNote = () => {
                     Select your Folder:
                   </p>
 
-                  <FolderCard 
-                    folderName={"Folder Name"}
-                    img={arrowimg}
-                  />
+                  <FolderCard folderName={"Folder Name"} img={arrowimg} />
                 </div>
 
                 <p className="text-[26px] font-semibold dark:text-white">

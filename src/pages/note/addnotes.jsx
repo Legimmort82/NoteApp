@@ -2,16 +2,35 @@ import Layout from "@/components/Layout";
 import Image from "next/image";
 import notedate from "@/assets/icons/note-date.svg";
 import arrowimg from "@/assets/icons/arrow.svg";
-import { useContext, useState } from "react";
-import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
+import { useEffect, useState } from "react";
 import { CirclePicker } from "react-color";
 import FolderCard from "@/components/FolderCard";
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import { db } from "@/context/Firebase";
 
-function addnotes() {
-  const { createNote, notes } = useContext(darkModeNoteContext);
+function AddNotes() {
+  const NoteCollection = collection(db, "Notes");
+  const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
-  const [desc, setDesc] = useState("");          
+  const [desc, setDesc] = useState("");
+
+  useEffect(() => {
+    const getNotes = async () => {
+      try {
+        const noteData = await getDocs(NoteCollection);
+        const filteredData = noteData.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setNotes(filteredData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getNotes();
+  }, []);
 
   const handelTitle = (e) => {
     setTitle(e.target.value);
@@ -22,33 +41,39 @@ function addnotes() {
   const handelDesc = (e) => {
     setDesc(e.target.value);
   };
-  
-  const handleSubmit = () => {
-    createNote({
-      id: notes.length + 1,
-      title: title,
-      date:
-        new Date().getFullYear() +
-        "/" +
-        String(new Date().getMonth() + 1).padStart(2, "0") +
-        "/" +
-        String(new Date().getDate()).padStart(2, "0"),
-      description: desc,
-      color: selectColor,
-      tag: tag,
-      isFavorite: false,
-      isTrash: false,
-      folder: null,
-    });
+
+  const handleSubmit = async () => {
+    console.log("hey");
+    try {
+      await addDoc(NoteCollection, {
+        id: notes.length + 1,
+        title: title,
+        date:
+          new Date().getFullYear() +
+          "/" +
+          String(new Date().getMonth() + 1).padStart(2, "0") +
+          "/" +
+          String(new Date().getDate()).padStart(2, "0"),
+        description: desc,
+        color: selectColor,
+        tag: tag,
+        isFavorite: false,
+        isTrash: false,
+        folder: null,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const [selectColor, setSelectColor] = useState("#F44336");
 
-  const date = new Date().getFullYear() +
-  "/" +
-  String(new Date().getMonth() + 1).padStart(2, "0") +
-  "/" +
-  String(new Date().getDate()).padStart(2, "0")
+  const date =
+    new Date().getFullYear() +
+    "/" +
+    String(new Date().getMonth() + 1).padStart(2, "0") +
+    "/" +
+    String(new Date().getDate()).padStart(2, "0");
 
   return (
     <>
@@ -71,12 +96,14 @@ function addnotes() {
                   <p className="font-medium text-[18px] dark:text-white">
                     Color :
                   </p>
-                  <div className="w-8 h-8 rounded-[50%] ml-3" style={{backgroundColor: selectColor}}></div>
+                  <div
+                    className="w-8 h-8 rounded-[50%] ml-3"
+                    style={{ backgroundColor: selectColor }}
+                  ></div>
                 </div>
 
                 <div className="flex ml-[65px]">
                   <p className="text-gray-500 text-[17px] font-medium mr-2 dark:text-white">
-                    {/* 2022/01/05 */}
                     {date}
                   </p>
                   <Image src={notedate} alt="" />
@@ -94,19 +121,8 @@ function addnotes() {
                   color={selectColor}
                   circleSize={50}
                   width="100%"
-                  onChangeComplete={color => setSelectColor(color.hex)}
+                  onChangeComplete={(color) => setSelectColor(color.hex)}
                 />
-
-                {/* <div className="flex flex-wrap gap-10">
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-red"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-yellow"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-green"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-purple"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-light-blue"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-orange"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-pink"></div>
-                  <div className="cursor-pointer w-14 h-14 rounded-[50%] bg-note-dark-blue"></div>
-                </div> */}
               </div>
 
               <div className="flex flex-col w-[50%]">
@@ -115,19 +131,7 @@ function addnotes() {
                     Select your Folder:
                   </p>
 
-                  <FolderCard 
-                    folderName={"Folder Name"}
-                    img={arrowimg}
-                  />
-
-                  {/* <div className="bg-Primary-400 flex items-center justify-between rounded-md py-3 px-4 w-[33%]">
-                    <p className="text-[20px] font-semibold">Folder Name</p>
-                    <Image
-                      className="cursor-pointer w-4 h-4"
-                      src={arrowimg}
-                      alt=""
-                    />
-                  </div> */}
+                  <FolderCard folderName={"Folder Name"} img={arrowimg} />
                 </div>
 
                 <p className="text-[26px] font-semibold dark:text-white">
@@ -142,7 +146,6 @@ function addnotes() {
                     placeholder="Work"
                     className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 border-b-Primary-600 text-[26px] font-medium text-gray-500 placeholder:text-[30px] dark:bg-dark-300 dark:text-gray-300"
                   />
-
                 </div>
               </div>
             </div>
@@ -167,4 +170,4 @@ function addnotes() {
   );
 }
 
-export default addnotes;
+export default AddNotes;

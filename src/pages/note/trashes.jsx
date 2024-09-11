@@ -3,14 +3,31 @@ import NoteCard from "@/components/NoteCard";
 import refreshimg from "@/assets/icons/refresh.svg";
 import editimg from "@/assets/icons/edit.svg";
 import trashimg from "@/assets/icons/trash.svg";
-
-import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
-import { useContext } from "react";
+import truncateText from "@/hooks/truncateText";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/context/Firebase";
 
 function trashes() {
-  const { notes, setNotes } = useContext(darkModeNoteContext);
-
+  const NoteCollection = collection(db, "Notes");
+  const [notes, setNotes] = useState([]);
   const notesFilter = notes.filter((note) => note.isTrash == true);
+  useEffect(() => {
+    const getNotes = async () => {
+      try {
+        const noteData = await getDocs(NoteCollection);
+        const filteredData = noteData.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setNotes(filteredData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getNotes();
+  }, []);
 
   return (
     <>
@@ -25,21 +42,14 @@ function trashes() {
 
             <div className="flex justify-between">
               {notesFilter.map((item) => {
-                let truncateText = item.description;
-                if (item.description.length > 25) {
-                  truncateText = item.description.slice(0, 25).concat("...");
-                }
-                let truncateTitle = item.title;
-                if (item.title.length > 12) {
-                  truncateTitle = item.title.slice(0, 12).concat("...");
-                }
-
+                const truncatedDesc = truncateText(item.description, 25);
+                const truncatedTitle = truncateText(item.title, 12);
                 return (
                   <NoteCard
                     key={item.id}
-                    title={truncateTitle}
+                    title={truncatedTitle}
                     date={item.date}
-                    description={truncateText}
+                    description={truncatedDesc}
                     img1={editimg}
                     img2={refreshimg}
                     img3={trashimg}
