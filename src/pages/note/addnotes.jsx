@@ -1,10 +1,8 @@
 import Layout from "@/components/Layout";
 import Image from "next/image";
 import notedate from "@/assets/icons/note-date.svg";
-import arrowimg from "@/assets/icons/arrow.svg";
 import { useEffect, useState } from "react";
 import { CirclePicker } from "react-color";
-import FolderCard from "@/components/FolderCard";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "@/context/Firebase";
 
@@ -78,11 +76,11 @@ function AddNotes() {
   return (
     <>
       <Layout>
-        <div className="bg-Primary-100 dark:bg-dark-300 h-screen  relative overflow-clip">
+        <div className="bg-Primary-100 dark:bg-dark-300 h-ful relative overflow-clip">
           <div className="bg-Primary-700 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] shadow-md shadow-gray-400 dark:shadow-none" />
 
-          <div className="pl-36 pr-40 py-7">
-            <div className="pb-14">
+          <div className="lg:pl-36 lg:pr-40 pl-20 pr-20 py-7">
+            <div className="mb-20 lg:mb-14">
               <input
                 type="text"
                 onChange={handelTitle}
@@ -91,13 +89,13 @@ function AddNotes() {
                 className="bg-Primary-100 px-2 outline-none w-full border-b-[5px] h-11 border-b-Primary-600 placeholder:text-[30px] pb-3 text-[30px] font-semibold dark:bg-dark-300 dark:text-white"
               />
 
-              <div className=" flex justify-end items-center mt-3">
+              <div className=" flex justify-center md:justify-end items-center mt-3">
                 <div className="flex items-center">
                   <p className="font-medium text-[18px] dark:text-white">
                     Color :
                   </p>
                   <div
-                    className="w-8 h-8 rounded-[50%] ml-3"
+                    className="w-8 h-8 rounded-[50%] ml-2 lg:ml-3"
                     style={{ backgroundColor: selectColor }}
                   ></div>
                 </div>
@@ -111,8 +109,8 @@ function AddNotes() {
               </div>
             </div>
 
-            <div className="flex justify-between items-center mb-10">
-              <div className="flex flex-col items-center w-[35%]">
+            <div className="flex flex-col lg:flex-row lg:justify-between items-center mb-20 lg:mb-10">
+              <div className="flex flex-col items-center lg:w-[35%] mb-14 lg:mb-0">
                 <p className="font-semibold text-[26px] mb-9 dark:text-white">
                   Pick a color :
                 </p>
@@ -125,7 +123,7 @@ function AddNotes() {
                 />
               </div>
 
-              <div className="flex flex-col w-[50%]">
+              <div className="flex flex-col w-[80%] lg:w-[50%]">
 
                 <p className="text-[26px] font-semibold dark:text-white">
                   Write your tag :
@@ -146,7 +144,7 @@ function AddNotes() {
             <textarea
               value={desc}
               onChange={handelDesc}
-              className="bg-Primary-100 resize-none text-[24px] rounded-lg border-[3px] w-[100%] h-[400px] border-Primary-500 border-solid placeholder:text-gray-400  placeholder:font-medium p-4 dark:bg-dark-300 dark:text-white "
+              className="bg-Primary-100 resize-none text-[24px] rounded-lg border-[3px] w-[100%] h-[500px] lg:h-[400px] border-Primary-500 border-solid placeholder:text-gray-400  placeholder:font-medium p-4 dark:bg-dark-300 dark:text-white "
               type="text"
               placeholder="Type your content here ..."
             />
