@@ -5,6 +5,7 @@ import editimg from "@/assets/icons/edit.svg"
 import NoteCard from "@/components/NoteCard";
 import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
 import { useContext } from "react";
+import truncateText from "@/hooks/truncateText";
 
 function allnotes() {
   const {notes, setNotes} = useContext(darkModeNoteContext)
@@ -20,15 +21,16 @@ function allnotes() {
 
           <div className="flex flex-wrap gap-9">
           {notes.map((item) => {
-            const truncateText = item.description.slice(0,25).concat('...')
-            const truncateTitle = item.title.slice(0,15).concat('...')
+            const truncatedDesc = truncateText(item.description , 25)
+            const truncatedTitle = truncateText(item.title , 12)
+
               return (
                 <NoteCard
                   key={item.id}
                   id={item.id}
-                  title={truncateTitle}
+                  title={truncatedTitle}
                   date={item.date}
-                  description={truncateText}
+                  description={truncatedDesc}
                   img1={editimg} 
                   img2={notfavoriteimg}
                   img3={trashimg}

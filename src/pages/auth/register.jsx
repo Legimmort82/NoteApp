@@ -5,24 +5,27 @@ import Link from "next/link";
 import { useContext, useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/context/Firebase";
+import { useForm } from "react-hook-form";
 export default function Register() {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const { dark, setDark } = useContext(darkModeNoteContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    createUserWithEmailAndPassword(auth, email, password)
+  const [Loading, setLoading] = useState(false);
+
+  const OnSubmit = (data) => {
+    setLoading(true);
+    createUserWithEmailAndPassword(auth, data?.email, data?.password)
       .then((data) => {
         console.log(data);
-        // Signed up
-        // const user = userCredential.user;
-        // ...
       })
       .catch((error) => {
-        console.log(error);
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // ..
+        console.log(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
   return (
@@ -52,38 +55,45 @@ export default function Register() {
             <div className="mr-12 w-[30%]">
               <form
                 className="flex flex-col items-center"
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit(OnSubmit)}
               >
                 <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                   Email Address
                 </label>
-                <input
-                  className="rounded-md h-12 mb-8 w-[100%]"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-
+                <div className="mb-8 w-full">
+                  <input
+                    className="rounded-md h-12 w-[100%] px-4"
+                    type="email"
+                    name="email"
+                    {...register("email", {
+                      required: "Please enter a valid email address",
+                    })}
+                  />
+                  <p className="text-red-500 mt-2 font-semibold text-sm">
+                    {errors?.email?.message}
+                  </p>
+                </div>
                 <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                   Password
                 </label>
-                <input
-                  className="rounded-md h-12 mb-8 w-[100%]"
-                  type="text"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-
-                {/* <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
-                  Confirm Password
-                </label>
-                <input className="rounded-md h-12 mb-8 w-[100%]" type="text" /> */}
-
+                <div className="mb-8 w-full">
+                  <input
+                    className="rounded-md h-12  w-[100%] px-4"
+                    type="text"
+                    name="password"
+                    {...register("password", {
+                      required: "Enter your password",
+                    })}
+                  />
+                  <p className="text-red-500 mt-2 font-semibold text-sm">
+                    {errors?.password?.message}
+                  </p>
+                </div>
                 <button
                   className=" text-white py-3 px-[90px] bg-Primary-500 rounded-md mb-3"
                   type="submit"
                 >
-                  Create Account
+                  {Loading ? "Loading ..." : "Create Account"}
                 </button>
 
                 <Link
