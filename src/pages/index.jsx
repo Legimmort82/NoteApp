@@ -5,7 +5,6 @@ import image4r from "@/icons/r4.svg";
 import image5r from "@/icons/r5.svg";
 import image6r from "@/icons/r6.svg";
 import dartimg from "@/icons/Dart.svg";
-import star from "@/icons/Stars.svg";
 import dividertop from "@/icons/Divider-top.svg";
 import dividerdown from "@/icons/Divider-down.svg";
 import Image from "next/image";

@@ -94,7 +94,7 @@ function NoteCard({
 
   return (
     <div
-      className={"flex bg-white flex-col justify-between md:w-[30%] w-full min-w-[350px] rounded-md px-4 py-3"}
+      className={"flex bg-white flex-col justify-between md:w-[30%] w-full min-w-[350px] rounded-md px-4 py-3 shadow-sm hover:shadow-lg hover:scale-[1.01] dark:shadow-gray-600"}
       style={{ borderLeft: `8px solid ${color}`, borderColor: color }}
     >
       <div className="flex justify-between items-center mb-5">
