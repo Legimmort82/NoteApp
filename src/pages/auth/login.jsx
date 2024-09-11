@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { PropagateLoader } from "react-spinners";
+import { BeatLoader} from "react-spinners";
 
 export default function Login() {
   const {
@@ -95,7 +95,7 @@ export default function Login() {
                 className="bg-Primary-500 text-white py-3 px-[110px] rounded-md mb-3"
                 type="submit"
               >
-                {Loading ? <PropagateLoader color="#FFF" size={7}/> : "Login"}
+                {Loading ? <BeatLoader color="#FFF" size={12} className="px-6" /> : "Login"}
               </button>
 
               <Link

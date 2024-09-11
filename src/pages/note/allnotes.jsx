@@ -28,7 +28,7 @@ function AllNotes() {
     };
 
     getNotes();
-  }, []);
+  }, [NoteCollection]);
   return (
     <>
       <Layout>

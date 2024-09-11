@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/context/Firebase";
 import { useForm } from "react-hook-form";
-import { PropagateLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 
 export default function Register() {
   const {
@@ -95,7 +95,11 @@ export default function Register() {
                   className=" text-white py-3 px-[90px] bg-Primary-500 rounded-md mb-3"
                   type="submit"
                 >
-                  {Loading ? <PropagateLoader color="#FFF" size={7}/> : "Create Account"}
+                  {Loading ? (
+                    <BeatLoader color="#FFF" size={12} className="px-6" />
+                  ) : (
+                    "Create Account"
+                  )}
                 </button>
 
                 <Link

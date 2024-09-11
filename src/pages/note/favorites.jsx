@@ -11,7 +11,7 @@ import { db } from "@/context/Firebase";
 function favorites() {
   const NoteCollection = collection(db, "Notes");
   const [notes, setNotes] = useState([]);
-  const notesFilter = notes.filter((note) => note.isFavorite == true);
+  const notesFilter = notes.filter((note) => note.isFavorite == true && note.isTrash == false) ;
 
   useEffect(() => {
     const getNotes = async () => {
@@ -28,7 +28,7 @@ function favorites() {
     };
 
     getNotes();
-  }, []);
+  }, [NoteCollection]);
 
   return (
     <>
@@ -50,6 +50,7 @@ function favorites() {
                     key={item.id}
                     title={truncatedTitle}
                     date={item.date}
+                    id={item.id}
                     description={truncatedDesc}
                     img1={editimg}
                     img2={favoriteimg}

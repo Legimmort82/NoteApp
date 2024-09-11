@@ -151,13 +151,6 @@ const EditNote = () => {
               </div>
 
               <div className="flex flex-col w-[50%]">
-                <div className="flex justify-between items-center mb-14">
-                  <p className="text-[26px] font-semibold dark:text-white">
-                    Select your Folder:
-                  </p>
-
-                  <FolderCard folderName={"Folder Name"} img={arrowimg} />
-                </div>
 
                 <p className="text-[26px] font-semibold dark:text-white">
                   Write your tag :

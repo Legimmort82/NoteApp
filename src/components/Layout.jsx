@@ -30,11 +30,11 @@ const Layout = ({ children }) => {
           </Tippy>
         </Link>
 
-        <Link href={"/note/folders"}>
+        {/* <Link href={"/note/folders"}>
           <Tippy content="Folders" placement="right" delay={200}>
             <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image3w} alt=""/>
           </Tippy>
-        </Link>
+        </Link> */}
 
         <Link href={"/note/trashes"}>
           <Tippy content="Trash" placement="right"  delay={200}>

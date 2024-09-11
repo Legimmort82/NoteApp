@@ -4,6 +4,8 @@ import refreshimg from "@/assets/icons/refresh.svg";
 import editimg from "@/assets/icons/edit.svg";
 import trashimg from "@/assets/icons/trash.svg";
 import truncateText from "@/hooks/truncateText";
+import notfavoriteimg from "@/assets/icons/not-favorite.svg";
+import favoriteimg from "@/assets/icons/favorite.svg";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/context/Firebase";
@@ -27,7 +29,7 @@ function trashes() {
     };
 
     getNotes();
-  }, []);
+  }, [NoteCollection]);
 
   return (
     <>
@@ -49,10 +51,12 @@ function trashes() {
                     key={item.id}
                     title={truncatedTitle}
                     date={item.date}
+                    id={item.id}
                     description={truncatedDesc}
                     img1={editimg}
-                    img2={refreshimg}
-                    img3={trashimg}
+                    // img2={item.isFavorite ? favoriteimg : notfavoriteimg}
+                    img5={trashimg}
+                    img4={refreshimg}
                     color={item.color}
                   />
                 );
