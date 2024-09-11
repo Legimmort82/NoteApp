@@ -6,7 +6,7 @@ function NoteCard({ title, description, date, img1, img2, img3 ,color,id}) { //T
   return (
     <div className={`flex bg-white flex-col justify-between w-[30%] rounded-md px-4 py-3`} style={{borderLeft:`8px solid ${color}`,borderColor: color}}>
       <div className="flex justify-between items-center mb-5">
-        <p className="text-[30px] font-semibold">{title}</p>
+        <p className="text-[25px] font-semibold">{title}</p>
         <p className="text-[18px] font-semibold">{date}</p>
       </div>
 
