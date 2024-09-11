@@ -17,7 +17,7 @@ function NoteCard({ title, description, date, img1, img2, img3 ,color,id}) { //T
             <Image className="w-[25px] ml-2 cursor-pointer" src={img1} alt="" />
           </Link>
 
-          <Image className="w-[25px] ml-2 cursor-pointer" src={img2} alt="" />
+          <Image className="w-[25px] ml-2 cursor-pointer duration-500 hover:rotate-[360deg]" src={img2} alt="" />
           <Image className="w-[25px] ml-2 cursor-pointer" src={img3} alt="" />
         </div>
       </div>

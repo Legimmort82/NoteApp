@@ -6,6 +6,8 @@ import { useContext, useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/context/Firebase";
 import { useForm } from "react-hook-form";
+import { PropagateLoader } from "react-spinners";
+
 export default function Register() {
   const {
     register,
@@ -93,7 +95,7 @@ export default function Register() {
                   className=" text-white py-3 px-[90px] bg-Primary-500 rounded-md mb-3"
                   type="submit"
                 >
-                  {Loading ? "Loading ..." : "Create Account"}
+                  {Loading ? <PropagateLoader color="#FFF" size={7}/> : "Create Account"}
                 </button>
 
                 <Link
@@ -109,7 +111,7 @@ export default function Register() {
               <h2 className="text-gray-950 dark:text-white mb-[20px] text-[60px] text-center font-bold">
                 Create a free account
               </h2>
-              <p className="text-gray-700 dark:text-white text-center text-[25px]">
+              <p className="text-gray-700 dark:text-white text-center text-[25px] leading-[50px]">
                 Join NoteSmart for free Create and manage unlimited notes enjoy
                 the friendly and easy to use enviroment with various features
               </p>
