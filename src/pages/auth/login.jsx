@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { PropagateLoader } from "react-spinners";
 
 export default function Login() {
   const {
@@ -94,7 +95,7 @@ export default function Login() {
                 className="bg-Primary-500 text-white py-3 px-[110px] rounded-md mb-3"
                 type="submit"
               >
-                {Loading ? "Loading ..." : "Login"}
+                {Loading ? <PropagateLoader color="#FFF" size={7}/> : "Login"}
               </button>
 
               <Link
@@ -110,7 +111,8 @@ export default function Login() {
             <h2 className="text-gray-950 mb-[20px] dark:text-white text-[60px] text-center font-bold">
               Log In To Your Account
             </h2>
-            <p className="text-gray-700 text-center dark:text-white text-[25px]">
+        
+            <p className="text-gray-700 text-center dark:text-white text-[25px] leading-[50px]">
               Login to NoteSmart for free Create and manage unlimited notes
               enjoy the friendly and easy to use enviroment with various
               features
