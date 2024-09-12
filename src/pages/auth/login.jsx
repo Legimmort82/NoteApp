@@ -33,7 +33,7 @@ export default function Login() {
   };
   return (
     <div className={`${dark && "dark"}`}>
-      <div className={` flex flex-col items-center bg-Primary-100 dark:bg-dark-300 lg:h-screen md:h-full h-screen relative `} >
+      <div className={` flex flex-col items-center bg-Primary-100 dark:bg-dark-300 overflow-auto h-screen relative `} >
         <div
           className="absolute lg:top-[50px] lg:right-[130px] top-[160px]"
           onClick={() => {
@@ -109,7 +109,7 @@ export default function Login() {
             </form>
           </div>
 
-          <div className="md:flex md:flex-col md:items-center md:justify-center md:w-[30%] hidden md:pb-[250px]">
+          <div className="md:flex md:flex-col md:items-center md:justify-center md:w-[30%] hidden ">
             <h2 className="text-gray-950 mb-[20px] dark:text-white text-[60px] text-center font-bold">
               Log In To Your Account
             </h2>

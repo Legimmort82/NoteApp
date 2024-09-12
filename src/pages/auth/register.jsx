@@ -35,7 +35,7 @@ export default function Register() {
   return (
     <>
       <div className={`${dark && "dark"}`}>
-        <div className="flex flex-col bg-Primary-100 items-center relative dark:bg-dark-300 lg:h-screen md:h-full h-screen">
+        <div className="flex flex-col bg-Primary-100 items-center relative dark:bg-dark-300 h-screen overflow-auto">
           <div
             className="absolute lg:top-[50px] lg:right-[130px] top-[160px]"
             onClick={() => {
@@ -116,7 +116,7 @@ export default function Register() {
               </form>
             </div>
 
-            <div className="md:flex md:flex-col md:items-center md:justify-center md:w-[30%] hidden md:pb-[250px]">
+            <div className="md:flex md:flex-col md:items-center md:justify-center md:w-[30%] hidden ">
               <h2 className="text-gray-950 dark:text-white mb-[20px] text-[60px] text-center font-bold">
                 Create a free account
               </h2>
