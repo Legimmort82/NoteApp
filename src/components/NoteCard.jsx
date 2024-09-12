@@ -1,4 +1,3 @@
-import { db } from "@/context/Firebase";
 import {
   collection,
   deleteDoc,
@@ -8,7 +7,10 @@ import {
 } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
+import CustomToast from "./CustomToast";
+import { db } from "@/context/Firebase";
 import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 function NoteCard({
   title,
@@ -31,6 +33,13 @@ function NoteCard({
     if (singleNote?.isTrash == false) {
       try {
         await updateDoc(NoteDoc, { isTrash: true });
+        toast.custom(
+          (t) => <CustomToast text="Note moved to trash page" color="red" />,
+          {
+            position: "top-center",
+            duration: 3000,
+          }
+        );
       } catch (error) {
         console.log(error);
       }
@@ -42,6 +51,15 @@ function NoteCard({
     if (singleNote?.isTrash == true) {
       try {
         await updateDoc(NoteDoc, { isTrash: false });
+        toast.custom(
+          (t) => (
+            <CustomToast text="Note restored successfully" color="green" />
+          ),
+          {
+            position: "top-center",
+            duration: 3000,
+          }
+        );
       } catch (error) {
         console.log(error);
       }
@@ -50,16 +68,31 @@ function NoteCard({
 
   const ChangeFavoriteStatus = async () => {
     const NoteDoc = doc(db, "Notes", id);
-    console.log(singleNote);
     if (singleNote?.isFavorite == true) {
       try {
         await updateDoc(NoteDoc, { isFavorite: false });
+        toast.custom(
+          (t) => <CustomToast text="Note is not favorite yet" color="green" />,
+          {
+            position: "top-center",
+            duration: 3000,
+          }
+        );
       } catch (error) {
         console.log(error);
       }
     } else {
       try {
         await updateDoc(NoteDoc, { isFavorite: true });
+        toast.custom(
+          (t) => (
+            <CustomToast text="Note is now a favorite note" color="green" />
+          ),
+          {
+            position: "top-center",
+            duration: 3000,
+          }
+        );
       } catch (error) {
         console.log(error);
       }
@@ -68,11 +101,43 @@ function NoteCard({
 
   const DeleteNote = async () => {
     const NoteDoc = doc(db, "Notes", id);
-    try {
-      await deleteDoc(NoteDoc);
-    } catch (error) {
-      console.log(error);
-    }
+    toast.custom(
+      () => (
+        <CustomToast
+          text="Do you want to delete this note permanently?"
+          color="red"
+          isDelete={true}
+          onClick={async () => {
+            try {
+              await deleteDoc(NoteDoc);
+              toast.custom(
+                () => (
+                  <CustomToast
+                    text="Note deleted permanently !!!"
+                    color="green"
+                  />
+                ),
+                {
+                  position: "top-center",
+                  duration: 3000,
+                }
+              );
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+        />
+      ),
+      {
+        position: "top-center",
+        duration: 3000,
+      }
+    );
+    // try {
+    //   await deleteDoc(NoteDoc);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   useEffect(() => {
@@ -94,7 +159,9 @@ function NoteCard({
 
   return (
     <div
-      className={"flex bg-white flex-col justify-between md:w-[30%] w-full min-w-[350px] rounded-md px-4 py-3 shadow-sm hover:shadow-lg hover:scale-[1.01] dark:shadow-gray-600"}
+      className={
+        "flex bg-white flex-col justify-between md:w-[30%] w-full min-w-[350px] rounded-md px-4 py-3 shadow-sm hover:shadow-lg hover:scale-[1.01] dark:shadow-gray-600"
+      }
       style={{ borderLeft: `8px solid ${color}`, borderColor: color }}
     >
       <div className="flex justify-between items-center mb-5">
@@ -142,6 +209,7 @@ function NoteCard({
               onClick={DeleteNote}
             />
           )}
+          <Toaster />
         </div>
       </div>
     </div>

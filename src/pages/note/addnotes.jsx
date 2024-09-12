@@ -1,10 +1,12 @@
 import Layout from "@/components/Layout";
 import Image from "next/image";
 import notedate from "@/assets/icons/note-date.svg";
+import CustomToast from "@/components/CustomToast";
 import { useEffect, useState } from "react";
 import { CirclePicker } from "react-color";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "@/context/Firebase";
+import toast, { Toaster } from "react-hot-toast";
 
 function AddNotes() {
   const NoteCollection = collection(db, "Notes");
@@ -59,6 +61,13 @@ function AddNotes() {
         isTrash: false,
         folder: null,
       });
+      toast.custom(
+        (t) => <CustomToast text="Note added successfully" color="green" />,
+        {
+          position: "top-center",
+          duration: 3000,
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -124,7 +133,6 @@ function AddNotes() {
               </div>
 
               <div className="flex flex-col w-[80%] lg:w-[50%]">
-
                 <p className="text-[26px] font-semibold dark:text-white">
                   Write your tag :
                 </p>
@@ -154,6 +162,7 @@ function AddNotes() {
             >
               Save / Edit
             </button>
+            <Toaster />
           </div>
         </div>
       </Layout>
