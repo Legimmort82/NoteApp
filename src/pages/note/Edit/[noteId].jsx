@@ -1,14 +1,13 @@
-import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
-import { useParams } from "next/navigation";
 import notedate from "@/assets/icons/note-date.svg";
-import arrowimg from "@/assets/icons/arrow.svg";
 import Layout from "@/components/Layout";
 import Image from "next/image";
+import CustomToast from "@/components/CustomToast";
+import { db } from "@/context/Firebase";
+import { useParams } from "next/navigation";
 import { CirclePicker } from "react-color";
 import { useEffect, useState } from "react";
-import FolderCard from "@/components/FolderCard";
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
-import { db } from "@/context/Firebase";
+import toast, { Toaster } from "react-hot-toast";
 
 const EditNote = () => {
   const params = useParams();
@@ -20,7 +19,7 @@ const EditNote = () => {
   const [desc, setDesc] = useState("");
   const [date, setDate] = useState("");
   const findNote = notes.find((note) => note.id == params?.noteId);
-  console.log(typeof(findNote?.id));
+  console.log(typeof findNote?.id);
   console.log(NoteCollection?.name);
   useEffect(() => {
     const getNotes = async () => {
@@ -59,7 +58,6 @@ const EditNote = () => {
   }, [findNote]);
 
   const handleSubmit = async (id) => {
-
     try {
       const NoteDoc = doc(db, "Notes", findNote.id);
       await updateDoc(NoteDoc, {
@@ -78,6 +76,13 @@ const EditNote = () => {
         isTrash: false,
         folder: null,
       });
+      toast.custom(
+        (t) => <CustomToast text="Note edited successfully" color="green" />,
+        {
+          position: "top-center",
+          duration: 3000,
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -151,7 +156,6 @@ const EditNote = () => {
               </div>
 
               <div className="flex flex-col w-[80%] lg:w-[50%]">
-
                 <p className="text-[26px] font-semibold dark:text-white">
                   Write your tag :
                 </p>
@@ -184,6 +188,7 @@ const EditNote = () => {
             >
               Save / Edit
             </button>
+            <Toaster/>
           </div>
         </div>
       </Layout>
