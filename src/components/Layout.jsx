@@ -4,7 +4,6 @@ import image3w from "@/icons/w3.svg";
 import image4w from "@/icons/w4.svg";
 import image5w from "@/icons/w5.svg";
 import image6w from "@/icons/w6.svg";
-import image7w from "@/icons/w7.svg";
 import Image from "next/image";
 import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
 import { useContext } from "react";
