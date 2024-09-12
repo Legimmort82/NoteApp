@@ -32,14 +32,15 @@ function NoteCard({
     const NoteDoc = doc(db, "Notes", id);
     if (singleNote?.isTrash == false) {
       try {
-        await updateDoc(NoteDoc, { isTrash: true });
-        toast.custom(
-          (t) => <CustomToast text="Note moved to trash page" color="red" />,
-          {
-            position: "top-center",
-            duration: 3000,
-          }
-        );
+        await updateDoc(NoteDoc, { isTrash: true }).then(() => {
+          toast.custom(
+            (t) => <CustomToast text="Note moved to trash page" color="red" />,
+            {
+              position: "top-center",
+              duration: 3000,
+            }
+          );
+        });
       } catch (error) {
         console.log(error);
       }
@@ -50,16 +51,17 @@ function NoteCard({
     const NoteDoc = doc(db, "Notes", id);
     if (singleNote?.isTrash == true) {
       try {
-        await updateDoc(NoteDoc, { isTrash: false });
-        toast.custom(
-          (t) => (
-            <CustomToast text="Note restored successfully" color="green" />
-          ),
-          {
-            position: "top-center",
-            duration: 3000,
-          }
-        );
+        await updateDoc(NoteDoc, { isTrash: false }).then(() => {
+          toast.custom(
+            (t) => (
+              <CustomToast text="Note restored successfully" color="green" />
+            ),
+            {
+              position: "top-center",
+              duration: 3000,
+            }
+          );
+        });
       } catch (error) {
         console.log(error);
       }
@@ -70,29 +72,33 @@ function NoteCard({
     const NoteDoc = doc(db, "Notes", id);
     if (singleNote?.isFavorite == true) {
       try {
-        await updateDoc(NoteDoc, { isFavorite: false });
-        toast.custom(
-          (t) => <CustomToast text="Note is not favorite yet" color="green" />,
-          {
-            position: "top-center",
-            duration: 3000,
-          }
-        );
+        await updateDoc(NoteDoc, { isFavorite: false }).then(() => {
+          toast.custom(
+            (t) => (
+              <CustomToast text="Note is not favorite yet" color="green" />
+            ),
+            {
+              position: "top-center",
+              duration: 3000,
+            }
+          );
+        });
       } catch (error) {
         console.log(error);
       }
     } else {
       try {
-        await updateDoc(NoteDoc, { isFavorite: true });
-        toast.custom(
-          (t) => (
-            <CustomToast text="Note is now a favorite note" color="green" />
-          ),
-          {
-            position: "top-center",
-            duration: 3000,
-          }
-        );
+        await updateDoc(NoteDoc, { isFavorite: true }).then(() => {
+          toast.custom(
+            (t) => (
+              <CustomToast text="Note is now a favorite note" color="green" />
+            ),
+            {
+              position: "top-center",
+              duration: 3000,
+            }
+          );
+        });
       } catch (error) {
         console.log(error);
       }
@@ -109,19 +115,20 @@ function NoteCard({
           isDelete={true}
           onClick={async () => {
             try {
-              await deleteDoc(NoteDoc);
-              toast.custom(
-                () => (
-                  <CustomToast
-                    text="Note deleted permanently !!!"
-                    color="green"
-                  />
-                ),
-                {
-                  position: "top-center",
-                  duration: 3000,
-                }
-              );
+              await deleteDoc(NoteDoc).then(() => {
+                toast.custom(
+                  () => (
+                    <CustomToast
+                      text="Note deleted permanently !!!"
+                      color="green"
+                    />
+                  ),
+                  {
+                    position: "top-center",
+                    duration: 3000,
+                  }
+                );
+              });
             } catch (error) {
               console.log(error);
             }
@@ -130,14 +137,9 @@ function NoteCard({
       ),
       {
         position: "top-center",
-        duration: 3000,
+        duration: 5000,
       }
     );
-    // try {
-    //   await deleteDoc(NoteDoc);
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   useEffect(() => {

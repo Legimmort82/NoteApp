@@ -75,14 +75,15 @@ const EditNote = () => {
         isFavorite: false,
         isTrash: false,
         folder: null,
+      }).then(() => {
+        toast.custom(
+          (t) => <CustomToast text="Note edited successfully" color="green" />,
+          {
+            position: "top-center",
+            duration: 3000,
+          }
+        );
       });
-      toast.custom(
-        (t) => <CustomToast text="Note edited successfully" color="green" />,
-        {
-          position: "top-center",
-          duration: 3000,
-        }
-      );
     } catch (error) {
       console.log(error);
     }
@@ -188,7 +189,7 @@ const EditNote = () => {
             >
               Save / Edit
             </button>
-            <Toaster/>
+            <Toaster />
           </div>
         </div>
       </Layout>

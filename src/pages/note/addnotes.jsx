@@ -60,14 +60,15 @@ function AddNotes() {
         isFavorite: false,
         isTrash: false,
         folder: null,
+      }).then(() => {
+        toast.custom(
+          (t) => <CustomToast text="Note added successfully" color="green" />,
+          {
+            position: "top-center",
+            duration: 3000,
+          }
+        );
       });
-      toast.custom(
-        (t) => <CustomToast text="Note added successfully" color="green" />,
-        {
-          position: "top-center",
-          duration: 3000,
-        }
-      );
     } catch (error) {
       console.log(error);
     }
