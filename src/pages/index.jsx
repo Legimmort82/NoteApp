@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="bg-Primary-100 dark:bg-dark-300 h-screen  relative overflow-auto flex-col items-center justify-between">
+      <div className="bg-Primary-100 dark:bg-dark-300 h-screen  relative overflow-y-auto overflow-x-clip flex-col items-center justify-between">
         <div className="bg-Primary-700 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] shadow-md shadow-gray-400 "></div>
           <h1 className="lg:text-[80px] text-[40px] font-bold mb-8 dark:text-white text-center">Welcome to Note Smart</h1>
 

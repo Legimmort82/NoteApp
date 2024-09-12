@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
           <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image6w} onClick={()=>{setDark(!dark)}} alt=""/>
         </Tippy>
       </div>
-      <div className="">{children}</div>
+      <div className="flex-1">{children}</div>
     </div>
   );
 };
