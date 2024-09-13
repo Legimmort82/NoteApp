@@ -1,7 +1,7 @@
 const CustomToast = ({ text, color,isDelete,onClick }) => {
   return (
     <div
-      className="px-4 py-2 bg-amber-200 rounded-lg  border-red-500"
+      className="px-8 py-6 bg-white rounded-lg  border-red-500"
       style={{ borderLeft: `8px solid ${color}`, borderColor: color }}
     >
       <p className="text-lg font-semibold">{text}</p>

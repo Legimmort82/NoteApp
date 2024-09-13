@@ -46,7 +46,7 @@ function AddNotes() {
     console.log("hey");
     try {
       await addDoc(NoteCollection, {
-        id: notes.length + 1,
+        // id: notes.length + 1,
         title: title,
         date:
           new Date().getFullYear() +
@@ -59,7 +59,7 @@ function AddNotes() {
         tag: tag,
         isFavorite: false,
         isTrash: false,
-        folder: null,
+        // folder: null,
       }).then(() => {
         toast.custom(
           (t) => <CustomToast text="Note added successfully" color="green" />,

@@ -74,7 +74,7 @@ const EditNote = () => {
         tag: tag,
         isFavorite: false,
         isTrash: false,
-        folder: null,
+        // folder: null,
       }).then(() => {
         toast.custom(
           (t) => <CustomToast text="Note edited successfully" color="green" />,
