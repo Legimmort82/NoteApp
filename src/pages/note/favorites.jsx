@@ -36,7 +36,7 @@ function favorites() {
         <div className="bg-Primary-100 dark:bg-dark-300 h-screen relative overflow-x-clip overflow-y-auto">
           <div className="bg-Primary-700 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] shadow-md shadow-gray-400 dark:shadow-none" />
 
-          <div className="flex flex-col items-center md:pl-[96px] md:pr-10">
+          <div className="flex flex-col md:items-start  md:pl-[96px] md:pr-10">
             <h1 className="py-7 text-Primary-500 text-[55px] font-bold md:self-start">
               Favorites
             </h1>
