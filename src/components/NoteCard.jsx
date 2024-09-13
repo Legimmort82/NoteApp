@@ -175,7 +175,7 @@ function NoteCard({
         <p className="text-gray-500 text-[18px]">{description}</p>
         <div className="flex">
           <Link href={`/note/Edit/${id}`}>
-            <Image className="w-[25px] ml-2 cursor-pointer" src={img1} alt="" />
+            <Image className="w-[25px] mr-2 cursor-pointer" src={img1} alt="" />
           </Link>
           {img2 && (
             <Image
