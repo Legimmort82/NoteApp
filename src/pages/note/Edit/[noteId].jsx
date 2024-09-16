@@ -185,7 +185,7 @@ const EditNote = () => {
             />
             <button
               onClick={handleSubmit}
-              className="bg-Primary-800 px-8 py-2 rounded-lg text-white font-medium mt-3"
+              className="bg-Primary-800 px-8 py-2 rounded-lg text-white font-medium mt-3 duration-300 hover:scale-105"
             >
               Save / Edit
             </button>
