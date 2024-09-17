@@ -6,7 +6,7 @@ import editimg from "@/assets/icons/edit.svg";
 import NoteCard from "@/components/NoteCard";
 import truncateText from "@/hooks/truncateText";
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, getDocsFromCache, getDocsFromServer } from "firebase/firestore";
 import { db } from "@/context/Firebase";
 
 function AllNotes() {
