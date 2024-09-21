@@ -32,11 +32,11 @@ function AddNotes() {
   const { data } = useQuery('note-data', () => {
     return axios.get("http://localhost:4000/notes")
   })
-  const arrey = data?.data.length
+  const numberOfObjects = data?.data.length
   
   const handleSubmit = () => {
     const note = {
-      id: arrey + 1,
+      id: numberOfObjects + 1,
       title: title,
       date:
         new Date().getFullYear() +
