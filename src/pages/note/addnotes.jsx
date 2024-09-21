@@ -13,7 +13,6 @@ function AddNotes() {
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
   const [selectColor, setSelectColor] = useState("#F44336");
-  const [idNumber, setIdNumber] = useState("")
 
   const handelTitle = (e) => {
     setTitle(e.target.value);
@@ -33,19 +32,8 @@ function AddNotes() {
   const { data } = useQuery('note-data', () => {
     return axios.get("http://localhost:4000/notes")
   })
-  const arrey = setIdNumber(data?.data.length)
-  console.log(arrey);
+  const arrey = data?.data.length
   
-  // useEffect(() => {
-  //   axios.get("http://localhost:4000/notes").then((response) => {
-  //     // console.log(response);
-  //     const array = response?.data
-  //     console.log(array?.length);
-  //   });
-  // }, []);
-  // const previousNotes = axios.get("http://localhost:4000/notes");
-  // const filt = previousNotes.data?.data;
-  // console.log(filt);
   const handleSubmit = () => {
     const note = {
       id: arrey + 1,
