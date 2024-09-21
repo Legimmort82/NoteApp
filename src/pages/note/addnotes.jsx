@@ -9,11 +9,9 @@ import { useMutation } from "react-query";
 import axios from "axios";
 
 function AddNotes() {
-
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
-
 
   const handelTitle = (e) => {
     setTitle(e.target.value);
@@ -26,14 +24,21 @@ function AddNotes() {
   };
 
   const addNote = (note) => {
-    return axios.post("http://localhost:4000/notes", note)
-  }
+    return axios.post("http://localhost:4000/notes", note);
+  };
 
- const { mutate } = useMutation(addNote)
-
- const previousNotes = axios.get("http://localhost:4000/notes")
-
-  const handleSubmit =  () => {
+  const { mutate } = useMutation(addNote);
+  useEffect(() => {
+    axios.get("http://localhost:4000/notes").then((response) => {
+      // console.log(response);
+      const array = response?.data
+      console.log(array?.length);
+    });
+  }, []);
+  // const previousNotes = axios.get("http://localhost:4000/notes");
+  // const filt = previousNotes.data?.data;
+  // console.log(filt);
+  const handleSubmit = () => {
     const note = {
       id: previousNotes.length + 1,
       title: title,
@@ -47,9 +52,9 @@ function AddNotes() {
       color: selectColor,
       tag: tag,
       isFavorite: false,
-      isTrash: false
-    }
-    mutate(note)
+      isTrash: false,
+    };
+    mutate(note);
     // try {
     //   await addDoc(NoteCollection, {
     //     // id: notes.length + 1,
@@ -79,8 +84,6 @@ function AddNotes() {
     //   console.log(error);
     // }
   };
-
- 
 
   const [selectColor, setSelectColor] = useState("#F44336");
 
