@@ -12,32 +12,12 @@ import { useQuery } from "react-query";
 import axios from "axios";
 
 function AllNotes() {
-  // const [notes, setNotes] = useState([]);
-
-  // const NoteCollection = collection(db, "Notes");
-  // useEffect(() => {
-  //   const getNotes = async () => {
-  //     try {
-  //       const noteData = await getDocs(NoteCollection);
-  //       const filteredData = noteData.docs.map((doc) => ({
-  //         ...doc.data(),
-  //         id: doc.id,
-  //       }));
-  //       setNotes(filteredData);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   getNotes();
-  // }, [NoteCollection]);
 
   const { isLoading, data } = useQuery('note-data', () => {
     return axios.get("http://localhost:4000/notes")
   })
 
   const notesFilter = data?.data.filter((note) => note.isTrash === false);
-  console.log(notesFilter);
 
   if (isLoading) {
     return <h2>LOADING ...</h2>
