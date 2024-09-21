@@ -5,31 +5,27 @@ import editimg from "@/assets/icons/edit.svg";
 import NoteCard from "@/components/NoteCard";
 import truncateText from "@/hooks/truncateText";
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/context/Firebase";
+// import { collection, getDocs } from "firebase/firestore";
+// import { db } from "@/context/Firebase";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 function favorites() {
-  const NoteCollection = collection(db, "Notes");
-  const [notes, setNotes] = useState([]);
-  const notesFilter = notes.filter((note) => note.isFavorite == true && note.isTrash == false) ;
 
-  useEffect(() => {
-    const getNotes = async () => {
-      try {
-        const noteData = await getDocs(NoteCollection);
-        const filteredData = noteData.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setNotes(filteredData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const { isLoading, data, isError, error } = useQuery('note-data', () => {
+    return axios.get("http://localhost:4000/notes")
+  }, {refetchOnMount: true , refetchOnWindowFocus:true})
 
-    getNotes();
-  }, [NoteCollection]);
+  const notesFilter = data?.data.filter((note) => note.isFavorite == true && note.isTrash == false) ;
 
+  if (isLoading) {
+    return <h2>LOADING ...</h2>
+  }
+
+  if (isError) {
+    return <h2>{error.message}</h2>
+  }
+  
   return (
     <>
       <Layout>
@@ -42,7 +38,7 @@ function favorites() {
             </h1>
 
             <div className="flex flex-col md:flex-row md:flex-wrap gap-9 pb-10">
-              {notesFilter.map((item) => {
+              {notesFilter?.map((item) => {
                 const truncatedDesc = truncateText(item.description, 25);
                 const truncatedTitle = truncateText(item.title, 12);
                 return (

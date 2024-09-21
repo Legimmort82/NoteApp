@@ -6,21 +6,23 @@ import editimg from "@/assets/icons/edit.svg";
 import NoteCard from "@/components/NoteCard";
 import truncateText from "@/hooks/truncateText";
 import { useEffect, useState } from "react";
-// import { collection, getDocs, getDocsFromCache, getDocsFromServer } from "firebase/firestore";
-// import { db } from "@/context/Firebase";
 import { useQuery } from "react-query";
 import axios from "axios";
 
 function AllNotes() {
 
-  const { isLoading, data } = useQuery('note-data', () => {
+  const { isLoading, data, isError, error } = useQuery('note-data', () => {
     return axios.get("http://localhost:4000/notes")
-  })
+  }, {refetchOnMount: true , refetchOnWindowFocus:true})
 
   const notesFilter = data?.data.filter((note) => note.isTrash === false);
 
   if (isLoading) {
     return <h2>LOADING ...</h2>
+  }
+
+  if (isError) {
+    return <h2>{error.message}</h2>
   }
 
   return (

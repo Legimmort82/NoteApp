@@ -1,14 +1,14 @@
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  updateDoc,
-} from "firebase/firestore";
+// import {
+//   collection,
+//   deleteDoc,
+//   doc,
+//   getDocs,
+//   updateDoc,
+// } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import CustomToast from "./CustomToast";
-import { db } from "@/context/Firebase";
+// import { db } from "@/context/Firebase";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 

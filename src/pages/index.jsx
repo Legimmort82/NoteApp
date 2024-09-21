@@ -10,8 +10,6 @@ import Image from "next/image";
 import HomePageCard from "@/components/HomePageCard";
 import Layout from "@/components/Layout";
 
-
-
 export default function Home() {
 
   return (
