@@ -4,33 +4,16 @@ import notedate from "@/assets/icons/note-date.svg";
 import CustomToast from "@/components/CustomToast";
 import { useEffect, useState } from "react";
 import { CirclePicker } from "react-color";
-import { addDoc, collection, getDocs } from "firebase/firestore";
-import { db } from "@/context/Firebase";
 import toast, { Toaster } from "react-hot-toast";
+import { useMutation } from "react-query";
+import axios from "axios";
 
 function AddNotes() {
-  const NoteCollection = collection(db, "Notes");
-  const [notes, setNotes] = useState([]);
+
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
 
-  useEffect(() => {
-    const getNotes = async () => {
-      try {
-        const noteData = await getDocs(NoteCollection);
-        const filteredData = noteData.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setNotes(filteredData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getNotes();
-  }, []);
 
   const handelTitle = (e) => {
     setTitle(e.target.value);
@@ -42,37 +25,62 @@ function AddNotes() {
     setDesc(e.target.value);
   };
 
-  const handleSubmit = async () => {
-    console.log("hey");
-    try {
-      await addDoc(NoteCollection, {
-        // id: notes.length + 1,
-        title: title,
-        date:
-          new Date().getFullYear() +
-          "/" +
-          String(new Date().getMonth() + 1).padStart(2, "0") +
-          "/" +
-          String(new Date().getDate()).padStart(2, "0"),
-        description: desc,
-        color: selectColor,
-        tag: tag,
-        isFavorite: false,
-        isTrash: false,
-        // folder: null,
-      }).then(() => {
-        toast.custom(
-          (t) => <CustomToast text="Note added successfully" color="green" />,
-          {
-            position: "top-center",
-            duration: 3000,
-          }
-        );
-      });
-    } catch (error) {
-      console.log(error);
+  const addNote = (note) => {
+    return axios.post("http://localhost:4000/notes", note)
+  }
+
+ const { mutate } = useMutation(addNote)
+
+ const previousNotes = axios.get("http://localhost:4000/notes")
+
+  const handleSubmit =  () => {
+    const note = {
+      id: previousNotes.length + 1,
+      title: title,
+      date:
+        new Date().getFullYear() +
+        "/" +
+        String(new Date().getMonth() + 1).padStart(2, "0") +
+        "/" +
+        String(new Date().getDate()).padStart(2, "0"),
+      description: desc,
+      color: selectColor,
+      tag: tag,
+      isFavorite: false,
+      isTrash: false
     }
+    mutate(note)
+    // try {
+    //   await addDoc(NoteCollection, {
+    //     // id: notes.length + 1,
+    //     title: title,
+    //     date:
+    //       new Date().getFullYear() +
+    //       "/" +
+    //       String(new Date().getMonth() + 1).padStart(2, "0") +
+    //       "/" +
+    //       String(new Date().getDate()).padStart(2, "0"),
+    //     description: desc,
+    //     color: selectColor,
+    //     tag: tag,
+    //     isFavorite: false,
+    //     isTrash: false,
+    //     // folder: null,
+    //   }).then(() => {
+    //     toast.custom(
+    //       (t) => <CustomToast text="Note added successfully" color="green" />,
+    //       {
+    //         position: "top-center",
+    //         duration: 3000,
+    //       }
+    //     );
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
+
+ 
 
   const [selectColor, setSelectColor] = useState("#F44336");
 

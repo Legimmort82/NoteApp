@@ -1,8 +1,7 @@
 {
-  "notes": 
-  [
+  "notes": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Django",
       "date": "2022/05/01",
       "description": "I should learn this course in this week",
@@ -12,7 +11,7 @@
       "isTrash": true
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "JS",
       "date": "2023/07/21",
       "description": "I should learn this course in this week from Youtube",
@@ -22,7 +21,7 @@
       "isTrash": false
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "SQL",
       "date": "2024/11/24",
       "description": "I should learn this course in this week from docs",
@@ -30,7 +29,16 @@
       "tag": "my-job",
       "isFavorite": true,
       "isTrash": false
+    },
+    {
+      "id": "b300",
+      "title": "C++",
+      "date": "2024/09/21",
+      "description": "eofnvioeqjv[eqj[oipqeb",
+      "color": "#ffeb3b",
+      "tag": "Uni",
+      "isFavorite": false,
+      "isTrash": false
     }
   ]
 }
- 
