@@ -1,0 +1,36 @@
+{
+  "notes": 
+  [
+    {
+      "id": 1,
+      "title": "Django",
+      "date": "2022/05/01",
+      "description": "I should learn this course in this week",
+      "color": "#F44336",
+      "tag": "team-Project",
+      "isFavorite": false,
+      "isTrash": true
+    },
+    {
+      "id": 2,
+      "title": "JS",
+      "date": "2023/07/21",
+      "description": "I should learn this course in this week from Youtube",
+      "color": "#2196F3",
+      "tag": "work-Project",
+      "isFavorite": false,
+      "isTrash": false
+    },
+    {
+      "id": 3,
+      "title": "SQL",
+      "date": "2024/11/24",
+      "description": "I should learn this course in this week from docs",
+      "color": "#4CAF50",
+      "tag": "my-job",
+      "isFavorite": true,
+      "isTrash": false
+    }
+  ]
+}
+ 

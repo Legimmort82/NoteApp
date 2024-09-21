@@ -6,19 +6,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serve-json": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
     "@next/font": "^14.2.11",
     "@tippyjs/react": "^4.2.6",
     "axios": "^1.7.7",
     "firebase": "^10.13.1",
+    "json-server": "^1.0.0-beta.2",
     "next": "14.2.5",
     "react": "^18",
     "react-color": "^2.19.3",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
     "react-hot-toast": "^2.4.1",
+    "react-query": "^3.39.3",
     "react-spinners": "^0.14.1"
   },
   "devDependencies": {
