@@ -5,13 +5,15 @@ import CustomToast from "@/components/CustomToast";
 import { useEffect, useState } from "react";
 import { CirclePicker } from "react-color";
 import toast, { Toaster } from "react-hot-toast";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 
 function AddNotes() {
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
+  const [selectColor, setSelectColor] = useState("#F44336");
+  const [idNumber, setIdNumber] = useState("")
 
   const handelTitle = (e) => {
     setTitle(e.target.value);
@@ -26,21 +28,27 @@ function AddNotes() {
   const addNote = (note) => {
     return axios.post("http://localhost:4000/notes", note);
   };
-
   const { mutate } = useMutation(addNote);
-  useEffect(() => {
-    axios.get("http://localhost:4000/notes").then((response) => {
-      // console.log(response);
-      const array = response?.data
-      console.log(array?.length);
-    });
-  }, []);
+
+  const { data } = useQuery('note-data', () => {
+    return axios.get("http://localhost:4000/notes")
+  })
+  const arrey = setIdNumber(data?.data.length)
+  console.log(arrey);
+  
+  // useEffect(() => {
+  //   axios.get("http://localhost:4000/notes").then((response) => {
+  //     // console.log(response);
+  //     const array = response?.data
+  //     console.log(array?.length);
+  //   });
+  // }, []);
   // const previousNotes = axios.get("http://localhost:4000/notes");
   // const filt = previousNotes.data?.data;
   // console.log(filt);
   const handleSubmit = () => {
     const note = {
-      id: previousNotes.length + 1,
+      id: arrey + 1,
       title: title,
       date:
         new Date().getFullYear() +
@@ -84,8 +92,6 @@ function AddNotes() {
     //   console.log(error);
     // }
   };
-
-  const [selectColor, setSelectColor] = useState("#F44336");
 
   const date =
     new Date().getFullYear() +

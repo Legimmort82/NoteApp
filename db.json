@@ -29,16 +29,6 @@
       "tag": "my-job",
       "isFavorite": true,
       "isTrash": false
-    },
-    {
-      "id": "b300",
-      "title": "C++",
-      "date": "2024/09/21",
-      "description": "eofnvioeqjv[eqj[oipqeb",
-      "color": "#ffeb3b",
-      "tag": "Uni",
-      "isFavorite": false,
-      "isTrash": false
     }
   ]
 }
