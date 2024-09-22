@@ -36,7 +36,7 @@ function AddNotes() {
   
   const handleSubmit = () => {
     const note = {
-      id: numberOfObjects + 1,
+      id: String(numberOfObjects + 1),
       title: title,
       date:
         new Date().getFullYear() +

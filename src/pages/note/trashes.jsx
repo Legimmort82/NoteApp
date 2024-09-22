@@ -5,22 +5,68 @@ import editimg from "@/assets/icons/edit.svg";
 import trashimg from "@/assets/icons/trash.svg";
 import truncateText from "@/hooks/truncateText";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import axios from "axios";
 
 
 function trashes() {
 
-  const { isLoading, data, isError, error } = useQuery('note-data', () => {
+  const { isLoading, data, isError, error, refetch } = useQuery('note-data', () => {
     return axios.get("http://localhost:4000/notes")
-  }, {refetchOnMount: true , refetchOnWindowFocus:true})
-  
+    }, { refetchOnMount: true, refetchOnWindowFocus: true }) 
   const notesFilter = data?.data.filter((note) => note.isTrash == true);
+  
+  const updateNote = ({ note, id }) => {
+    return axios.put(`http://localhost:4000/notes/${id}`, note);
+  };
+  const mutationUpdate = useMutation({
+    mutationKey: ["update"],
+    mutationFn: updateNote,
+  });
+
+  const RestoreNote = (id) => {
+    const singleNote = notesFilter.find((note) => note.id === id);
+    const note = { ...singleNote, isTrash: false };
+    mutationUpdate.mutate(
+      { note, id },
+      {
+        onSuccess: (res) => {
+          console.log(res);
+          refetch()
+        },
+        onError: (err) => {
+          console.log(err);
+        },
+      }
+    );
+  };
+
+  const UpdateDeleteNote = ({id}) => {
+    return axios.delete(`http://localhost:4000/notes/${id}`);
+  }
+  const mutationDelete = useMutation({
+    mutationKey: ["delete"],
+    mutationFn: UpdateDeleteNote,
+  });
+
+  const DeleteNote = (id) => {
+    mutationDelete.mutate(
+      { id },
+      {
+        onSuccess: (res) => {
+          console.log(res);
+          refetch()
+        },
+        onError: (err) => {
+          console.log(err);
+        },
+      }
+    );
+  }
 
   if (isLoading) {
     return <h2>LOADING ...</h2>
   }
-
   if (isError) {
     return <h2>{error.message}</h2>
   }
@@ -48,10 +94,11 @@ function trashes() {
                     id={item.id}
                     description={truncatedDesc}
                     img1={editimg}
-                    // img2={item.isFavorite ? favoriteimg : notfavoriteimg}
                     img2={refreshimg}
                     img3={trashimg}
                     color={item.color}
+                    onClick1={() => RestoreNote(item.id)}
+                    onClick2={() => DeleteNote(item.id)}
                   />
                 );
               })}

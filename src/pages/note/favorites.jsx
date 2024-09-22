@@ -7,21 +7,62 @@ import truncateText from "@/hooks/truncateText";
 import { useEffect, useState } from "react";
 // import { collection, getDocs } from "firebase/firestore";
 // import { db } from "@/context/Firebase";
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import axios from "axios";
 
 function favorites() {
 
-  const { isLoading, data, isError, error } = useQuery('note-data', () => {
+  const { isLoading, data, isError, error, refetch } = useQuery('note-data', () => {
     return axios.get("http://localhost:4000/notes")
   }, {refetchOnMount: true , refetchOnWindowFocus:true})
 
   const notesFilter = data?.data.filter((note) => note.isFavorite == true && note.isTrash == false) ;
 
+  const updateNote = ({ note, id }) => {
+    return axios.put(`http://localhost:4000/notes/${id}`, note);
+  };
+  const mutation = useMutation({
+    mutationKey: ["update"],
+    mutationFn: updateNote,
+  });
+
+  const ChangeTrashStatus = (id) => {
+    const singleNote = notesFilter.find((note) => note.id === id);
+    const note = { ...singleNote, isTrash: true };
+    mutation.mutate(
+      { note, id },
+      {
+        onSuccess: (res) => {
+          console.log(res);
+          refetch()
+        },
+        onError: (err) => {
+          console.log(err);
+        },
+      }
+    );
+  };
+
+  const ChangeFavoriteToFalse = (id) => {
+    const singleNote = notesFilter.find((note) => note.id === id);
+    const note = { ...singleNote, isFavorite: false };
+    mutation.mutate(
+      { note, id },
+      {
+        onSuccess: (res) => {
+          console.log(res);
+          refetch()
+        },
+        onError: (err) => {
+          console.log(err);
+        },
+      }
+    );
+  };
+
   if (isLoading) {
     return <h2>LOADING ...</h2>
   }
-
   if (isError) {
     return <h2>{error.message}</h2>
   }
@@ -52,6 +93,8 @@ function favorites() {
                     img2={favoriteimg}
                     img3={trashimg}
                     color={item.color}
+                    onClick1={() => ChangeFavoriteToFalse(item.id)}
+                    onClick2={() => ChangeTrashStatus(item.id)}
                   />
                 );
               })}

@@ -10,13 +10,15 @@ import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 
 function AllNotes() {
-  const { isLoading, data, isError, error } = useQuery(
+  const { isLoading, data, isError, error, refetch } = useQuery(
     "note-data",
     () => {
       return axios.get("http://localhost:4000/notes");
     },
     { refetchOnMount: true, refetchOnWindowFocus: true }
   );
+  const notesFilter = data?.data.filter((note) => note.isTrash === false);
+
   const updateNote = ({ note, id }) => {
     return axios.put(`http://localhost:4000/notes/${id}`, note);
   };
@@ -24,15 +26,6 @@ function AllNotes() {
     mutationKey: ["update"],
     mutationFn: updateNote,
   });
-
-  const notesFilter = data?.data.filter((note) => note.isTrash === false);
-  console.log(notesFilter);
-  if (isLoading) {
-    return <h2>LOADING ...</h2>;
-  }
-  if (isError) {
-    return <h2>{error.message}</h2>;
-  }
 
   const ChangeTrashStatus = (id) => {
     const singleNote = notesFilter.find((note) => note.id === id);
@@ -42,6 +35,7 @@ function AllNotes() {
       {
         onSuccess: (res) => {
           console.log(res);
+          refetch()
         },
         onError: (err) => {
           console.log(err);
@@ -49,6 +43,47 @@ function AllNotes() {
       }
     );
   };
+
+  const ChangeFavoriteToTrue = (id) => {
+    const singleNote = notesFilter.find((note) => note.id === id);
+    if(singleNote.isFavorite === false) {
+      const note = { ...singleNote, isFavorite: true };
+      mutation.mutate(
+        { note, id },
+        {
+          onSuccess: (res) => {
+            console.log(res);
+            refetch()
+          },
+          onError: (err) => {
+            console.log(err);
+          },
+        }
+      );
+    }
+    else {
+      const note = { ...singleNote, isFavorite: false };
+      mutation.mutate(
+        { note, id },
+        {
+          onSuccess: (res) => {
+            console.log(res);
+            refetch()
+          },
+          onError: (err) => {
+            console.log(err);
+          },
+        }
+      );
+    }
+  };
+
+  if (isLoading) {
+    return <h2>LOADING ...</h2>;
+  }
+  if (isError) {
+    return <h2>{error.message}</h2>;
+  }
 
   return (
     <>
@@ -77,6 +112,7 @@ function AllNotes() {
                     img2={item.isFavorite ? favoriteimg : notfavoriteimg}
                     img3={trashimg}
                     color={item.color}
+                    onClick1={() => ChangeFavoriteToTrue(item.id)}
                     onClick2={() => ChangeTrashStatus(item.id)}
                   />
                 );

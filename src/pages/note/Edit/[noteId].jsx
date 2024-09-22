@@ -8,6 +8,7 @@ import { CirclePicker } from "react-color";
 import { useEffect, useState } from "react";
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
+import { useQuery } from "react-query";
 
 const EditNote = () => {
   const params = useParams();
@@ -18,25 +19,32 @@ const EditNote = () => {
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
   const [date, setDate] = useState("");
+
+  const { isLoading, data, isError, error, refetch } = useQuery('note-data', () => {
+    return axios.get("http://localhost:4000/notes")
+    }, { refetchOnMount: true, refetchOnWindowFocus: true }) 
+  
   const findNote = notes.find((note) => note.id == params?.noteId);
+  
   console.log(typeof findNote?.id);
   console.log(NoteCollection?.name);
-  useEffect(() => {
-    const getNotes = async () => {
-      try {
-        const noteData = await getDocs(NoteCollection);
-        const filteredData = noteData.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setNotes(filteredData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
 
-    getNotes();
-  }, []);
+  // useEffect(() => {
+  //   const getNotes = async () => {
+  //     try {
+  //       const noteData = await getDocs(NoteCollection);
+  //       const filteredData = noteData.docs.map((doc) => ({
+  //         ...doc.data(),
+  //         id: doc.id,
+  //       }));
+  //       setNotes(filteredData);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   getNotes();
+  // }, []);
   const handelTitle = (e) => {
     setTitle(e.target.value);
   };
