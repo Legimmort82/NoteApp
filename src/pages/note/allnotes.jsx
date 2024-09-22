@@ -6,7 +6,7 @@ import editimg from "@/assets/icons/edit.svg";
 import NoteCard from "@/components/NoteCard";
 import truncateText from "@/hooks/truncateText";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 
 function AllNotes() {
@@ -20,10 +20,23 @@ function AllNotes() {
   if (isLoading) {
     return <h2>LOADING ...</h2>
   }
-
   if (isError) {
     return <h2>{error.message}</h2>
   }
+
+  // const updateNote = (note) => {
+  //     return axios.put(`http://localhost:4000/notes/${id}`, note)
+  //   }
+  // const { mutate } = useMutation(updateNote);
+
+  // const ChangeTrashStatus = () => {
+  //   const singleNote = notesFilter.find((note) => note.id == item.id);
+  //     const note = {
+  //       isTrash: true
+  //     }
+  //     mutate(note)
+  //   }
+  // }
 
   return (
     <>
@@ -53,6 +66,9 @@ function AllNotes() {
                       img2={item.isFavorite ? favoriteimg : notfavoriteimg}
                       img3={trashimg}
                       color={item.color}
+                      onClick2={useEffect (() => {
+                        axios.put(`http://localhost:4000/notes/${item.id}`, {isTrash: true})
+                      })}
                     />
                   );
                 })}

@@ -49,8 +49,8 @@ function trashes() {
                     description={truncatedDesc}
                     img1={editimg}
                     // img2={item.isFavorite ? favoriteimg : notfavoriteimg}
-                    img5={trashimg}
-                    img4={refreshimg}
+                    img2={refreshimg}
+                    img3={trashimg}
                     color={item.color}
                   />
                 );

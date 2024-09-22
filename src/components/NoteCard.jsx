@@ -8,9 +8,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import CustomToast from "./CustomToast";
-// import { db } from "@/context/Firebase";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import { useMutation, useQuery } from "react-query";
 
 function NoteCard({
   title,
@@ -19,13 +20,13 @@ function NoteCard({
   img1,
   img2,
   img3,
-  img4,
-  img5,
   color,
   id,
+  onClick1,
+  onClick2
 }) {
   // const NoteCollection = collection(db, "Notes");
-  const [notes, setNotes] = useState([]);
+  // const [notes, setNotes] = useState([]);
   // const singleNote = notes.find((note) => note.id == id);
 
   // const ChangeTrashStatus = async () => {
@@ -47,117 +48,32 @@ function NoteCard({
   //   }
   // };
 
-  // const RestoreNote = async () => {
-  //   const NoteDoc = doc(db, "Notes", id);
-  //   if (singleNote?.isTrash == true) {
-  //     try {
-  //       await updateDoc(NoteDoc, { isTrash: false }).then(() => {
-  //         toast.custom(
-  //           (t) => (
-  //             <CustomToast text="Note restored successfully" color="green" />
-  //           ),
-  //           {
-  //             position: "top-center",
-  //             duration: 3000,
-  //           }
-  //         );
-  //       });
-  //     } catch (error) {
-  //       console.log(error);
+
+  // const updateNote = (note) => {
+  //   return axios.put(`http://localhost:4000/notes/${id}`, note)
+  // }
+  // const { mutate } = useMutation(updateNote);
+
+  // const ChangeTrashStatus = () => {
+  //   if(isTrash === false) {
+  //     const note = {
+  //       isTrash: true
   //     }
+  //     mutate(note);
   //   }
-  // };
+  // }
+
+  // const deleteNote = (note) => {
+  //   return axios.delete(`http://localhost:4000/notes/${id}`, note)
+  // }
+
+  // const RestoreNote = async () => {
 
   // const ChangeFavoriteStatus = async () => {
-  //   const NoteDoc = doc(db, "Notes", id);
-  //   if (singleNote?.isFavorite == true) {
-  //     try {
-  //       await updateDoc(NoteDoc, { isFavorite: false }).then(() => {
-  //         toast.custom(
-  //           (t) => (
-  //             <CustomToast text="Note is not favorite yet" color="green" />
-  //           ),
-  //           {
-  //             position: "top-center",
-  //             duration: 3000,
-  //           }
-  //         );
-  //       });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   } else {
-  //     try {
-  //       await updateDoc(NoteDoc, { isFavorite: true }).then(() => {
-  //         toast.custom(
-  //           (t) => (
-  //             <CustomToast text="Note is now a favorite note" color="green" />
-  //           ),
-  //           {
-  //             position: "top-center",
-  //             duration: 3000,
-  //           }
-  //         );
-  //       });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // };
 
   // const DeleteNote = async () => {
-  //   const NoteDoc = doc(db, "Notes", id);
-  //   toast.custom(
-  //     () => (
-  //       <CustomToast
-  //         text="Do you want to delete this note permanently?"
-  //         color="red"
-  //         isDelete={true}
-  //         onClick={async () => {
-  //           try {
-  //             await deleteDoc(NoteDoc).then(() => {
-  //               toast.custom(
-  //                 () => (
-  //                   <CustomToast
-  //                     text="Note deleted permanently !!!"
-  //                     color="green"
-  //                   />
-  //                 ),
-  //                 {
-  //                   position: "top-center",
-  //                   duration: 3000,
-  //                 }
-  //               );
-  //             });
-  //           } catch (error) {
-  //             console.log(error);
-  //           }
-  //         }}
-  //       />
-  //     ),
-  //     {
-  //       position: "top-center",
-  //       duration: 5000,
-  //     }
-  //   );
-  // };
 
-  // useEffect(() => {
-  //   const getNotes = async () => {
-  //     try {
-  //       const noteData = await getDocs(NoteCollection);
-  //       const filteredData = noteData.docs.map((doc) => ({
-  //         ...doc.data(),
-  //         id: doc.id,
-  //       }));
-  //       setNotes(filteredData);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   getNotes();
-  // }, [NoteCollection]);
+  
 
   return (
     <div
@@ -177,37 +93,21 @@ function NoteCard({
           <Link href={`/note/Edit/${id}`}>
             <Image className="w-[25px] mr-2 cursor-pointer" src={img1} alt="" />
           </Link>
-          {img2 && (
+
             <Image
+              onClick={onClick1}
               className="w-[25px] ml-2 cursor-pointer duration-500 hover:rotate-[360deg]"
               src={img2}
               alt=""
             />
-          )}
-
-          {img3 && (
+  
             <Image
+              onClick={onClick2}
               className="w-[25px] ml-2 cursor-pointer"
               src={img3}
               alt=""
             />
-          )}
-
-          {img4 && (
-            <Image
-              className="w-[25px] ml-2 cursor-pointer duration-500 hover:rotate-[-360deg]"
-              src={img4}
-              alt=""
-            />
-          )}
-          {img5 && (
-            <Image
-              className="w-[25px] ml-2 cursor-pointer"
-              src={img5}
-              alt=""
-            />
-          )}
-          <Toaster />
+          {/* <Toaster /> */}
         </div>
       </div>
     </div>
