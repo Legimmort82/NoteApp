@@ -78,13 +78,6 @@ function AllNotes() {
     }
   };
 
-  if (isLoading) {
-    return <h2>LOADING ...</h2>;
-  }
-  if (isError) {
-    return <h2>{error.message}</h2>;
-  }
-
   return (
     <>
       <Layout>

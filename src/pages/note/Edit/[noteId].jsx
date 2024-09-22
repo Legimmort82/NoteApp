@@ -2,33 +2,64 @@ import notedate from "@/assets/icons/note-date.svg";
 import Layout from "@/components/Layout";
 import Image from "next/image";
 import CustomToast from "@/components/CustomToast";
-import { db } from "@/context/Firebase";
 import { useParams } from "next/navigation";
 import { CirclePicker } from "react-color";
 import { useEffect, useState } from "react";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
+import axios from "axios";
 
 const EditNote = () => {
   const params = useParams();
-  const NoteCollection = collection(db, "Notes");
   const [selectColor, setSelectColor] = useState("#F44336");
-  const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [desc, setDesc] = useState("");
   const [date, setDate] = useState("");
 
-  const { isLoading, data, isError, error, refetch } = useQuery('note-data', () => {
+  const { isLoading, data, isError, error } = useQuery('note-data', () => {
     return axios.get("http://localhost:4000/notes")
     }, { refetchOnMount: true, refetchOnWindowFocus: true }) 
   
-  const findNote = notes.find((note) => note.id == params?.noteId);
-  
-  console.log(typeof findNote?.id);
-  console.log(NoteCollection?.name);
+  const findNote = data?.data.find((note) => note.id == params?.noteId);
+  useEffect(() => {
+    if (findNote) {
+      setDesc(findNote.description);
+      setTag(findNote.tag);
+      setTitle(findNote.title);
+      setSelectColor(findNote.color);
+      setDate(findNote.date);
+    }
+  }, [findNote]);
 
+  const handelTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const handelTag = (e) => {
+    setTag(e.target.value);
+  };
+  const handelDesc = (e) => {
+    setDesc(e.target.value);
+  };
+
+  const updateNote = (note) => {
+    return axios.put(`http://localhost:4000/notes/${params?.noteId}`, note);
+  };
+  const mutation = useMutation({
+    mutationKey: ["update-note"],
+    mutationFn: updateNote,
+  });
+
+  const handleSubmit = () => {
+    const note = {
+      ...findNote,
+      title: title,
+      description: desc,
+      color: selectColor,
+      tag: tag,
+    };
+    mutation.mutate(note);
+  };
   // useEffect(() => {
   //   const getNotes = async () => {
   //     try {
@@ -45,73 +76,61 @@ const EditNote = () => {
 
   //   getNotes();
   // }, []);
-  const handelTitle = (e) => {
-    setTitle(e.target.value);
-  };
-  const handelTag = (e) => {
-    setTag(e.target.value);
-  };
-  const handelDesc = (e) => {
-    setDesc(e.target.value);
-  };
+  
+  // const handleSubmit = async (id) => {
+  //   try {
+  //     const NoteDoc = doc(db, "Notes", findNote.id);
+  //     await updateDoc(NoteDoc, {
+  //       // id: params.noteId,
+  //       title: title,
+  //       date:
+  //         new Date().getFullYear() +
+  //         "/" +
+  //         String(new Date().getMonth() + 1).padStart(2, "0") +
+  //         "/" +
+  //         String(new Date().getDate()).padStart(2, "0"),
+  //       description: desc,
+  //       color: selectColor,
+  //       tag: tag,
+  //       isFavorite: false,
+  //       isTrash: false,
+  //       // folder: null,
+  //     }).then(() => {
+  //       toast.custom(
+  //         (t) => <CustomToast text="Note edited successfully" color="green" />,
+  //         {
+  //           position: "top-center",
+  //           duration: 3000,
+  //         }
+  //       );
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   updateNote(params.noteId, {
+  //     id: params.noteId,
+  //     title: title,
+  //     date:
+  //       new Date().getFullYear() +
+  //       "/" +
+  //       String(new Date().getMonth() + 1).padStart(2, "0") +
+  //       "/" +
+  //       String(new Date().getDate()).padStart(2, "0"),
+  //     description: desc,
+  //     color: selectColor,
+  //     tag: tag,
+  //     isFavorite: false,
+  //     isTrash: false,
+  //     folder: null,
+  //   });
+  // };
 
-  useEffect(() => {
-    if (findNote) {
-      setDesc(findNote.description);
-      setTag(findNote.tag);
-      setTitle(findNote.title);
-      setSelectColor(findNote.color);
-      setDate(findNote.date);
-    }
-  }, [findNote]);
-
-  const handleSubmit = async (id) => {
-    try {
-      const NoteDoc = doc(db, "Notes", findNote.id);
-      await updateDoc(NoteDoc, {
-        // id: params.noteId,
-        title: title,
-        date:
-          new Date().getFullYear() +
-          "/" +
-          String(new Date().getMonth() + 1).padStart(2, "0") +
-          "/" +
-          String(new Date().getDate()).padStart(2, "0"),
-        description: desc,
-        color: selectColor,
-        tag: tag,
-        isFavorite: false,
-        isTrash: false,
-        // folder: null,
-      }).then(() => {
-        toast.custom(
-          (t) => <CustomToast text="Note edited successfully" color="green" />,
-          {
-            position: "top-center",
-            duration: 3000,
-          }
-        );
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    // updateNote(params.noteId, {
-    //   id: params.noteId,
-    //   title: title,
-    //   date:
-    //     new Date().getFullYear() +
-    //     "/" +
-    //     String(new Date().getMonth() + 1).padStart(2, "0") +
-    //     "/" +
-    //     String(new Date().getDate()).padStart(2, "0"),
-    //   description: desc,
-    //   color: selectColor,
-    //   tag: tag,
-    //   isFavorite: false,
-    //   isTrash: false,
-    //   folder: null,
-    // });
-  };
+  if (isLoading) {
+    return <h2>LOADING ...</h2>;
+  }
+  if (isError) {
+    return <h2>{error.message}</h2>;
+  }
 
   return (
     <>

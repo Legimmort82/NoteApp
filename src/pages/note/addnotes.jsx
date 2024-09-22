@@ -29,6 +29,7 @@ function AddNotes() {
   };
   const { mutate } = useMutation(addNote);
 
+  //* for find number of objects
   const { data } = useQuery('note-data', () => {
     return axios.get("http://localhost:4000/notes")
   })
