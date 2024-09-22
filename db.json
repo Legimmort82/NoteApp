@@ -1,26 +1,14 @@
 {
   "notes": [
     {
-      "id": "1",
       "title": "Django",
       "date": "2022/05/01",
       "description": "I should learn this course in this week",
       "color": "#F44336",
       "tag": "team-Project",
-      "isFavorite": false,
-      "isTrash": true
-    },
-    {
-      "isTrash": true,
-      "id": "2"
-    },
-    {
-      "isTrash": true,
-      "id": "3"
-    },
-    {
-      "isTrash": true,
-      "id": "4"
+      "isFavorite": true,
+      "isTrash": false,
+      "id": "1"
     }
   ]
 }
