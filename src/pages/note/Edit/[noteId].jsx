@@ -13,6 +13,7 @@ import {
   PrimaryTextareaField,
 } from "@/components/ui/Fields/fields";
 import Form from "@/components/ui/Form";
+import Button from "@/components/ui/Button/index.jsx"
 
 const EditNote = () => {
   const params = useParams();
@@ -81,7 +82,7 @@ const EditNote = () => {
           <div className="bg-Primary-700 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] shadow-md shadow-gray-400 dark:shadow-none" />
           <div className="lg:pl-36 lg:pr-40 pl-20 pr-20 py-7">
             <div className="mb-20 lg:mb-14">
-              <PrimaryInputField name="title" />
+              <PrimaryInputField name="title" placeholder="Title"/>
               <div className=" flex justify-center md:justify-end items-center mt-3">
                 <div className="flex items-center">
                   <p className="font-medium text-[18px] dark:text-white">
@@ -118,17 +119,23 @@ const EditNote = () => {
                   Write your tag :
                 </p>
                 <div className="mt-8">
-                  <PrimaryInputField name="tag" />
+                  <PrimaryInputField name="tag" placeholder="Tag Name"/>
                 </div>
               </div>
             </div>
-            <PrimaryTextareaField name="desc" />
-            <button
+
+            <PrimaryTextareaField name="desc" placeholder="Write Your Content ... "/>
+
+            <div className="w-40">
+              <Button onClick={() => handleSubmit}> save / edit</Button>
+            </div>
+
+            {/* <button
               type="submit"
               className="bg-Primary-800 px-8 py-2 rounded-lg text-white font-medium mt-3 duration-300 hover:scale-105"
             >
               Save / Edit
-            </button>
+            </button> */}
             <Toaster />
           </div>
         </Form>

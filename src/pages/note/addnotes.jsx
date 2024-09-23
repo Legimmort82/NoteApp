@@ -11,11 +11,18 @@ import {
   PrimaryInputField,
   PrimaryTextareaField,
 } from "@/components/ui/Fields/fields";
+import Button from "@/components/ui/Button/index.jsx"
 
 function AddNotes() {
   const [selectColor, setSelectColor] = useState("#F44336");
 
-  const methods = useForm();
+  const methods = useForm({
+    defaultValues: {
+      title: "",
+      tag: "",
+      desc: "",
+    },
+  });
 
   const addNote = (note) => {
     return axios.post("http://localhost:4000/notes", note);
@@ -73,8 +80,8 @@ function AddNotes() {
                 placeholder="Type your title here..."
                 className="bg-Primary-100 px-2 outline-none w-full border-b-[5px] h-11 border-b-Primary-600 placeholder:text-[30px] pb-3 text-[30px] font-semibold dark:bg-dark-300 dark:text-white"
               /> */}
-              <PrimaryInputField name="title" />
-              <div className=" flex justify-center md:justify-end items-center mt-3">
+              <PrimaryInputField name="title" placeholder="Title" />
+              <div className=" flex justify-center md:justify-end items-center mt-6">
                 <div className="flex items-center">
                   <p className="font-medium text-[18px] dark:text-white">
                     Color :
@@ -121,7 +128,7 @@ function AddNotes() {
                     placeholder="Work"
                     className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 border-b-Primary-600 text-[26px] font-medium text-gray-500 placeholder:text-[30px] dark:bg-dark-300 dark:text-gray-300"
                   /> */}
-                  <PrimaryInputField name="tag" />
+                  <PrimaryInputField name="tag" placeholder="Tag Name"/>
                 </div>
               </div>
             </div>
@@ -133,14 +140,19 @@ function AddNotes() {
               type="text"
               placeholder="Type your content here ..."
             /> */}
-            <PrimaryTextareaField name="desc" />
-            <button
+            <PrimaryTextareaField name="desc" placeholder="Write Your Content ... "/>
+
+            <div className="w-40">
+              <Button onClick={() => handleSubmit}> save / edit</Button>
+            </div>
+
+            {/* <button
               // onClick={handleSubmit}
               type="submit"
               className="bg-Primary-800 px-8 py-2 rounded-lg text-white font-medium mt-3 duration-300 hover:scale-105"
             >
               Save / Edit
-            </button>
+            </button> */}
           </div>
         </Form>
       </Layout>
