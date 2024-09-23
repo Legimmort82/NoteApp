@@ -11,24 +11,24 @@
       "isTrash": false
     },
     {
-      "id": "3",
-      "title": "C++",
+      "id": "2",
+      "title": "JS",
       "date": "2024/09/23",
-      "description": "project for Uni",
-      "color": "#ffeb3b",
+      "description": "for my Uni",
+      "color": "#F44336",
       "tag": "Uni",
       "isFavorite": false,
-      "isTrash": true
+      "isTrash": false
     },
     {
       "id": "3",
-      "title": "Js",
+      "title": "C++",
       "date": "2024/09/23",
-      "description": "my personal project",
+      "description": "personal project",
       "color": "#F44336",
       "tag": "personal",
       "isFavorite": false,
-      "isTrash": false
+      "isTrash": true
     }
   ]
 }
