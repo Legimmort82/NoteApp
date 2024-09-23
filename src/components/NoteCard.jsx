@@ -5,6 +5,7 @@
 //   getDocs,
 //   updateDoc,
 // } from "firebase/firestore";
+import PropTypes from "prop-types";
 import Image from "next/image";
 import Link from "next/link";
 import CustomToast from "./CustomToast";
@@ -115,3 +116,9 @@ function NoteCard({
 }
 
 export default NoteCard;
+ Notecard.propTypes ={
+  title: PropTypes.string,
+  description: PropTypes.string,
+  date: PropTypes.string,
+  onClick1:PropTypes.func,
+ }
