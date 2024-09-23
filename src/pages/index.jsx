@@ -8,7 +8,7 @@ import dividertop from "@/icons/Divider-top.svg";
 import dividerdown from "@/icons/Divider-down.svg";
 import Image from "next/image";
 import HomePageCard from "@/components/HomePageCard";
-import Layout from "@/components/Layout";
+import Layout from "@/components/Layouts/Layout";
 
 export default function Home() {
 

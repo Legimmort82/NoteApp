@@ -1,21 +1,19 @@
 import darkchangeimg from "@/assets/icons/dark-change.svg";
-import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import Tippy from "@tippyjs/react";
+import Form from "@/components/ui/Form";
+import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useContext, useState } from "react";
+import { BeatLoader } from "react-spinners";
 import { auth } from "@/context/Firebase";
 import { useForm } from "react-hook-form";
-import { BeatLoader } from "react-spinners";
-import Tippy from "@tippyjs/react"
-import "tippy.js/dist/tippy.css"
+import { SecondaryInputField } from "@/components/ui/Fields/fields";
+import "tippy.js/dist/tippy.css";
 
 export default function Register() {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
+  const methods = useForm();
   const { dark, setDark } = useContext(darkModeNoteContext);
   const [Loading, setLoading] = useState(false);
 
@@ -59,42 +57,23 @@ export default function Register() {
 
           <div className="md:flex md:justify-evenly justify-center">
             <div className="mr-12 md:w-[30%] w-full mt-[70px]">
-              <form
+              <Form
+                methods={methods}
                 className="flex flex-col items-center justify-center"
-                onSubmit={handleSubmit(OnSubmit)}
+                onSubmit={OnSubmit}
               >
                 <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                   Email Address
                 </label>
                 <div className="mb-8 w-full">
-                  <input
-                    className="rounded-md h-12 w-[100%] px-4"
-                    type="email"
-                    name="email"
-                    {...register("email", {
-                      required: "Please enter a valid email address",
-                    })}
-                  />
-                  <p className="text-red-500 mt-2 font-semibold text-sm">
-                    {errors?.email?.message}
-                  </p>
+                  <SecondaryInputField name="email" />
                 </div>
 
                 <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                   Password
                 </label>
                 <div className="mb-8 w-full">
-                  <input
-                    className="rounded-md h-12  w-[100%] px-4"
-                    type="text"
-                    name="password"
-                    {...register("password", {
-                      required: "Enter your password",
-                    })}
-                  />
-                  <p className="text-red-500 mt-2 font-semibold text-sm">
-                    {errors?.password?.message}
-                  </p>
+                  <SecondaryInputField name="password" />
                 </div>
                 <button
                   className=" text-white py-3 px-[90px] bg-Primary-500 rounded-md mb-3"
@@ -113,7 +92,7 @@ export default function Register() {
                 >
                   Already have an account?
                 </Link>
-              </form>
+              </Form>
             </div>
 
             <div className="md:flex md:flex-col md:items-center md:justify-center md:w-[30%] hidden ">

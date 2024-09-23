@@ -1,5 +1,5 @@
 import notedate from "@/assets/icons/note-date.svg";
-import Layout from "@/components/Layout";
+import Layout from "@/components/Layouts/Layout";
 import Image from "next/image";
 import CustomToast from "@/components/CustomToast";
 import { useParams } from "next/navigation";

@@ -1,28 +1,21 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/Layouts/Layout";
 import Image from "next/image";
 import notedate from "@/assets/icons/note-date.svg";
-import CustomToast from "@/components/CustomToast";
-import { useEffect, useState } from "react";
-import { CirclePicker } from "react-color";
-import toast, { Toaster } from "react-hot-toast";
-import { useMutation, useQuery } from "react-query";
 import axios from "axios";
+import Form from "@/components/ui/Form";
+import { useState } from "react";
+import { CirclePicker } from "react-color";
+import { useMutation, useQuery } from "react-query";
+import { useForm } from "react-hook-form";
+import {
+  PrimaryInputField,
+  PrimaryTextareaField,
+} from "@/components/ui/Fields/fields";
 
 function AddNotes() {
-  const [title, setTitle] = useState("");
-  const [tag, setTag] = useState("");
-  const [desc, setDesc] = useState("");
   const [selectColor, setSelectColor] = useState("#F44336");
 
-  const handelTitle = (e) => {
-    setTitle(e.target.value);
-  };
-  const handelTag = (e) => {
-    setTag(e.target.value);
-  };
-  const handelDesc = (e) => {
-    setDesc(e.target.value);
-  };
+  const methods = useForm();
 
   const addNote = (note) => {
     return axios.post("http://localhost:4000/notes", note);
@@ -30,56 +23,28 @@ function AddNotes() {
   const { mutate } = useMutation(addNote);
 
   //* for find number of objects
-  const { data } = useQuery('note-data', () => {
-    return axios.get("http://localhost:4000/notes")
-  })
-  const numberOfObjects = data?.data.length
-  
-  const handleSubmit = () => {
+  const { data } = useQuery("note-data", () => {
+    return axios.get("http://localhost:4000/notes");
+  });
+  const numberOfObjects = data?.data.length;
+
+  const handleSubmit = (addData) => {
     const note = {
       id: String(numberOfObjects + 1),
-      title: title,
+      title: addData?.title,
       date:
         new Date().getFullYear() +
         "/" +
         String(new Date().getMonth() + 1).padStart(2, "0") +
         "/" +
         String(new Date().getDate()).padStart(2, "0"),
-      description: desc,
+      description: addData?.desc,
       color: selectColor,
-      tag: tag,
+      tag: addData?.tag,
       isFavorite: false,
       isTrash: false,
     };
     mutate(note);
-    // try {
-    //   await addDoc(NoteCollection, {
-    //     // id: notes.length + 1,
-    //     title: title,
-    //     date:
-    //       new Date().getFullYear() +
-    //       "/" +
-    //       String(new Date().getMonth() + 1).padStart(2, "0") +
-    //       "/" +
-    //       String(new Date().getDate()).padStart(2, "0"),
-    //     description: desc,
-    //     color: selectColor,
-    //     tag: tag,
-    //     isFavorite: false,
-    //     isTrash: false,
-    //     // folder: null,
-    //   }).then(() => {
-    //     toast.custom(
-    //       (t) => <CustomToast text="Note added successfully" color="green" />,
-    //       {
-    //         position: "top-center",
-    //         duration: 3000,
-    //       }
-    //     );
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   const date =
@@ -92,19 +57,23 @@ function AddNotes() {
   return (
     <>
       <Layout>
-        <div className="bg-Primary-100 dark:bg-dark-300 h-screen relative overflow-x-clip overflow-y-auto">
+        <Form
+          methods={methods}
+          onSubmit={handleSubmit}
+          className="bg-Primary-100 dark:bg-dark-300 h-screen relative overflow-x-clip overflow-y-auto"
+        >
           <div className="bg-Primary-700 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] shadow-md shadow-gray-400 dark:shadow-none" />
 
           <div className="lg:pl-36 lg:pr-40 pl-20 pr-20 py-7">
             <div className="mb-20 lg:mb-14">
-              <input
+              {/* <input
                 type="text"
                 onChange={handelTitle}
                 value={title}
                 placeholder="Type your title here..."
                 className="bg-Primary-100 px-2 outline-none w-full border-b-[5px] h-11 border-b-Primary-600 placeholder:text-[30px] pb-3 text-[30px] font-semibold dark:bg-dark-300 dark:text-white"
-              />
-
+              /> */}
+              <PrimaryInputField name="title" />
               <div className=" flex justify-center md:justify-end items-center mt-3">
                 <div className="flex items-center">
                   <p className="font-medium text-[18px] dark:text-white">
@@ -145,33 +114,35 @@ function AddNotes() {
                 </p>
 
                 <div className="mt-8">
-                  <input
+                  {/* <input
                     type="text"
                     value={tag}
                     onChange={handelTag}
                     placeholder="Work"
                     className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 border-b-Primary-600 text-[26px] font-medium text-gray-500 placeholder:text-[30px] dark:bg-dark-300 dark:text-gray-300"
-                  />
+                  /> */}
+                  <PrimaryInputField name="tag" />
                 </div>
               </div>
             </div>
 
-            <textarea
+            {/* <textarea
               value={desc}
               onChange={handelDesc}
               className="bg-Primary-100 resize-none text-[24px] rounded-lg border-[3px] w-[100%] h-[500px] lg:h-[400px] border-Primary-500 border-solid placeholder:text-gray-400  placeholder:font-medium p-4 dark:bg-dark-300 dark:text-white "
               type="text"
               placeholder="Type your content here ..."
-            />
+            /> */}
+            <PrimaryTextareaField name="desc" />
             <button
-              onClick={handleSubmit}
+              // onClick={handleSubmit}
+              type="submit"
               className="bg-Primary-800 px-8 py-2 rounded-lg text-white font-medium mt-3 duration-300 hover:scale-105"
             >
               Save / Edit
             </button>
-            <Toaster />
           </div>
-        </div>
+        </Form>
       </Layout>
     </>
   );

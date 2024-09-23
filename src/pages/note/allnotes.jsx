@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/Layouts/Layout";
 import trashimg from "@/assets/icons/trash.svg";
 import notfavoriteimg from "@/assets/icons/not-favorite.svg";
 import favoriteimg from "@/assets/icons/favorite.svg";

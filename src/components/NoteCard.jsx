@@ -1,10 +1,4 @@
-// import {
-//   collection,
-//   deleteDoc,
-//   doc,
-//   getDocs,
-//   updateDoc,
-// } from "firebase/firestore";
+
 import PropTypes from "prop-types";
 import Image from "next/image";
 import Link from "next/link";
@@ -116,7 +110,7 @@ function NoteCard({
 }
 
 export default NoteCard;
- Notecard.propTypes ={
+ NoteCard.propTypes ={
   title: PropTypes.string,
   description: PropTypes.string,
   date: PropTypes.string,

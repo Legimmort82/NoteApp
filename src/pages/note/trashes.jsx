@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/Layouts/Layout";
 import NoteCard from "@/components/NoteCard";
 import refreshimg from "@/assets/icons/refresh.svg";
 import editimg from "@/assets/icons/edit.svg";
