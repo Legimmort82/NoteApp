@@ -1,4 +1,4 @@
-import darkchangeimg from "@/assets/icons/dark-change.svg";
+import darkModeImg from "@/assets/icons/dark-mode-img.svg";
 import Image from "next/image";
 import Link from "next/link";
 import Tippy from "@tippyjs/react";
@@ -43,7 +43,7 @@ export default function Login() {
           <Tippy content="Dark | Light" placement="bottom" delay={200}>
             <Image
               className="w-[ 60px] h-[60px] cursor-pointer duration-[230ms] hover:scale-[1.12]"
-              src={darkchangeimg}
+              src={darkModeImg}
               alt="logo"
             />
           </Tippy>

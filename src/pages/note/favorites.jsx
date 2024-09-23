@@ -1,7 +1,7 @@
 import Layout from "@/components/Layouts/Layout";
-import trashimg from "@/assets/icons/trash.svg";
-import favoriteimg from "@/assets/icons/favorite.svg";
-import editimg from "@/assets/icons/edit.svg";
+import trashImg from "@/assets/icons/note-card-icons/trash.svg";
+import favoriteImg from "@/assets/icons/note-card-icons/favorite.svg";
+import editImg from "@/assets/icons/note-card-icons/edit.svg";
 import NoteCard from "@/components/NoteCard";
 import truncateText from "@/hooks/truncateText";
 import { useEffect, useState } from "react";
@@ -89,9 +89,9 @@ function favorites() {
                     date={item.date}
                     id={item.id}
                     description={truncatedDesc}
-                    img1={editimg}
-                    img2={favoriteimg}
-                    img3={trashimg}
+                    img1={editImg}
+                    img2={favoriteImg}
+                    img3={trashImg}
                     color={item.color}
                     onClick1={() => ChangeFavoriteToFalse(item.id)}
                     onClick2={() => ChangeTrashStatus(item.id)}

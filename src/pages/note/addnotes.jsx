@@ -1,6 +1,6 @@
+import noteDate from "@/assets/icons/note-card-icons/note-date.svg";
 import Layout from "@/components/Layouts/Layout";
 import Image from "next/image";
-import notedate from "@/assets/icons/note-date.svg";
 import axios from "axios";
 import Form from "@/components/ui/Form";
 import { useState } from "react";
@@ -96,7 +96,7 @@ function AddNotes() {
                   <p className="text-gray-500 text-[17px] font-medium mr-2 dark:text-white">
                     {date}
                   </p>
-                  <Image src={notedate} alt="" />
+                  <Image src={noteDate} alt="" />
                 </div>
               </div>
             </div>

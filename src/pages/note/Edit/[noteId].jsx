@@ -1,4 +1,4 @@
-import notedate from "@/assets/icons/note-date.svg";
+import noteDate from "@/assets/icons/note-card-icons/note-date.svg";
 import Layout from "@/components/Layouts/Layout";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -98,7 +98,7 @@ const EditNote = () => {
                     {/* 2022/01/05 */}
                     {findNote?.date}
                   </p>
-                  <Image src={notedate} alt="" />
+                  <Image src={noteDate} alt="" />
                 </div>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import { forwardRef, useState } from "react";
+import PropTypes from "prop-types";
 
 const PrimaryInput = forwardRef(
   (
@@ -43,8 +44,8 @@ const PrimaryInput = forwardRef(
           onChange={onChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className={`bg-Primary-100 px-2 outline-none w-full border-b-[5px] h-11 border-b-Primary-600 placeholder:text-[30px] pb-3 text-[30px] font-semibold dark:bg-dark-300 dark:text-white  ${
-            focus ? "scale-[1.02] duration-200" : ""
+          className={`bg-Primary-100 px-2 outline-none w-full border-b-[5px] h-11 border-b-Primary-600 placeholder:text-[30px] pb-3 text-[30px] font-semibold dark:bg-dark-300 dark:text-white duration-200 hover:shadow-md hover:shadow-gray-400 ${
+            focus ? "scale-[1.02]" : ""
           }`}
         />
         {error && <p className="mt-[5px] text-xs text-State-error">{error}</p>}
@@ -54,3 +55,8 @@ const PrimaryInput = forwardRef(
 );
 
 export default PrimaryInput;
+PrimaryInput.propTypes ={
+  placeholder: PropTypes.string,
+  name: PropTypes.string,
+  onChange: PropTypes.func
+ }

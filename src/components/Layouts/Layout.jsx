@@ -1,16 +1,15 @@
-import image1w from "@/icons/w1.svg";
-import image2w from "@/icons/w2.svg";
-import image3w from "@/icons/w3.svg";
-import image4w from "@/icons/w4.svg";
-import image5w from "@/icons/w5.svg";
-import image6w from "@/icons/w6.svg";
+import allNoteImg from "@/assets/icons/sidebar-icons/all-note-img.svg";
+import addNoteImg from "@/assets/icons/sidebar-icons/add-note-img.svg";
+import trashImg from "@/assets/icons/sidebar-icons/trash-img.svg";
+import favoriteImg from "@/assets/icons/sidebar-icons/favorite-img.svg";
+import darkModeImg from "@/assets/icons/sidebar-icons/dark-mode-img.svg";
+import homeImg from "@/assets/icons/sidebar-icons/home-img.svg"
 import Image from "next/image";
 import { darkModeNoteContext } from "@/context/DarkModeNoteContext"
 import { useContext } from "react";
 import Link from "next/link";
 import Tippy from "@tippyjs/react"
 import "tippy.js/dist/tippy.css"
-import homeImg from "@/assets/icons/home.svg"
 
 const Layout = ({ children }) => {
   const { dark, setDark } = useContext(darkModeNoteContext);
@@ -26,13 +25,13 @@ const Layout = ({ children }) => {
 
         <Link href={"/note/allnotes"}>
           <Tippy content="All Notes" placement="right" delay={200}>
-            <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image1w} alt="" />
+            <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={allNoteImg} alt="" />
           </Tippy>
         </Link>
 
         <Link href={"/note/addnotes"}>
           <Tippy content="Add Note" placement="right" delay={200}>
-            <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image2w} alt="" />
+            <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={addNoteImg} alt="" />
           </Tippy>
         </Link>
 
@@ -44,18 +43,18 @@ const Layout = ({ children }) => {
 
         <Link href={"/note/trashes"}>
           <Tippy content="Trash" placement="right" delay={200}>
-            <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image4w} alt="" />
+            <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={trashImg} alt="" />
           </Tippy>
         </Link>
 
         <Link href={"/note/favorites"}>
           <Tippy content="Favorite" placement="right" delay={200}>
-            <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image5w} alt="" />
+            <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={favoriteImg} alt="" />
           </Tippy>
         </Link>
 
         <Tippy content="Dark | Light" placement="right" delay={200}>
-          <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={image6w} onClick={() => { setDark(!dark) }} alt="" />
+          <Image className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]" src={darkModeImg} onClick={() => { setDark(!dark) }} alt="" />
         </Tippy>
       </div>
       <div className="flex-1">{children}</div>

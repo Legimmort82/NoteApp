@@ -1,11 +1,11 @@
-import image1r from "@/icons/r1.svg";
-import image2r from "@/icons/r2.svg";
-import image4r from "@/icons/r4.svg";
-import image5r from "@/icons/r5.svg";
-import image6r from "@/icons/r6.svg";
-import dartimg from "@/icons/Dart.svg";
-import dividertop from "@/icons/Divider-top.svg";
-import dividerdown from "@/icons/Divider-down.svg";
+import allNoteImg from "@/assets/icons/home-page-icons/all-note-Img.svg";
+import addNoteImg from "@/assets/icons/home-page-icons/add-note-Img.svg";
+import trashImg from "@/assets/icons/home-page-icons/trash-img.svg";
+import favoriteImg from "@/assets/icons/home-page-icons/favorite-img.svg";
+import darkModeImg from "@/assets/icons/home-page-icons/dark-mode-img.svg";
+import dartimg from "@/assets/icons/home-page-icons/Dart.svg";
+import dividertop from "@/assets/icons/home-page-icons/Divider-top.svg";
+import dividerdown from "@/assets/icons/home-page-icons/Divider-down.svg";
 import Image from "next/image";
 import HomePageCard from "@/components/HomePageCard";
 import Layout from "@/components/Layouts/Layout";
@@ -23,13 +23,13 @@ export default function Home() {
           <div className="flex flex-col justify-center px-4 lg:px-0">
             <div className="lg:flex-row gap-3 flex flex-col lg:justify-between items-center">
               <HomePageCard
-                img={image1r}
+                img={allNoteImg}
                 link={"/note/allnotes"}
                 text="Click on the notes icon to see all of your created notes"
               />
               <Image className="w-[90px] h-[90px] lg:block hidden" src={dartimg} />
               <HomePageCard
-                img={image2r}
+                img={addNoteImg}
                 link={"/note/addnotes"}
                 text="Click on the new note icon to create a new one and mange it"
               />
@@ -37,7 +37,7 @@ export default function Home() {
             <Image src={dividertop} className="lg:block hidden" />
             <div className="lg:flex-row gap-3 flex flex-col lg:justify-center mt-3 items-center mb-3 lg:mb-[28px]">
               <HomePageCard
-                img={image5r}
+                img={favoriteImg}
                 link={"/note/favorites"}
                 text="Click on the favorite icon to see your favorites ones in the app"
               />
@@ -47,7 +47,7 @@ export default function Home() {
 
             <div className="lg:flex-row gap-3 flex flex-col lg:justify-between  items-center mb-6">
                 <HomePageCard
-                  img={image4r}
+                  img={trashImg}
                   link={"/note/trashes"}
                   text="Click on the recycle bin icon to restore notes you were removed before"
                 />
@@ -55,7 +55,7 @@ export default function Home() {
               <Image className="w-[90px] h-[90px] lg:block hidden " src={dartimg} />
 
               <HomePageCard
-                img={image6r}
+                img={darkModeImg}
                 text="Toggle dark mode or light mode as you like"
               />
             </div>

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,3 +14,8 @@ function HomePageCard({ text, img, link = ""}) {
 }
 
 export default HomePageCard;
+
+HomePageCard.propTypes ={
+  text: PropTypes.string,
+  link: PropTypes.string,
+ }

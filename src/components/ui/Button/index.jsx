@@ -1,5 +1,6 @@
 // bg-Primary-800 px-8 py-2 rounded-lg text-white font-medium mt-3
 import Styles from'./button.module.css'
+import PropTypes from "prop-types";
 
 function index({ children, onClick, type, disabled }) {
   return (
@@ -18,3 +19,8 @@ function index({ children, onClick, type, disabled }) {
 }
 
 export default index;
+index.propTypes ={
+  type: PropTypes.string,
+  disabled: PropTypes.func,
+  onClick: PropTypes.func
+ }

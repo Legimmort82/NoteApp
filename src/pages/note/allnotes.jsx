@@ -1,8 +1,8 @@
 import Layout from "@/components/Layouts/Layout";
-import trashimg from "@/assets/icons/trash.svg";
-import notfavoriteimg from "@/assets/icons/not-favorite.svg";
-import favoriteimg from "@/assets/icons/favorite.svg";
-import editimg from "@/assets/icons/edit.svg";
+import trashImg from "@/assets/icons/note-card-icons/trash.svg";
+import notFavoriteImg from "@/assets/icons/note-card-icons/not-favorite.svg";
+import favoriteImg from "@/assets/icons/note-card-icons/favorite.svg";
+import editImg from "@/assets/icons/note-card-icons/edit.svg";
 import NoteCard from "@/components/NoteCard";
 import truncateText from "@/hooks/truncateText";
 import { useEffect, useState } from "react";
@@ -101,9 +101,9 @@ function AllNotes() {
                     title={truncatedTitle}
                     date={item.date}
                     description={truncatedDesc}
-                    img1={editimg}
-                    img2={item.isFavorite ? favoriteimg : notfavoriteimg}
-                    img3={trashimg}
+                    img1={editImg}
+                    img2={item.isFavorite ? favoriteImg : notFavoriteImg}
+                    img3={trashImg}
                     color={item.color}
                     onClick1={() => ChangeFavoriteToTrue(item.id)}
                     onClick2={() => ChangeTrashStatus(item.id)}

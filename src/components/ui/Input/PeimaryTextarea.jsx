@@ -1,4 +1,5 @@
 import { forwardRef, useState } from "react";
+import PropTypes from "prop-types";
 
 const PrimaryTextarea = forwardRef(
   (
@@ -14,20 +15,17 @@ const PrimaryTextarea = forwardRef(
       min,
       max,
       onChange,
-      onFocus,
-      onBlur
     },
     ref
   ) => {
 
     const [focus, setFocus] = useState(false)
 
-    const handleFocus = (e) => {
+    const handleFocus = () => {
       setFocus(true)
-
     };
 
-    const handleBlur = (e) => {
+    const handleBlur = () => {
       setFocus(false)
     };
     return (
@@ -57,3 +55,8 @@ const PrimaryTextarea = forwardRef(
 );
 
 export default PrimaryTextarea;
+PrimaryTextarea.propTypes ={
+  placeholder: PropTypes.string,
+  name: PropTypes.string,
+  onChange: PropTypes.func
+ }

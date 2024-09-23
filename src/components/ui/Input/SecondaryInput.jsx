@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import PropTypes from "prop-types";
 
 const SecondaryInput = forwardRef(
   (
@@ -17,8 +18,7 @@ const SecondaryInput = forwardRef(
     },
     ref
   ) => {
-    const handleFocus = () => {};
-    const handleBlur = () => {};
+    
     return (
       <div>
         <input
@@ -44,3 +44,8 @@ const SecondaryInput = forwardRef(
 );
 
 export default SecondaryInput;
+SecondaryInput.propTypes ={
+  placeholder: PropTypes.string,
+  name: PropTypes.string,
+  onChange: PropTypes.func
+ }

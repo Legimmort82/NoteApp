@@ -1,8 +1,8 @@
 import Layout from "@/components/Layouts/Layout";
 import NoteCard from "@/components/NoteCard";
-import refreshimg from "@/assets/icons/refresh.svg";
-import editimg from "@/assets/icons/edit.svg";
-import trashimg from "@/assets/icons/trash.svg";
+import refreshImg from "@/assets/icons/note-card-icons/refresh.svg";
+import editImg from "@/assets/icons/note-card-icons/edit.svg";
+import trashImg from "@/assets/icons/note-card-icons/trash.svg";
 import truncateText from "@/hooks/truncateText";
 import { useEffect, useState } from "react";
 import { useQuery, useMutation } from "react-query";
@@ -93,9 +93,9 @@ function trashes() {
                     date={item.date}
                     id={item.id}
                     description={truncatedDesc}
-                    img1={editimg}
-                    img2={refreshimg}
-                    img3={trashimg}
+                    img1={editImg}
+                    img2={refreshImg}
+                    img3={trashImg}
                     color={item.color}
                     onClick1={() => RestoreNote(item.id)}
                     onClick2={() => DeleteNote(item.id)}

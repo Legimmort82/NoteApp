@@ -1,4 +1,3 @@
-
 import PropTypes from "prop-types";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +18,8 @@ function NoteCard({
   id,
   onClick1,
   onClick2
-}) {
+}) 
+{
   // const NoteCollection = collection(db, "Notes");
   // const [notes, setNotes] = useState([]);
   // const singleNote = notes.find((note) => note.id == id);
@@ -111,8 +111,14 @@ function NoteCard({
 
 export default NoteCard;
  NoteCard.propTypes ={
+  id: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   date: PropTypes.string,
-  onClick1:PropTypes.func,
+  color: PropTypes.string,
+  onClick1: PropTypes.func,
+  onClick2: PropTypes.func,
  }
+
+ 
+
