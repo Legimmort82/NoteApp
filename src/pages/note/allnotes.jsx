@@ -3,41 +3,26 @@ import trashImg from "@/assets/icons/note-card-icons/trash.svg";
 import notFavoriteImg from "@/assets/icons/note-card-icons/not-favorite.svg";
 import favoriteImg from "@/assets/icons/note-card-icons/favorite.svg";
 import editImg from "@/assets/icons/note-card-icons/edit.svg";
-import NoteCard from "@/components/NoteCard";
+import NoteCard from "@/components/ui/Cards/NoteCard";
 import truncateText from "@/hooks/truncateText";
-import { useEffect, useState } from "react";
-import { useMutation, useQuery } from "react-query";
-import axios from "axios";
-import { BarLoader, BeatLoader } from "react-spinners";
 import Loading from "@/components/ui/Loading/Loading";
+import useGetAllNotes from "@/api/Notes/getAllNotes";
+import useUpdateNote from "@/api/Notes/updateNote";
 
 function AllNotes() {
-  const { isLoading, data, isError, error, refetch } = useQuery(
-    "note-data",
-    () => {
-      return axios.get("http://localhost:4000/notes");
-    },
-    { refetchOnMount: true, refetchOnWindowFocus: true }
-  );
+  const { isLoading, data, isError, error, refetch } = useGetAllNotes();
+  const mutation = useUpdateNote();
   const notesFilter = data?.data.filter((note) => note.isTrash === false);
-
-  const updateNote = ({ note, id }) => {
-    return axios.put(`http://localhost:4000/notes/${id}`, note);
-  };
-  const mutation = useMutation({
-    mutationKey: ["update"],
-    mutationFn: updateNote,
-  });
 
   const ChangeTrashStatus = (id) => {
     const singleNote = notesFilter.find((note) => note.id === id);
     const note = { ...singleNote, isTrash: true };
     mutation.mutate(
-      { note, id },
+      { data: note, id },
       {
         onSuccess: (res) => {
           console.log(res);
-          refetch()
+          refetch();
         },
         onError: (err) => {
           console.log(err);
@@ -47,30 +32,30 @@ function AllNotes() {
   };
 
   const ChangeFavoriteToTrue = (id) => {
+    console.log(typeof id);
     const singleNote = notesFilter.find((note) => note.id === id);
     if (singleNote.isFavorite === false) {
       const note = { ...singleNote, isFavorite: true };
       mutation.mutate(
-        { note, id },
+        { data: note, id },
         {
           onSuccess: (res) => {
             console.log(res);
-            refetch()
+            refetch();
           },
           onError: (err) => {
             console.log(err);
           },
         }
       );
-    }
-    else {
+    } else {
       const note = { ...singleNote, isFavorite: false };
       mutation.mutate(
-        { note, id },
+        { data: note, id },
         {
           onSuccess: (res) => {
             console.log(res);
-            refetch()
+            refetch();
           },
           onError: (err) => {
             console.log(err);
@@ -81,15 +66,11 @@ function AllNotes() {
   };
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
-  // if (!data) {
-  //   return <Loading />
-  // }
-
   if (isError) {
-    return <h2>{error.message}</h2>
+    return <h2>{error.message}</h2>;
   }
 
   return (

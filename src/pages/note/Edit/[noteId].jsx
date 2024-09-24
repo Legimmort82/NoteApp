@@ -1,44 +1,28 @@
 import noteDate from "@/assets/icons/note-card-icons/note-date.svg";
 import Layout from "@/components/Layouts/Layout";
 import Image from "next/image";
-import Button from "@/components/ui/Button/index.jsx"
+import Button from "@/components/ui/Button/index.jsx";
 import Form from "@/components/ui/Form";
-import axios from "axios";
+import useUpdateNote from "@/api/Notes/updateNote";
+import useGetAllNotes from "@/api/Notes/getAllNotes";
+import Loading from "@/components/ui/Loading/Loading";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { CirclePicker } from "react-color";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import { useMutation, useQuery } from "react-query";
 import {
   PrimaryInputField,
   PrimaryTextareaField,
 } from "@/components/ui/Fields/fields";
-import { z } from "zod";
-import Form from "@/components/ui/Form";
-import Button from "@/components/ui/Button/index.jsx"
-import Loading from "@/components/ui/Loading/Loading";
+import { EditNoteSchema } from "@/schemas/EditNoteSchema";
 
 const EditNote = () => {
   const params = useParams();
-
   const [selectColor, setSelectColor] = useState("#F44336");
-
-  const EditNoteSchema = z.object({
-    title: z.string().min(1, { message: "Enter a title please" }),
-    tag: z.string(),
-    desc: z.string().min(1, { message: "Enter at least one character" }),
-  });
-
-  const { isLoading, data, isError, error } = useQuery(
-    "note-data",
-    () => {
-      return axios.get("http://localhost:4000/notes");
-    },
-    { refetchOnMount: true, refetchOnWindowFocus: true }
-  );
-
+  const { isLoading, data, isError, error } = useGetAllNotes();
+  const mutation = useUpdateNote();
   const findNote = data?.data.find((note) => note.id == params?.noteId);
   const methods = useForm({
     defaultValues: {
@@ -46,8 +30,9 @@ const EditNote = () => {
       tag: "",
       desc: "",
     },
-    resolver:zodResolver(EditNoteSchema)
+    resolver: zodResolver(EditNoteSchema),
   });
+
   useEffect(() => {
     if (findNote) {
       methods.reset({
@@ -57,14 +42,6 @@ const EditNote = () => {
       });
     }
   }, [findNote, methods.reset]);
-  
-  const updateNote = (note) => {
-    return axios.put(`http://localhost:4000/notes/${params?.noteId}`, note);
-  };
-  const mutation = useMutation({
-    mutationKey: ["update-note"],
-    mutationFn: updateNote,
-  });
 
   const handleSubmit = (data) => {
     const note = {
@@ -74,11 +51,21 @@ const EditNote = () => {
       color: selectColor,
       tag: data?.tag,
     };
-    mutation.mutate(note);
+    mutation.mutate(
+      { data: note, id: params.noteId },
+      {
+        onSuccess: (res) => {
+          console.log(res);
+        },
+        onError: (err) => {
+          console.log(err);
+        },
+      }
+    );
   };
-  
+
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
   if (isError) {
     return <h2>{error.message}</h2>;
@@ -95,7 +82,7 @@ const EditNote = () => {
           <div className="bg-Primary-700 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] shadow-md shadow-gray-400 dark:shadow-none" />
           <div className="lg:pl-36 lg:pr-40 pl-20 pr-20 py-7">
             <div className="mb-20 lg:mb-14">
-              <PrimaryInputField name="title" placeholder="Title"/>
+              <PrimaryInputField name="title" placeholder="Title" />
               <div className=" flex justify-center md:justify-end items-center mt-3">
                 <div className="flex items-center">
                   <p className="font-medium text-[18px] dark:text-white">
@@ -132,23 +119,19 @@ const EditNote = () => {
                   Write your tag :
                 </p>
                 <div className="mt-8">
-                  <PrimaryInputField name="tag" placeholder="Tag Name"/>
+                  <PrimaryInputField name="tag" placeholder="Tag Name" />
                 </div>
               </div>
             </div>
 
-            <PrimaryTextareaField name="desc" placeholder="Write Your Content ... "/>
+            <PrimaryTextareaField
+              name="desc"
+              placeholder="Write Your Content ... "
+            />
 
             <div className="w-40">
               <Button onClick={() => handleSubmit}> save / edit</Button>
             </div>
-
-            {/* <button
-              type="submit"
-              className="bg-Primary-800 px-8 py-2 rounded-lg text-white font-medium mt-3 duration-300 hover:scale-105"
-            >
-              Save / Edit
-            </button> */}
             <Toaster />
           </div>
         </Form>

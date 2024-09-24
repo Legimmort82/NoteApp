@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Tippy from "@tippyjs/react";
 import Form from "@/components/ui/Form";
-import { darkModeNoteContext } from "@/context/DarkModeNoteContext";
+import { darkModeNoteContext } from "@/context/DarkModeContext";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useContext, useState } from "react";
 import { BeatLoader } from "react-spinners";
@@ -11,25 +11,11 @@ import { auth } from "@/context/Firebase";
 import { useForm } from "react-hook-form";
 import { SecondaryInputField } from "@/components/ui/Fields/fields";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { RegisterSchema } from "@/schemas/RegisterSchema";
 import "tippy.js/dist/tippy.css";
 
 export default function Register() {
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/;
-  const RegisterSchema = z.object({
-    email: z
-      .string()
-      .email({ message: "Enter a valid email please" })
-      .min(1, { message: "Please enter an email" }),
-    password: z
-      .string()
-      .min(1, { message: "Please enter a password" })
-      .min(5, { message: "Password must be bigger than 5 characters" })
-      .regex(passwordRegex, {
-        message:
-          "Password must be more than 8 characters and include uppercase letters and numbers",
-      }),
-  });
+
   const methods = useForm({
     defaultValues: {
       email: "",

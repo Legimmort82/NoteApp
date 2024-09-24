@@ -7,7 +7,7 @@ import dartimg from "@/assets/icons/home-page-icons/Dart.svg";
 import dividertop from "@/assets/icons/home-page-icons/Divider-top.svg";
 import dividerdown from "@/assets/icons/home-page-icons/Divider-down.svg";
 import Image from "next/image";
-import HomePageCard from "@/components/HomePageCard";
+import HomePageCard from "@/components/ui/Cards/HomePageCard";
 import Layout from "@/components/Layouts/Layout";
 
 export default function Home() {
@@ -27,14 +27,14 @@ export default function Home() {
                 link={"/note/allnotes"}
                 text="Click on the notes icon to see all of your created notes"
               />
-              <Image className="w-[90px] h-[90px] lg:block hidden" src={dartimg} />
+              <Image className="w-[90px] h-[90px] lg:block hidden" alt="dart" src={dartimg} />
               <HomePageCard
                 img={addNoteImg}
                 link={"/note/addnotes"}
                 text="Click on the new note icon to create a new one and mange it"
               />
             </div>
-            <Image src={dividertop} className="lg:block hidden" />
+            <Image src={dividertop} alt="dart" className="lg:block hidden" />
             <div className="lg:flex-row gap-3 flex flex-col lg:justify-center mt-3 items-center mb-3 lg:mb-[28px]">
               <HomePageCard
                 img={favoriteImg}
@@ -43,7 +43,7 @@ export default function Home() {
               />
             </div>
 
-            <Image src={dividerdown} className="lg:block hidden"/>
+            <Image src={dividerdown} alt="divider" className="lg:block hidden"/>
 
             <div className="lg:flex-row gap-3 flex flex-col lg:justify-between  items-center mb-6">
                 <HomePageCard
@@ -52,7 +52,7 @@ export default function Home() {
                   text="Click on the recycle bin icon to restore notes you were removed before"
                 />
               
-              <Image className="w-[90px] h-[90px] lg:block hidden " src={dartimg} />
+              <Image className="w-[90px] h-[90px] lg:block hidden " alt="dart" src={dartimg} />
 
               <HomePageCard
                 img={darkModeImg}

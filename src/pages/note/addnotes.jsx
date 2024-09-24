@@ -1,29 +1,25 @@
 import noteDate from "@/assets/icons/note-card-icons/note-date.svg";
 import Layout from "@/components/Layouts/Layout";
 import Image from "next/image";
-import axios from "axios";
 import Form from "@/components/ui/Form";
 import Button from "@/components/ui/Button/index.jsx";
+import useAddNote from "@/api/Notes/addNote";
+import useGetAllNotes from "@/api/Notes/getAllNotes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { CirclePicker } from "react-color";
-import { useMutation, useQuery } from "react-query";
 import { useForm } from "react-hook-form";
 import {
   PrimaryInputField,
   PrimaryTextareaField,
 } from "@/components/ui/Fields/fields";
-import { z } from "zod";
+import { AddNoteSchema } from "@/schemas/AddNoteSchema";
 
 function AddNotes() {
   const [selectColor, setSelectColor] = useState("#F44336");
-
-  const AddNoteSchema = z.object({
-    title: z.string().min(1, { message: "Enter a title please" }),
-    tag: z.string(),
-    desc: z.string().min(1, { message: "Enter at least one character" }),
-  });
-
+  const { mutate } = useAddNote();
+  const { data } = useGetAllNotes();
+  const numberOfObjects = data?.data.length;
   const methods = useForm({
     defaultValues: {
       title: "",
@@ -32,18 +28,6 @@ function AddNotes() {
     },
     resolver: zodResolver(AddNoteSchema),
   });
-
-  const addNote = (note) => {
-    return axios.post("http://localhost:4000/notes", note);
-  };
-  const { mutate } = useMutation(addNote);
-
-  //* for find number of objects
-  const { data } = useQuery("note-data", () => {
-    return axios.get("http://localhost:4000/notes");
-  });
-  
-  const numberOfObjects = data?.data.length;
 
   const handleSubmit = (addData) => {
     const note = {
@@ -61,7 +45,14 @@ function AddNotes() {
       isFavorite: false,
       isTrash: false,
     };
-    mutate(note);
+    mutate(note, {
+      onSuccess: (res) => {
+        console.log(res);
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+    });
   };
 
   const date =

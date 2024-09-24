@@ -1,29 +1,22 @@
 import Layout from "@/components/Layouts/Layout";
-import NoteCard from "@/components/NoteCard";
+import NoteCard from "@/components/ui/Cards/NoteCard";
 import refreshImg from "@/assets/icons/note-card-icons/refresh.svg";
 import editImg from "@/assets/icons/note-card-icons/edit.svg";
 import trashImg from "@/assets/icons/note-card-icons/trash.svg";
 import truncateText from "@/hooks/truncateText";
-import { useEffect, useState } from "react";
-import { useQuery, useMutation } from "react-query";
-import axios from "axios";
 import Loading from "@/components/ui/Loading/Loading";
+import useGetAllNotes from "@/api/Notes/getAllNotes";
+import useUpdateNote from "@/api/Notes/updateNote";
+import useDeleteNote from "@/api/Notes/deleteNote";
 
 
 function trashes() {
-
-  const { isLoading, data, isError, error, refetch } = useQuery('note-data', () => {
-    return axios.get("http://localhost:4000/notes")
-    }, { refetchOnMount: true, refetchOnWindowFocus: true }) 
+  const {isLoading,data,isError,error,refetch} = useGetAllNotes()
+  const mutationUpdate = useUpdateNote()
+  const mutationDelete= useDeleteNote()
   const notesFilter = data?.data.filter((note) => note.isTrash == true);
   
-  const updateNote = ({ note, id }) => {
-    return axios.put(`http://localhost:4000/notes/${id}`, note);
-  };
-  const mutationUpdate = useMutation({
-    mutationKey: ["update"],
-    mutationFn: updateNote,
-  });
+
 
   const RestoreNote = (id) => {
     const singleNote = notesFilter.find((note) => note.id === id);
@@ -41,14 +34,6 @@ function trashes() {
       }
     );
   };
-
-  const UpdateDeleteNote = ({id}) => {
-    return axios.delete(`http://localhost:4000/notes/${id}`);
-  }
-  const mutationDelete = useMutation({
-    mutationKey: ["delete"],
-    mutationFn: UpdateDeleteNote,
-  });
 
   const DeleteNote = (id) => {
     mutationDelete.mutate(
