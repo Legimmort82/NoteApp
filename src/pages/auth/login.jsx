@@ -10,10 +10,33 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BeatLoader } from "react-spinners";
 import { SecondaryInputField } from "@/components/ui/Fields/fields";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import "tippy.js/dist/tippy.css";
 
 export default function Login() {
-  const methods = useForm();
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/;
+  const LoginSchema = z.object({
+    email: z
+      .string()
+      .email({ message: "Enter a valid email please" })
+      .min(1, { message: "Please enter an email" }),
+    password: z
+      .string()
+      .min(1, { message: "Please enter a password" })
+      .min(5, { message: "Password must be bigger than 5 characters" })
+      .regex(passwordRegex, {
+        message:
+          "Password must be more than 8 characters and include uppercase letters and numbers",
+      }),
+  });
+  const methods = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: zodResolver(LoginSchema),
+  });
   const { dark, setDark } = useContext(darkModeNoteContext);
   const [Loading, setLoading] = useState(false);
   const OnSubmit = (data) => {

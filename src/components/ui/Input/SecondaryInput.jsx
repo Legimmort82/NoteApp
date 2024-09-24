@@ -33,11 +33,11 @@ const SecondaryInput = forwardRef(
           max={max}
           ref={ref}
           onChange={onChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
+          // onFocus={handleFocus}
+          // onBlur={handleBlur}
           className="rounded-md h-12 w-full bg-white px-4"
           />
-        {error && <p className="mt-[5px] text-xs text-State-error">{error}</p>}
+        {error && <p className="mt-[5px] text-sm text-red-600">{error}</p>}
       </div>
     );
   }

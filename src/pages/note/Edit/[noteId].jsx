@@ -1,24 +1,32 @@
 import noteDate from "@/assets/icons/note-card-icons/note-date.svg";
 import Layout from "@/components/Layouts/Layout";
 import Image from "next/image";
+import Button from "@/components/ui/Button/index.jsx"
+import Form from "@/components/ui/Form";
+import axios from "axios";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { CirclePicker } from "react-color";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
-import axios from "axios";
 import {
   PrimaryInputField,
   PrimaryTextareaField,
 } from "@/components/ui/Fields/fields";
-import Form from "@/components/ui/Form";
-import Button from "@/components/ui/Button/index.jsx"
+import { z } from "zod";
 
 const EditNote = () => {
   const params = useParams();
 
   const [selectColor, setSelectColor] = useState("#F44336");
+
+  const EditNoteSchema = z.object({
+    title: z.string().min(1, { message: "Enter a title please" }),
+    tag: z.string(),
+    desc: z.string().min(1, { message: "Enter at least one character" }),
+  });
 
   const { isLoading, data, isError, error } = useQuery(
     "note-data",
@@ -35,6 +43,7 @@ const EditNote = () => {
       tag: "",
       desc: "",
     },
+    resolver:zodResolver(EditNoteSchema)
   });
   useEffect(() => {
     if (findNote) {

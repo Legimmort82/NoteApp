@@ -48,7 +48,7 @@ const PrimaryTextarea = forwardRef(
             focus ? "duration-200 outline-none shadow-lg shadow-gray-500" : ""
           }`}
           />
-        {error && <p className="mt-[5px] text-xs text-State-error">{error}</p>}
+        {error && <p className="text-sm text-red-600">{error}</p>}
       </div>
     );
   }

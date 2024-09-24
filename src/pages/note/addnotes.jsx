@@ -3,6 +3,8 @@ import Layout from "@/components/Layouts/Layout";
 import Image from "next/image";
 import axios from "axios";
 import Form from "@/components/ui/Form";
+import Button from "@/components/ui/Button/index.jsx";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { CirclePicker } from "react-color";
 import { useMutation, useQuery } from "react-query";
@@ -11,10 +13,16 @@ import {
   PrimaryInputField,
   PrimaryTextareaField,
 } from "@/components/ui/Fields/fields";
-import Button from "@/components/ui/Button/index.jsx"
+import { z } from "zod";
 
 function AddNotes() {
   const [selectColor, setSelectColor] = useState("#F44336");
+
+  const AddNoteSchema = z.object({
+    title: z.string().min(1, { message: "Enter a title please" }),
+    tag: z.string(),
+    desc: z.string().min(1, { message: "Enter at least one character" }),
+  });
 
   const methods = useForm({
     defaultValues: {
@@ -22,6 +30,7 @@ function AddNotes() {
       tag: "",
       desc: "",
     },
+    resolver: zodResolver(AddNoteSchema),
   });
 
   const addNote = (note) => {
@@ -33,6 +42,7 @@ function AddNotes() {
   const { data } = useQuery("note-data", () => {
     return axios.get("http://localhost:4000/notes");
   });
+  
   const numberOfObjects = data?.data.length;
 
   const handleSubmit = (addData) => {
@@ -128,7 +138,7 @@ function AddNotes() {
                     placeholder="Work"
                     className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 border-b-Primary-600 text-[26px] font-medium text-gray-500 placeholder:text-[30px] dark:bg-dark-300 dark:text-gray-300"
                   /> */}
-                  <PrimaryInputField name="tag" placeholder="Tag Name"/>
+                  <PrimaryInputField name="tag" placeholder="Tag Name" />
                 </div>
               </div>
             </div>
@@ -140,7 +150,10 @@ function AddNotes() {
               type="text"
               placeholder="Type your content here ..."
             /> */}
-            <PrimaryTextareaField name="desc" placeholder="Write Your Content ... "/>
+            <PrimaryTextareaField
+              name="desc"
+              placeholder="Write Your Content ... "
+            />
 
             <div className="w-40">
               <Button onClick={() => handleSubmit}> save / edit</Button>
