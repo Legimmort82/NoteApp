@@ -7,6 +7,7 @@ import truncateText from "@/hooks/truncateText";
 import { useEffect, useState } from "react";
 import { useQuery, useMutation } from "react-query";
 import axios from "axios";
+import Loading from "@/components/ui/Loading/Loading";
 
 
 function trashes() {
@@ -65,7 +66,7 @@ function trashes() {
   }
 
   if (isLoading) {
-    return <h2>LOADING ...</h2>
+    return <Loading />
   }
   if (isError) {
     return <h2>{error.message}</h2>

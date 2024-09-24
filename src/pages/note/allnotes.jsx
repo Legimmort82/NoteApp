@@ -8,6 +8,8 @@ import truncateText from "@/hooks/truncateText";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
+import { BarLoader, BeatLoader } from "react-spinners";
+import Loading from "@/components/ui/Loading/Loading";
 
 function AllNotes() {
   const { isLoading, data, isError, error, refetch } = useQuery(
@@ -46,7 +48,7 @@ function AllNotes() {
 
   const ChangeFavoriteToTrue = (id) => {
     const singleNote = notesFilter.find((note) => note.id === id);
-    if(singleNote.isFavorite === false) {
+    if (singleNote.isFavorite === false) {
       const note = { ...singleNote, isFavorite: true };
       mutation.mutate(
         { note, id },
@@ -77,6 +79,18 @@ function AllNotes() {
       );
     }
   };
+
+  if (isLoading) {
+    return <Loading />
+  }
+
+  // if (!data) {
+  //   return <Loading />
+  // }
+
+  if (isError) {
+    return <h2>{error.message}</h2>
+  }
 
   return (
     <>

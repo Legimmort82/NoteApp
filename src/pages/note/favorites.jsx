@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 // import { db } from "@/context/Firebase";
 import { useQuery, useMutation } from "react-query";
 import axios from "axios";
+import Loading from "@/components/ui/Loading/Loading";
 
 function favorites() {
 
@@ -61,7 +62,7 @@ function favorites() {
   };
 
   if (isLoading) {
-    return <h2>LOADING ...</h2>
+    return <Loading />
   }
   if (isError) {
     return <h2>{error.message}</h2>
