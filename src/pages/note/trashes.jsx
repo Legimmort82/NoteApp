@@ -8,6 +8,7 @@ import Loading from "@/components/ui/Loading/Loading";
 import useGetAllNotes from "@/api/Notes/getAllNotes";
 import useUpdateNote from "@/api/Notes/updateNote";
 import useDeleteNote from "@/api/Notes/deleteNote";
+import Error from "@/components/ui/Error/Error";
 
 
 function trashes() {
@@ -54,7 +55,11 @@ function trashes() {
     return <Loading />
   }
   if (isError) {
-    return <h2>{error.message}</h2>
+    return (
+      <Error>
+        {error.message}
+      </Error>
+    )
   }
 
   return (

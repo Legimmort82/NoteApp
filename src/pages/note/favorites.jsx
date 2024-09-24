@@ -7,6 +7,7 @@ import truncateText from "@/hooks/truncateText";
 import Loading from "@/components/ui/Loading/Loading";
 import useGetAllNotes from "@/api/Notes/getAllNotes";
 import useUpdateNote from "@/api/Notes/updateNote";
+import Error from "@/components/ui/Error/Error";
 
 function favorites() {
   const {isLoading,data,isError,error,refetch} = useGetAllNotes()
@@ -52,7 +53,11 @@ function favorites() {
     return <Loading />
   }
   if (isError) {
-    return <h2>{error.message}</h2>
+    return (
+      <Error>
+        {error.message}
+      </Error>
+    )
   }
   
   return (

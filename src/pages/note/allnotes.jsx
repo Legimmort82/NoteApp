@@ -69,7 +69,6 @@ function AllNotes() {
   if (isLoading) {
     return <Loading />;
   }
-
   if (isError) {
     return (
       <Error>

@@ -17,6 +17,7 @@ import {
   PrimaryTextareaField,
 } from "@/components/ui/Fields/fields";
 import { EditNoteSchema } from "@/schemas/EditNoteSchema";
+import Error from "@/components/ui/Error/Error";
 
 const EditNote = () => {
   const params = useParams();
@@ -68,7 +69,11 @@ const EditNote = () => {
     return <Loading />;
   }
   if (isError) {
-    return <h2>{error.message}</h2>;
+    return (
+      <Error>
+        {error.message}
+      </Error>
+    )
   }
 
   return (
