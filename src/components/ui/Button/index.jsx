@@ -21,6 +21,7 @@ function index({ children, onClick, type, disabled }) {
 export default index;
 index.propTypes ={
   type: PropTypes.string,
-  disabled: PropTypes.func,
-  onClick: PropTypes.func
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
+  children:PropTypes.string
  }

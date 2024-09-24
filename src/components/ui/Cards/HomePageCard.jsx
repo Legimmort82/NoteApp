@@ -18,4 +18,5 @@ export default HomePageCard;
 HomePageCard.propTypes ={
   text: PropTypes.string,
   link: PropTypes.string,
+  img:PropTypes.oneOfType([PropTypes.string, PropTypes.object])
  }

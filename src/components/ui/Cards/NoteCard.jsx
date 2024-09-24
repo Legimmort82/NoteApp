@@ -65,4 +65,7 @@ NoteCard.propTypes = {
   color: PropTypes.string,
   onClick1: PropTypes.func,
   onClick2: PropTypes.func,
+  img1:PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  img2:PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  img3:PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 };
