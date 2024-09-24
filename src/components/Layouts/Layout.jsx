@@ -5,14 +5,14 @@ import favoriteImg from "@/assets/icons/sidebar-icons/favorite-img.svg";
 import darkModeImg from "@/assets/icons/sidebar-icons/dark-mode-img.svg";
 import homeImg from "@/assets/icons/sidebar-icons/home-img.svg";
 import Image from "next/image";
-import { darkModeNoteContext } from "@/context/DarkModeContext";
+import { darkModeContext } from "@/context/DarkModeContext";
 import { useContext } from "react";
 import Link from "next/link";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
 const Layout = ({ children }) => {
-  const { dark, setDark } = useContext(darkModeNoteContext);
+  const { dark, setDark } = useContext(darkModeContext);
 
   return (
     <div className={`lg:flex-row flex flex-col-reverse ${dark && "dark"}`}>

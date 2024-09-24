@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Tippy from "@tippyjs/react";
 import Form from "@/components/ui/Form";
-import { darkModeNoteContext } from "@/context/DarkModeContext";
+import { darkModeContext } from "@/context/DarkModeContext";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useContext, useState } from "react";
 import { BeatLoader } from "react-spinners";
@@ -23,7 +23,7 @@ export default function Register() {
     },
     resolver: zodResolver(RegisterSchema),
   });
-  const { dark, setDark } = useContext(darkModeNoteContext);
+  const { dark, setDark } = useContext(darkModeContext);
   const [Loading, setLoading] = useState(false);
 
   const OnSubmit = (data) => {

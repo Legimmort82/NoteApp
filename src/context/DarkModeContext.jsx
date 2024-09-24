@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-const darkModeNoteContext = createContext();
+const darkModeContext = createContext();
 
 const DarkModeProvider = ({ children }) => {
   const [dark, setDark] = useState(false);
@@ -10,10 +10,10 @@ const DarkModeProvider = ({ children }) => {
   };
 
   return (
-    <darkModeNoteContext.Provider value={values}>
+    <darkModeContext.Provider value={values}>
       {children}
-    </darkModeNoteContext.Provider>
+    </darkModeContext.Provider>
   );
 };
 
-export { darkModeNoteContext, DarkModeProvider };
+export { darkModeContext, DarkModeProvider };

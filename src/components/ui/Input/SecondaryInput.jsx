@@ -45,7 +45,15 @@ const SecondaryInput = forwardRef(
 
 export default SecondaryInput;
 SecondaryInput.propTypes ={
+  type: PropTypes.string,
+  value: PropTypes.string,
+  error: PropTypes.string,
   placeholder: PropTypes.string,
   name: PropTypes.string,
+  required: PropTypes.bool,
+  maxLength: PropTypes.number,
+  minLength: PropTypes.number,
+  min: PropTypes.number,
+  max: PropTypes.number,
   onChange: PropTypes.func
  }
