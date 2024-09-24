@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/Fields/fields";
 import Form from "@/components/ui/Form";
 import Button from "@/components/ui/Button/index.jsx"
+import Loading from "@/components/ui/Loading/Loading";
 
 const EditNote = () => {
   const params = useParams();
@@ -64,8 +65,9 @@ const EditNote = () => {
     };
     mutation.mutate(note);
   };
+  
   if (isLoading) {
-    return <h2>LOADING ...</h2>;
+    return <Loading />
   }
   if (isError) {
     return <h2>{error.message}</h2>;
