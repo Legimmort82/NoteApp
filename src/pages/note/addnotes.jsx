@@ -125,6 +125,7 @@ function AddNotes() {
               >
                 {" "}
                 save / edit
+                {/* {console.log(methods.formState.isDirty)} */}
               </Button>
             </div>
           </div>

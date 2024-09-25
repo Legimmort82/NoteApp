@@ -9,7 +9,7 @@ function Button({ children, onClick, type, disabled }) {
         <button
         disabled={disabled}
         type={type}
-        className={`bg-Primary-800 px-8 py-2 rounded-lg text-white font-medium mt-3 w-full ${Styles.button}`}
+        className={`bg-Primary-800 px-8 py-2 rounded-lg cursor-pointer text-white font-medium mt-3 w-full text-[18px] ${Styles.button}`}
         onClick={onClick}
       >
         {children}
@@ -18,7 +18,7 @@ function Button({ children, onClick, type, disabled }) {
       <button
         disabled={disabled}
         type={type}
-        className={`bg-Primary-800 opacity-70 px-8 py-2 rounded-lg text-white font-medium mt-3 w-full ${Styles.button}`}
+        className={`bg-Primary-800 opacity-100 px-8 py-2 rounded-lg cursor-pointer text-white font-medium mt-3 w-full text-[18px] ${Styles.button}`}
         onClick={onClick}
       >
         {children}
