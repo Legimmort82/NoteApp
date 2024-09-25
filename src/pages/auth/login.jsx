@@ -26,7 +26,7 @@ export default function Login() {
   const OnSubmit = (data) => {
   };
   return (
-    <div className={`${dark && "dark"}`}>
+    <div className={``}>
       <div
         className={` flex flex-col items-center bg-Primary-100 dark:bg-dark-300 overflow-auto h-screen relative `}
       >

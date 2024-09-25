@@ -28,7 +28,7 @@ export default function Register() {
   };
   return (
     <>
-      <div className={`${dark && "dark"}`}>
+      <div className={``}>
         <div className="flex flex-col bg-Primary-100 items-center relative dark:bg-dark-300 h-screen overflow-auto">
           <div
             className="absolute lg:top-[50px] lg:right-[130px] top-[160px]"
