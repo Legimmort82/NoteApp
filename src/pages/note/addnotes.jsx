@@ -5,6 +5,7 @@ import Form from "@/components/ui/Form";
 import Button from "@/components/ui/Button/index.jsx";
 import useAddNote from "@/api/Notes/addNote";
 import useGetAllNotes from "@/api/Notes/getAllNotes";
+import CustomToast from "@/components/ui/Toast/CustomToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { CirclePicker } from "react-color";
@@ -14,11 +15,14 @@ import {
   PrimaryTextareaField,
 } from "@/components/ui/Fields/fields";
 import { AddNoteSchema } from "@/schemas/AddNoteSchema";
+import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 function AddNotes() {
   const [selectColor, setSelectColor] = useState("#F44336");
   const { mutate } = useAddNote();
   const { data } = useGetAllNotes();
+  const router = useRouter();
   const numberOfObjects = data?.data.length;
   const methods = useForm({
     defaultValues: {
@@ -47,6 +51,11 @@ function AddNotes() {
     mutate(note, {
       onSuccess: (res) => {
         console.log(res);
+        toast.custom(
+          () => <CustomToast text="Note Added successfully" color="green" />,
+          { duration: 1500, position: "top-center" }
+        );
+        router.push("allnotes")
       },
       onError: (err) => {
         console.log(err);
@@ -146,7 +155,13 @@ function AddNotes() {
             />
 
             <div className="w-40">
-              <Button onClick={() => handleSubmit} disabled={methods.formState.isValid}> save / edit</Button>
+              <Button
+                onClick={() => handleSubmit}
+                disabled={methods.formState.isLoading}
+              >
+                {" "}
+                save / edit
+              </Button>
             </div>
 
             {/* <button
@@ -157,6 +172,7 @@ function AddNotes() {
               Save / Edit
             </button> */}
           </div>
+          <Toaster />
         </Form>
       </Layout>
     </>

@@ -9,6 +9,8 @@ import Loading from "@/components/ui/Loading/Loading";
 import useGetAllNotes from "@/api/Notes/getAllNotes";
 import useUpdateNote from "@/api/Notes/updateNote";
 import Error from "@/components/ui/Error/Error";
+import toast, { Toaster } from "react-hot-toast";
+import CustomToast from "@/components/ui/Toast/CustomToast";
 
 function AllNotes() {
   const { isLoading, data, isError, error, refetch } = useGetAllNotes();
@@ -22,8 +24,17 @@ function AllNotes() {
       { data: note, id },
       {
         onSuccess: (res) => {
-          console.log(res);
           refetch();
+          toast.custom(
+            () => (
+              <CustomToast
+                text="Note is on trash folder right now"
+                color="red"
+              />
+            ),
+            { duration: 1500, position: "top-center" }
+          );
+          console.log(res);
         },
         onError: (err) => {
           console.log(err);
@@ -33,7 +44,6 @@ function AllNotes() {
   };
 
   const ChangeFavoriteToTrue = (id) => {
-    console.log(typeof id);
     const singleNote = notesFilter.find((note) => note.id === id);
     if (singleNote.isFavorite === false) {
       const note = { ...singleNote, isFavorite: true };
@@ -41,8 +51,14 @@ function AllNotes() {
         { data: note, id },
         {
           onSuccess: (res) => {
-            console.log(res);
             refetch();
+            toast.custom(
+              () => (
+                <CustomToast text="Note is now a favorite note" color="green" />
+              ),
+              { duration: 1500, position: "top-center" }
+            );
+            console.log(res);
           },
           onError: (err) => {
             console.log(err);
@@ -57,6 +73,15 @@ function AllNotes() {
           onSuccess: (res) => {
             console.log(res);
             refetch();
+            toast.custom(
+              () => (
+                <CustomToast
+                  text="Note is now unFavorite note"
+                  color="orange"
+                />
+              ),
+              { duration: 1500, position: "top-center" }
+            );
           },
           onError: (err) => {
             console.log(err);
@@ -70,11 +95,7 @@ function AllNotes() {
     return <Loading />;
   }
   if (isError) {
-    return (
-      <Error>
-        {error.message}
-      </Error>
-    )
+    return <Error>{error.message}</Error>;
   }
 
   return (
@@ -111,6 +132,7 @@ function AllNotes() {
               })}
             </div>
           </div>
+          <Toaster />
         </div>
       </Layout>
     </>

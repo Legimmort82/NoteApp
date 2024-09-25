@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { CirclePicker } from "react-color";
 import { useEffect, useState } from "react";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import {
   PrimaryInputField,
@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/Fields/fields";
 import { EditNoteSchema } from "@/schemas/EditNoteSchema";
 import Error from "@/components/ui/Error/Error";
+import CustomToast from "@/components/ui/Toast/CustomToast";
 
 const EditNote = () => {
   const params = useParams();
@@ -41,6 +42,7 @@ const EditNote = () => {
         tag: findNote.tag,
         desc: findNote.description,
       });
+      setSelectColor(findNote?.color)
     }
   }, [findNote, methods.reset]);
 
@@ -57,6 +59,10 @@ const EditNote = () => {
       {
         onSuccess: (res) => {
           console.log(res);
+          toast.custom(
+            () => <CustomToast text="Note Edited successfully" color="green" />,
+            { duration: 1500, position: "top-center" }
+          );
         },
         onError: (err) => {
           console.log(err);
@@ -69,11 +75,7 @@ const EditNote = () => {
     return <Loading />;
   }
   if (isError) {
-    return (
-      <Error>
-        {error.message}
-      </Error>
-    )
+    return <Error>{error.message}</Error>;
   }
 
   return (
@@ -135,7 +137,13 @@ const EditNote = () => {
             />
 
             <div className="w-40">
-              <Button onClick={() => handleSubmit} disabled={methods.formState.isValid}> save / edit</Button>
+              <Button
+                onClick={() => handleSubmit}
+                disabled={methods.formState.isLoading}
+              >
+                {" "}
+                save / edit
+              </Button>
             </div>
             <Toaster />
           </div>

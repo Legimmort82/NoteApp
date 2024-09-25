@@ -9,25 +9,28 @@ import useGetAllNotes from "@/api/Notes/getAllNotes";
 import useUpdateNote from "@/api/Notes/updateNote";
 import useDeleteNote from "@/api/Notes/deleteNote";
 import Error from "@/components/ui/Error/Error";
-
+import toast, { Toaster } from "react-hot-toast";
+import CustomToast from "@/components/ui/Toast/CustomToast";
 
 function trashes() {
-  const {isLoading,data,isError,error,refetch} = useGetAllNotes()
-  const mutationUpdate = useUpdateNote()
-  const mutationDelete= useDeleteNote()
+  const { isLoading, data, isError, error, refetch } = useGetAllNotes();
+  const mutationUpdate = useUpdateNote();
+  const mutationDelete = useDeleteNote();
   const notesFilter = data?.data.filter((note) => note.isTrash == true);
-  
-
 
   const RestoreNote = (id) => {
     const singleNote = notesFilter.find((note) => note.id === id);
     const note = { ...singleNote, isTrash: false };
     mutationUpdate.mutate(
-      { note, id },
+      { data:note, id },
       {
         onSuccess: (res) => {
+          refetch();
+          toast.custom(
+            () => <CustomToast text="Note Restored" color="green" />,
+            { duration: 1500, position: "top-center" }
+          );
           console.log(res);
-          refetch()
         },
         onError: (err) => {
           console.log(err);
@@ -41,25 +44,28 @@ function trashes() {
       { id },
       {
         onSuccess: (res) => {
+          refetch();
+          toast.custom(
+            () => <CustomToast color="green" text="Note deleted permanently" />,
+            {
+              duration: 1500,
+              position: "top-center",
+            }
+          );
           console.log(res);
-          refetch()
         },
         onError: (err) => {
           console.log(err);
         },
       }
     );
-  }
+  };
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
   if (isError) {
-    return (
-      <Error>
-        {error.message}
-      </Error>
-    )
+    return <Error>{error.message}</Error>;
   }
 
   return (
@@ -95,6 +101,7 @@ function trashes() {
               })}
             </div>
           </div>
+          <Toaster />
         </div>
       </Layout>
     </>
