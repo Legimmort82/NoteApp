@@ -17,7 +17,7 @@ import { AddNoteSchema } from "@/schemas/AddNoteSchema";
 
 function AddNotes() {
   const [selectColor, setSelectColor] = useState("#F44336");
-  const { mutate,isPending } = useAddNote();
+  const { mutate } = useAddNote();
   const { data } = useGetAllNotes();
   const numberOfObjects = data?.data.length;
   const methods = useForm({
