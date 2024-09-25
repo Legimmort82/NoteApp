@@ -5,6 +5,7 @@ import Form from "@/components/ui/Form";
 import Button from "@/components/ui/Button/index.jsx";
 import useAddNote from "@/api/Notes/addNote";
 import useGetAllNotes from "@/api/Notes/getAllNotes";
+import CustomToast from "@/components/ui/Toast/CustomToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { CirclePicker } from "react-color";
@@ -15,12 +16,14 @@ import {
 } from "@/components/ui/Fields/fields";
 import { AddNoteSchema } from "@/schemas/AddNoteSchema";
 import ColorPicker from "@/components/ui/Color/ColorPicker";
+import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 function AddNotes() {
   const [color, setColor] = useState("#EA1616");
   const { mutate } = useAddNote();
   const { data } = useGetAllNotes();
-  const numberOfObjects = data?.data.length;
+  const router = useRouter();
   const methods = useForm({
     defaultValues: {
       title: "",
@@ -29,16 +32,21 @@ function AddNotes() {
     },
     resolver: zodResolver(AddNoteSchema),
   });
+  
+  const date =
+    new Date().getFullYear() +
+    "/" +
+    String(new Date().getMonth() + 1).padStart(2, "0") +
+    "/" +
+    String(new Date().getDate()).padStart(2, "0");
+
+  const numberOfObjects = data?.data.length;
+
   const handleSubmit = (addData) => {
     const note = {
       id: String(numberOfObjects + 1),
       title: addData?.title,
-      date:
-        new Date().getFullYear() +
-        "/" +
-        String(new Date().getMonth() + 1).padStart(2, "0") +
-        "/" +
-        String(new Date().getDate()).padStart(2, "0"),
+      date: date,
       description: addData?.desc,
       color: color,
       tag: addData?.tag,
@@ -48,19 +56,17 @@ function AddNotes() {
     mutate(note, {
       onSuccess: (res) => {
         console.log(res);
+        toast.custom(
+          () => <CustomToast text="Note Added successfully" color="green" />,
+          { duration: 1500, position: "top-center" }
+        );
+        router.push("allnotes");
       },
       onError: (err) => {
         console.log(err);
       },
     });
   };
-
-  const date =
-    new Date().getFullYear() +
-    "/" +
-    String(new Date().getMonth() + 1).padStart(2, "0") +
-    "/" +
-    String(new Date().getDate()).padStart(2, "0");
 
   return (
     <>
@@ -74,13 +80,6 @@ function AddNotes() {
 
           <div className="lg:pl-36 lg:pr-40 pl-20 pr-20 py-7">
             <div className="mb-20 lg:mb-14">
-              {/* <input
-                type="text"
-                onChange={handelTitle}
-                value={title}
-                placeholder="Type your title here..."
-                className="bg-Primary-100 px-2 outline-none w-full border-b-[5px] h-11 border-b-Primary-600 placeholder:text-[30px] pb-3 text-[30px] font-semibold dark:bg-dark-300 dark:text-white"
-              /> */}
               <PrimaryInputField name="title" placeholder="Title" />
               <div className=" flex justify-center md:justify-end items-center mt-6">
                 <div className="flex items-center">
@@ -119,42 +118,25 @@ function AddNotes() {
                 </p>
 
                 <div className="mt-8">
-                  {/* <input
-                    type="text"
-                    value={tag}
-                    onChange={handelTag}
-                    placeholder="Work"
-                    className="bg-Primary-100 outline-none px-2 w-full border-b-[5px] h-11 border-b-Primary-600 text-[26px] font-medium text-gray-500 placeholder:text-[30px] dark:bg-dark-300 dark:text-gray-300"
-                  /> */}
                   <PrimaryInputField name="tag" placeholder="Tag Name" />
                 </div>
               </div>
             </div>
-
-            {/* <textarea
-              value={desc}
-              onChange={handelDesc}
-              className="bg-Primary-100 resize-none text-[24px] rounded-lg border-[3px] w-[100%] h-[500px] lg:h-[400px] border-Primary-500 border-solid placeholder:text-gray-400  placeholder:font-medium p-4 dark:bg-dark-300 dark:text-white "
-              type="text"
-              placeholder="Type your content here ..."
-            /> */}
             <PrimaryTextareaField
               name="desc"
               placeholder="Write Your Content ... "
             />
-
             <div className="w-40">
-              <Button onClick={() => handleSubmit} > save / edit</Button>
+              <Button
+                onClick={() => handleSubmit}
+                disabled={methods.formState.isLoading}
+              >
+                {" "}
+                save / edit
+              </Button>
             </div>
-
-            {/* <button
-              // onClick={handleSubmit}
-              type="submit"
-              className="bg-Primary-800 px-8 py-2 rounded-lg text-white font-medium mt-3 duration-300 hover:scale-105"
-            >
-              Save / Edit
-            </button> */}
           </div>
+          <Toaster />
         </Form>
       </Layout>
     </>

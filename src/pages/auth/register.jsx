@@ -25,21 +25,10 @@ export default function Register() {
   const [Loading, setLoading] = useState(false);
 
   const OnSubmit = (data) => {
-    // setLoading(true);
-    // createUserWithEmailAndPassword(auth, data?.email, data?.password)
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   })
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
   };
   return (
     <>
-      <div className={`${dark && "dark"}`}>
+      <div className={``}>
         <div className="flex flex-col bg-Primary-100 items-center relative dark:bg-dark-300 h-screen overflow-auto">
           <div
             className="absolute lg:top-[50px] lg:right-[130px] top-[160px]"

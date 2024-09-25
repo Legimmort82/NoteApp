@@ -8,22 +8,35 @@ import Loading from "@/components/ui/Loading/Loading";
 import useGetAllNotes from "@/api/Notes/getAllNotes";
 import useUpdateNote from "@/api/Notes/updateNote";
 import Error from "@/components/ui/Error/Error";
+import CustomToast from "@/components/ui/Toast/CustomToast";
+import toast, { Toaster } from "react-hot-toast";
 
 function favorites() {
-  const {isLoading,data,isError,error,refetch} = useGetAllNotes()
-  const mutation = useUpdateNote()
-  const notesFilter = data?.data.filter((note) => note.isFavorite == true && note.isTrash == false) ;
-
+  const { isLoading, data, isError, error, refetch } = useGetAllNotes();
+  const mutation = useUpdateNote();
+  
+  const notesFilter = data?.data.filter(
+    (note) => note.isFavorite == true && note.isTrash == false
+  );
 
   const ChangeTrashStatus = (id) => {
     const singleNote = notesFilter.find((note) => note.id === id);
     const note = { ...singleNote, isTrash: true };
     mutation.mutate(
-      { note, id },
+      { data:note, id },
       {
         onSuccess: (res) => {
+          refetch();
+          toast.custom(
+            () => (
+              <CustomToast
+                text="Note is on trash folder right now"
+                color="red"
+              />
+            ),
+            { duration: 1500, position: "top-center", }
+          );
           console.log(res);
-          refetch()
         },
         onError: (err) => {
           console.log(err);
@@ -36,11 +49,17 @@ function favorites() {
     const singleNote = notesFilter.find((note) => note.id === id);
     const note = { ...singleNote, isFavorite: false };
     mutation.mutate(
-      { note, id },
+      { data:note, id },
       {
         onSuccess: (res) => {
+          refetch();
+          toast.custom(
+            () => (
+              <CustomToast text="Note is not favorite yet" color="orange" />
+            ),
+            { duration: 1500, position: "top-center" }
+          );
           console.log(res);
-          refetch()
         },
         onError: (err) => {
           console.log(err);
@@ -50,16 +69,12 @@ function favorites() {
   };
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
   if (isError) {
-    return (
-      <Error>
-        {error.message}
-      </Error>
-    )
+    return <Error>{error.message}</Error>;
   }
-  
+
   return (
     <>
       <Layout>
@@ -93,6 +108,7 @@ function favorites() {
               })}
             </div>
           </div>
+          <Toaster />
         </div>
       </Layout>
     </>
