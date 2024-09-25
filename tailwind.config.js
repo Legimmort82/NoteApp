@@ -34,6 +34,9 @@ module.exports = {
           "pink": "#EA4DC8"
         },
       },
+      height: {
+        'calc60': 'calc(100vh - 60px)',
+      },
     },
   },
   darkMode:"class",

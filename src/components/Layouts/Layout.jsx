@@ -15,12 +15,12 @@ const Layout = ({ children }) => {
   const { dark, setDark } = useContext(darkModeContext);
 
   return (
-    <div className={`lg:flex-row flex flex-col-reverse   `}>
-      <div className="bg-Primary-700 z-10 dark:bg-[#0C071C] duration-1000 min-w-[90px] min-h-[60px] lg:h-screen justify-between items-center px-2 flex lg:flex-col lg:justify-around lg:top-0 sticky bottom-0 right-0 left-0">
+    <div className="lg:flex-row flex flex-col-reverse">
+      <div className="bg-Primary-700 z-10 dark:bg-[#0C071C] duration-1000 min-h-[60px] lg:h-screen justify-between items-center px-4  flex lg:flex-col lg:justify-around lg:top-0 sticky bottom-0 right-0 left-0">
         <Link href={"/"}>
-          <Tippy content="Home" placement="right" delay={200}>
+          <Tippy content="Home" placement="top" delay={200}>
             <Image
-              className="w-[35px] h-[35px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
+              className="w-[21px] h-[21px] lg:w-[29px] lg:h-[29px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
               src={homeImg}
               alt="icon"
             />
@@ -28,9 +28,9 @@ const Layout = ({ children }) => {
         </Link>
 
         <Link href={"/note/allnotes"}>
-          <Tippy content="All Notes" placement="right" delay={200}>
+          <Tippy content="All Notes" placement="top" delay={200}>
             <Image
-              className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
+              className="w-[24px] h-[24px] lg:w-[32px] lg:h-[32px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
               src={allNoteImg}
               alt="icon"
             />
@@ -38,9 +38,9 @@ const Layout = ({ children }) => {
         </Link>
 
         <Link href={"/note/addnotes"}>
-          <Tippy content="Add Note" placement="right" delay={200}>
+          <Tippy content="Add Note" placement="top" delay={200}>
             <Image
-              className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
+              className="w-[24px] h-[24px] lg:w-[32px] lg:h-[32px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
               src={addNoteImg}
               alt="icon"
             />
@@ -48,9 +48,9 @@ const Layout = ({ children }) => {
         </Link>
 
         <Link href={"/note/trashes"}>
-          <Tippy content="Trash" placement="right" delay={200}>
+          <Tippy content="Trash" placement="top" delay={200}>
             <Image
-              className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
+              className="w-[24px] h-[24px] lg:w-[32px] lg:h-[32px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
               src={trashImg}
               alt="icon"
             />
@@ -58,18 +58,18 @@ const Layout = ({ children }) => {
         </Link>
 
         <Link href={"/note/favorites"}>
-          <Tippy content="Favorite" placement="right" delay={200}>
+          <Tippy content="Favorite" placement="top" delay={200}>
             <Image
-              className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
+              className="w-[24px] h-[24px] lg:w-[32px] lg:h-[32px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
               src={favoriteImg}
               alt="icon"
             />
           </Tippy>
         </Link>
 
-        <Tippy content="Dark | Light" placement="right" delay={200}>
+        <Tippy content="Dark | Light" placement="top" delay={200}>
           <Image
-            className="w-[40px] h-[40px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
+            className="w-[24px] h-[24px] lg:w-[32px] lg:h-[32px] cursor-pointer duration-[230ms] hover:scale-[1.30]"
             src={darkModeImg}
             onClick={() => {
               setDark(!dark);

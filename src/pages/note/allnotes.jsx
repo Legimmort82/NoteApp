@@ -102,12 +102,12 @@ function AllNotes() {
   return (
     <>
       <Layout>
-        <div className="bg-Primary-100 dark:bg-dark-300 h-screen relative overflow-x-clip overflow-y-auto duration-1000">
+        <div className="bg-Primary-100 dark:bg-dark-300 h-calc60 lg:h-screen relative overflow-x-clip overflow-y-auto duration-1000">
           <div className="bg-Primary-700 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] dark:shadow-none shadow-md shadow-gray-400 " />
 
-          <div className="flex flex-col items-center md:items-start  md:pl-[96px] md:pr-10">
+          <div className="flex flex-col items-center md:items-start md:pl-[96px] md:pr-10">
             <h1 className="py-7 text-Primary-500 text-[55px] font-bold md:self-start">
-              Allnotes
+              All notes
             </h1>
 
             <div className="flex flex-col md:flex-row md:flex-wrap gap-9 pb-10">
