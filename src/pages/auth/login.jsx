@@ -4,8 +4,6 @@ import Link from "next/link";
 import Tippy from "@tippyjs/react";
 import Form from "@/components/ui/Form";
 import { darkModeContext } from "@/context/DarkModeContext";
-import { auth } from "@/context/Firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BeatLoader } from "react-spinners";
@@ -27,16 +25,16 @@ export default function Login() {
   const [Loading, setLoading] = useState(false);
   const OnSubmit = (data) => {
     setLoading(true);
-    signInWithEmailAndPassword(auth, data?.email, data?.password)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    // signInWithEmailAndPassword(auth, data?.email, data?.password)
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
   };
   return (
     <div className={`${dark && "dark"}`}>

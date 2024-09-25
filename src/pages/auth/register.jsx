@@ -4,10 +4,8 @@ import Link from "next/link";
 import Tippy from "@tippyjs/react";
 import Form from "@/components/ui/Form";
 import { darkModeContext } from "@/context/DarkModeContext";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useContext, useState } from "react";
 import { BeatLoader } from "react-spinners";
-import { auth } from "@/context/Firebase";
 import { useForm } from "react-hook-form";
 import { SecondaryInputField } from "@/components/ui/Fields/fields";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,17 +25,17 @@ export default function Register() {
   const [Loading, setLoading] = useState(false);
 
   const OnSubmit = (data) => {
-    setLoading(true);
-    createUserWithEmailAndPassword(auth, data?.email, data?.password)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    // setLoading(true);
+    // createUserWithEmailAndPassword(auth, data?.email, data?.password)
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
   };
   return (
     <>

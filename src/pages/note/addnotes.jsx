@@ -17,7 +17,7 @@ import { AddNoteSchema } from "@/schemas/AddNoteSchema";
 
 function AddNotes() {
   const [selectColor, setSelectColor] = useState("#F44336");
-  const { mutate } = useAddNote();
+  const { mutate,isPending } = useAddNote();
   const { data } = useGetAllNotes();
   const numberOfObjects = data?.data.length;
   const methods = useForm({
@@ -28,7 +28,6 @@ function AddNotes() {
     },
     resolver: zodResolver(AddNoteSchema),
   });
-
   const handleSubmit = (addData) => {
     const note = {
       id: String(numberOfObjects + 1),
@@ -147,7 +146,7 @@ function AddNotes() {
             />
 
             <div className="w-40">
-              <Button onClick={() => handleSubmit}> save / edit</Button>
+              <Button onClick={() => handleSubmit} disabled={methods.formState.isValid}> save / edit</Button>
             </div>
 
             {/* <button

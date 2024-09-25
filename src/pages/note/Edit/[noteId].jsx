@@ -135,7 +135,7 @@ const EditNote = () => {
             />
 
             <div className="w-40">
-              <Button onClick={() => handleSubmit}> save / edit</Button>
+              <Button onClick={() => handleSubmit} disabled={methods.formState.isValid}> save / edit</Button>
             </div>
             <Toaster />
           </div>

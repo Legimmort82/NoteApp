@@ -17,7 +17,7 @@ function NoteCard({
   return (
     <div
       className={
-        "flex bg-white flex-col justify-between md:w-[30%] w-full min-w-[350px] rounded-md px-4 py-3 shadow-sm hover:shadow-lg duration-1000 hover:scale-[1.01] dark:shadow-gray-600"
+        "flex bg-white flex-col justify-between md:w-[30%] w-full min-w-[350px] rounded-md px-4 py-3 shadow-sm hover:shadow-lg duration-200 hover:scale-[1.01] dark:shadow-gray-600"
       }
       style={{ borderLeft: `8px solid ${color}`, borderColor: color }}
     >
