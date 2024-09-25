@@ -8,12 +8,13 @@ import Loading from "@/components/ui/Loading/Loading";
 import useGetAllNotes from "@/api/Notes/getAllNotes";
 import useUpdateNote from "@/api/Notes/updateNote";
 import Error from "@/components/ui/Error/Error";
-import toast, { Toaster } from "react-hot-toast";
 import CustomToast from "@/components/ui/Toast/CustomToast";
+import toast, { Toaster } from "react-hot-toast";
 
 function favorites() {
   const { isLoading, data, isError, error, refetch } = useGetAllNotes();
   const mutation = useUpdateNote();
+  
   const notesFilter = data?.data.filter(
     (note) => note.isFavorite == true && note.isTrash == false
   );

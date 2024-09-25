@@ -9,13 +9,14 @@ import useGetAllNotes from "@/api/Notes/getAllNotes";
 import useUpdateNote from "@/api/Notes/updateNote";
 import useDeleteNote from "@/api/Notes/deleteNote";
 import Error from "@/components/ui/Error/Error";
-import toast, { Toaster } from "react-hot-toast";
 import CustomToast from "@/components/ui/Toast/CustomToast";
+import toast, { Toaster } from "react-hot-toast";
 
 function trashes() {
   const { isLoading, data, isError, error, refetch } = useGetAllNotes();
   const mutationUpdate = useUpdateNote();
   const mutationDelete = useDeleteNote();
+  
   const notesFilter = data?.data.filter((note) => note.isTrash == true);
 
   const RestoreNote = (id) => {

@@ -24,17 +24,6 @@ export default function Login() {
   const { dark, setDark } = useContext(darkModeContext);
   const [Loading, setLoading] = useState(false);
   const OnSubmit = (data) => {
-    setLoading(true);
-    // signInWithEmailAndPassword(auth, data?.email, data?.password)
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   })
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
   };
   return (
     <div className={`${dark && "dark"}`}>

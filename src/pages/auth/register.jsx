@@ -25,17 +25,6 @@ export default function Register() {
   const [Loading, setLoading] = useState(false);
 
   const OnSubmit = (data) => {
-    // setLoading(true);
-    // createUserWithEmailAndPassword(auth, data?.email, data?.password)
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   })
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
   };
   return (
     <>
