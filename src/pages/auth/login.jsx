@@ -25,98 +25,93 @@ export default function Login() {
   const OnSubmit = (data) => {
   };
   return (
-    <div className={``}>
+
+    <div
+      className="flex flex-col items-center bg-Primary-100 dark:bg-dark-300 overflow-auto h-screen relative duration-1000"
+    >
       <div
-        className={` flex flex-col items-center bg-Primary-100 dark:bg-dark-300 overflow-auto h-screen relative `}
+        className="absolute top-5 left-9 md:top-[32px] md:left-[70px] lg:top-[38px] lg:left-[140px]"
+        onClick={() => {
+          setDark(!dark);
+        }}
       >
-        <div
-          className="absolute lg:top-[50px] lg:right-[130px] top-[160px]"
-          onClick={() => {
-            setDark(!dark);
-          }}
-        >
-          <Tippy content="Dark | Light" placement="bottom" delay={200}>
-            <Image
-              className="w-[ 60px] h-[60px] cursor-pointer duration-[230ms] hover:scale-[1.12]"
-              src={darkModeImg}
-              alt="logo"
-            />
-          </Tippy>
-        </div>
+        <Tippy content="Dark | Light" placement="bottom" delay={200}>
+          <Image
+            className="w-[35px] h-[35px] md:w-[45px] md:h-[45px] lg:w-[60px] lg:h-[60px] cursor-pointer duration-[230ms] hover:scale-[1.12]"
+            src={darkModeImg}
+            alt="logo"
+          />
+        </Tippy>
+      </div>
 
-        <div className="md:mb-28 mb-40">
-          <h1 className="text-Primary-500 md:text-[90px] text-[70px] font-bold">
-            Note Smart
-          </h1>
-        </div>
+      <div className="flex flex-col items-center mb-[80px] md:mb-28">
+        <h1 className="text-Primary-500 text-[50px] md:text-[70px] lg:text-[90px] font-extrabold">
+          Note Smart
+        </h1>
 
-        <div className="md:flex md:justify-evenly justify-center">
-          <div className="mr-12 md:w-[30%] w-full mt-[70px]">
-            <Form
-              className="flex flex-col items-center justify-center "
-              onSubmit={OnSubmit}
-              methods={methods}
+        <h2 className="text-[50px] text-center font-semibold mt-20 md:hidden">
+          Log In To Your Account
+        </h2>
+      </div>
+
+      <div className="md:flex md:justify-evenly justify-center">
+        <div className="mr-12 md:w-[30%] w-full mt-[70px]">
+          <Form
+            className="flex flex-col items-center justify-center "
+            onSubmit={OnSubmit}
+            methods={methods}
+          >
+            <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
+              Email Address
+            </label>
+            <div className="mb-8 w-full">
+              <SecondaryInputField name="email" type={"email"} />
+            </div>
+
+            <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
+              Password
+            </label>
+            <div className="mb-8 w-full">
+              <SecondaryInputField
+                isEye={true}
+                name="password"
+                type={"password"}
+              />
+            </div>
+
+            <button
+              className="bg-Primary-500 text-white py-3 px-[110px] rounded-md mb-3"
+              type="submit"
             >
-              <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
-                Email Address
-              </label>
-              <div className="mb-8 w-full">
-                <SecondaryInputField name="email" type={"email"} />
-              </div>
+              {Loading ? (
+                <BeatLoader color="#FFF" size={12} className="px-6" />
+              ) : (
+                "Login"
+              )}
+            </button>
 
-              <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
-                Password
-              </label>
-              <div className="mb-8 w-full">
-                <SecondaryInputField 
-                  isEye={true}
-                  name="password" 
-                  type={"password"} 
-                />
+            <Link
+              className="font-bold text-[16px] text-Primary-500"
+              href="register"
+            >
+              Dont have an account?
+            </Link>
+          </Form>
+        </div>
 
-                {/* {
-                  if(type = password) {
-                    <SecondaryInputField name="password" type={"password"}/>
-                  }
-                  else {
-                    <SecondaryInputField name="password" type={"text"}/>
-                  }
-                } */}
-              </div>
+        <div className="md:flex md:flex-col md:items-center md:justify-center md:w-[30%] hidden ">
+          <h2 className="text-gray-950 mb-[20px] dark:text-white text-[60px] text-center font-bold">
+            Log In To Your Account
+          </h2>
 
-              <button
-                className="bg-Primary-500 text-white py-3 px-[110px] rounded-md mb-3"
-                type="submit"
-              >
-                {Loading ? (
-                  <BeatLoader color="#FFF" size={12} className="px-6" />
-                ) : (
-                  "Login"
-                )}
-              </button>
-
-              <Link
-                className="font-bold text-[16px] text-Primary-500"
-                href="register"
-              >
-                Dont have an account?
-              </Link>
-            </Form>
-          </div>
-
-          <div className="md:flex md:flex-col md:items-center md:justify-center md:w-[30%] hidden ">
-            <h2 className="text-gray-950 mb-[20px] dark:text-white text-[60px] text-center font-bold">
-              Log In To Your Account
-            </h2>
-
-            <p className="text-gray-700 text-center dark:text-white text-[25px] leading-[50px]">
-              Login to NoteSmart for free Create and manage unlimited notes
-              enjoy the friendly and easy to use enviroment with various
-              features
-            </p>
-          </div>
+          <p className="text-gray-700 text-center dark:text-white text-[25px] leading-[50px]">
+            Login to NoteSmart for free Create and manage unlimited notes
+            enjoy the friendly and easy to use enviroment with various
+            features
+          </p>
         </div>
       </div>
     </div>
+
   );
 }
