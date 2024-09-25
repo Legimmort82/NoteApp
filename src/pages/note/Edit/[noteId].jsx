@@ -8,7 +8,6 @@ import useGetAllNotes from "@/api/Notes/getAllNotes";
 import Loading from "@/components/ui/Loading/Loading";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
-import { CirclePicker } from "react-color";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
