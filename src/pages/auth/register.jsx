@@ -73,14 +73,17 @@ export default function Register() {
                   Email Address
                 </label>
                 <div className="mb-8 w-full">
-                  <SecondaryInputField name="email" />
+                  <SecondaryInputField name="email" type={"email"}/>
                 </div>
 
                 <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                   Password
                 </label>
                 <div className="mb-8 w-full">
-                  <SecondaryInputField name="password" />
+                  <SecondaryInputField 
+                    isEye={true}
+                    name="password" 
+                    type={"password"}/>
                 </div>
                 <button
                   className=" text-white py-3 px-[90px] bg-Primary-500 rounded-md mb-3"

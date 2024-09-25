@@ -24,14 +24,14 @@ module.exports = {
           "100": "#40677D"
         },
         note: {
-          "red" : "#C92626",
-          "purple": "#700B47",
-          "yellow": "#C1C52B",
-          "green": "#70B857",
+          "red" : "#EA1616",
+          "orange": "#FF7817",
+          "yellow": "#FAFF00",
+          "green": "#0CAA08",
           "light-blue": "#35CEF0",
-          "orange": "#EB7635",
-          "pink": "#CA38AA",
-          "dark-blue": "#374FA6"
+          "dark-blue": "#0034EA",
+          "purple": "#90008A",
+          "pink": "#EA4DC8"
         },
       },
     },

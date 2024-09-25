@@ -1,10 +1,13 @@
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import PropTypes from "prop-types";
+import Image from "next/image";
+import eye from "@/assets/icons/login-&-register-icons/eye.svg";
+import eyeClose from "@/assets/icons/login-&-register-icons/eye-closed.svg";
 
 const SecondaryInput = forwardRef(
   (
     {
-      type = "text",
+      type,
       value,
       error,
       placeholder,
@@ -15,14 +18,27 @@ const SecondaryInput = forwardRef(
       min,
       max,
       onChange,
+      isEye = false
     },
     ref
   ) => {
     
+    const [typeKind, setTypeKind] = useState(type)
+
+    const handleType = () => {
+      if (typeKind == "password") {
+        setTypeKind("text")
+      }
+      else if (typeKind == "text") {
+        setTypeKind("password")
+      }
+    }
+
     return (
-      <div>
+      <div className="relative">
+        {isEye && <Image src={typeKind=="text"? eye : eyeClose} onClick={handleType} className="absolute right-2 top-3" />}
         <input
-          type={type}
+          type={typeKind}
           required={required}
           name={name}
           placeholder={placeholder}
@@ -54,6 +70,7 @@ SecondaryInput.propTypes ={
   minLength: PropTypes.number,
   min: PropTypes.number,
   max: PropTypes.number,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  isEye: PropTypes.bool
  }
 export default SecondaryInput;

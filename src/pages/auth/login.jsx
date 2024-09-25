@@ -13,7 +13,6 @@ import { LoginSchema } from "@/schemas/LoginSchema";
 import "tippy.js/dist/tippy.css";
 
 export default function Login() {
-
   const methods = useForm({
     defaultValues: {
       email: "",
@@ -73,14 +72,27 @@ export default function Login() {
                 Email Address
               </label>
               <div className="mb-8 w-full">
-                <SecondaryInputField name="email" />
+                <SecondaryInputField name="email" type={"email"} />
               </div>
 
               <label className="text-gray-800 dark:text-white text-[15px] mb-4 font-semibold">
                 Password
               </label>
               <div className="mb-8 w-full">
-                <SecondaryInputField name="password" />
+                <SecondaryInputField 
+                  isEye={true}
+                  name="password" 
+                  type={"password"} 
+                />
+
+                {/* {
+                  if(type = password) {
+                    <SecondaryInputField name="password" type={"password"}/>
+                  }
+                  else {
+                    <SecondaryInputField name="password" type={"text"}/>
+                  }
+                } */}
               </div>
 
               <button

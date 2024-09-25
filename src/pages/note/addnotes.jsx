@@ -14,9 +14,10 @@ import {
   PrimaryTextareaField,
 } from "@/components/ui/Fields/fields";
 import { AddNoteSchema } from "@/schemas/AddNoteSchema";
+import ColorPicker from "@/components/ui/Color/ColorPicker";
 
 function AddNotes() {
-  const [selectColor, setSelectColor] = useState("#F44336");
+  const [color, setColor] = useState("#EA1616");
   const { mutate } = useAddNote();
   const { data } = useGetAllNotes();
   const numberOfObjects = data?.data.length;
@@ -39,7 +40,7 @@ function AddNotes() {
         "/" +
         String(new Date().getDate()).padStart(2, "0"),
       description: addData?.desc,
-      color: selectColor,
+      color: color,
       tag: addData?.tag,
       isFavorite: false,
       isTrash: false,
@@ -88,7 +89,7 @@ function AddNotes() {
                   </p>
                   <div
                     className="w-8 h-8 rounded-[50%] ml-2 lg:ml-3"
-                    style={{ backgroundColor: selectColor }}
+                    style={{ backgroundColor: color }}
                   ></div>
                 </div>
 
@@ -102,18 +103,15 @@ function AddNotes() {
             </div>
 
             <div className="flex flex-col lg:flex-row lg:justify-between items-center mb-20 lg:mb-10">
-              <div className="flex flex-col items-center lg:w-[35%] mb-14 lg:mb-0">
-                <p className="font-semibold text-[26px] mb-9 dark:text-white">
-                  Pick a color :
-                </p>
+              <ColorPicker setColor={setColor} size={52}/>
 
-                <CirclePicker
+                {/* <CirclePicker
                   color={selectColor}
                   circleSize={50}
                   width="100%"
                   onChangeComplete={(color) => setSelectColor(color.hex)}
-                />
-              </div>
+                /> */}
+              
 
               <div className="flex flex-col w-[80%] lg:w-[50%]">
                 <p className="text-[26px] font-semibold dark:text-white">
@@ -146,7 +144,7 @@ function AddNotes() {
             />
 
             <div className="w-40">
-              <Button onClick={() => handleSubmit} disabled={methods.formState.isValid}> save / edit</Button>
+              <Button onClick={() => handleSubmit} > save / edit</Button>
             </div>
 
             {/* <button
