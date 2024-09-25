@@ -2,7 +2,7 @@
 import Styles from'./button.module.css'
 import PropTypes from "prop-types";
 
-function index({ children, onClick, type, disabled }) {
+function Button({ children, onClick, type, disabled }) {
   return (
     <>
       <button
@@ -17,11 +17,11 @@ function index({ children, onClick, type, disabled }) {
     </>
   );
 }
-
-export default index;
-index.propTypes ={
+Button.propTypes ={
   type: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   children:PropTypes.string
  }
+
+export default Button;

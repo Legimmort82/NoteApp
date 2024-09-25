@@ -82,7 +82,7 @@ const EditNote = () => {
         <Form
           methods={methods}
           onSubmit={handleSubmit}
-          className="bg-Primary-100 dark:bg-dark-300 h-screen relative overflow-x-clip overflow-y-auto"
+          className="bg-Primary-100 dark:bg-dark-300 h-screen relative overflow-x-clip overflow-y-auto duration-1000"
         >
           <div className="bg-Primary-700 dark:bg-dark-100 w-[120px] h-[120px] rounded-[50%] absolute top-[-60px] right-[-60px] shadow-md shadow-gray-400 dark:shadow-none" />
           <div className="lg:pl-36 lg:pr-40 pl-20 pr-20 py-7">

@@ -54,7 +54,6 @@ const PrimaryInput = forwardRef(
   }
 );
 
-export default PrimaryInput;
 PrimaryInput.propTypes ={
   type: PropTypes.string,
   value: PropTypes.string,
@@ -68,3 +67,4 @@ PrimaryInput.propTypes ={
   max: PropTypes.number,
   onChange: PropTypes.func
  }
+export default PrimaryInput;

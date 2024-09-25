@@ -1,7 +1,7 @@
-import Layout from "@/components/Layouts/Layout"
+import Layout from "@/components/Layouts/Layout";
 import PropTypes from "prop-types";
 
-function Error({children}) {
+function Error({ children }) {
   return (
     <>
       <Layout>
@@ -14,11 +14,11 @@ function Error({children}) {
         </div>
       </Layout>
     </>
-  )
+  );
 }
-
-export default Error
 
 Error.propTypes = {
   children: PropTypes.node,
-}
+};
+
+export default Error;

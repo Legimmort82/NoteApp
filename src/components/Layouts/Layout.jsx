@@ -15,8 +15,8 @@ const Layout = ({ children }) => {
   const { dark, setDark } = useContext(darkModeContext);
 
   return (
-    <div className={`lg:flex-row flex flex-col-reverse ${dark && "dark"}`}>
-      <div className="bg-Primary-700 z-10 dark:bg-[#0C071C] min-w-[90px] min-h-[60px] lg:h-screen justify-between items-center px-2 flex lg:flex-col lg:justify-around lg:top-0 sticky bottom-0 right-0 left-0">
+    <div className={`lg:flex-row flex flex-col-reverse ${dark && "dark"}  `}>
+      <div className="bg-Primary-700 z-10 dark:bg-[#0C071C] duration-1000 min-w-[90px] min-h-[60px] lg:h-screen justify-between items-center px-2 flex lg:flex-col lg:justify-around lg:top-0 sticky bottom-0 right-0 left-0">
         <Link href={"/"}>
           <Tippy content="Home" placement="right" delay={200}>
             <Image

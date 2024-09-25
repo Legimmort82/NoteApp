@@ -54,7 +54,6 @@ const PrimaryTextarea = forwardRef(
   }
 );
 
-export default PrimaryTextarea;
 PrimaryTextarea.propTypes ={
   type: PropTypes.string,
   value: PropTypes.string,
@@ -68,3 +67,4 @@ PrimaryTextarea.propTypes ={
   max: PropTypes.number,
   onChange: PropTypes.func
  }
+export default PrimaryTextarea;
