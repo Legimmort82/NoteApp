@@ -19,10 +19,11 @@ import {
 import { EditNoteSchema } from "@/schemas/EditNoteSchema";
 import Error from "@/components/ui/Error/Error";
 import CustomToast from "@/components/ui/Toast/CustomToast";
+import ColorPicker from "@/components/ui/Color/ColorPicker";
 
 const EditNote = () => {
   const params = useParams();
-  const [selectColor, setSelectColor] = useState("#F44336");
+  const [color, setColor] = useState("#EA1616");
   const { isLoading, data, isError, error } = useGetAllNotes();
   const mutation = useUpdateNote();
   const findNote = data?.data.find((note) => note.id == params?.noteId);
@@ -42,7 +43,7 @@ const EditNote = () => {
         tag: findNote.tag,
         desc: findNote.description,
       });
-      setSelectColor(findNote?.color)
+      setColor(findNote?.color)
     }
   }, [findNote, methods.reset]);
 
@@ -51,7 +52,7 @@ const EditNote = () => {
       ...findNote,
       title: data?.title,
       description: data?.desc,
-      color: selectColor,
+      color: color,
       tag: data?.tag,
     };
     mutation.mutate(
@@ -97,7 +98,7 @@ const EditNote = () => {
                   </p>
                   <div
                     className="w-8 h-8 rounded-[50%] ml-2 lg:ml-3"
-                    style={{ backgroundColor: selectColor }}
+                    style={{ backgroundColor: color }}
                   ></div>
                 </div>
                 <div className="flex ml-[65px]">
@@ -110,17 +111,9 @@ const EditNote = () => {
               </div>
             </div>
             <div className="flex flex-col lg:flex-row lg:justify-between items-center mb-20 lg:mb-10">
-              <div className="flex flex-col items-center lg:w-[35%] mb-14 lg:mb-0">
-                <p className="font-semibold text-[26px] mb-9 dark:text-white">
-                  Pick a color :
-                </p>
-                <CirclePicker
-                  color={selectColor}
-                  onChangeComplete={(color) => setSelectColor(color.hex)}
-                  circleSize={50}
-                  width="100%"
-                />
-              </div>
+              
+              <ColorPicker setColor={setColor} className={"w-[52px] h-[52px]"}/>
+
               <div className="flex flex-col w-[80%] lg:w-[50%]">
                 <p className="text-[26px] font-semibold dark:text-white">
                   Write your tag :

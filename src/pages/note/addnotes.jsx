@@ -8,7 +8,6 @@ import useGetAllNotes from "@/api/Notes/getAllNotes";
 import CustomToast from "@/components/ui/Toast/CustomToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { CirclePicker } from "react-color";
 import { useForm } from "react-hook-form";
 import {
   PrimaryInputField,
@@ -102,16 +101,9 @@ function AddNotes() {
             </div>
 
             <div className="flex flex-col lg:flex-row lg:justify-between items-center mb-20 lg:mb-10">
-              <ColorPicker setColor={setColor} size={52}/>
-
-                {/* <CirclePicker
-                  color={selectColor}
-                  circleSize={50}
-                  width="100%"
-                  onChangeComplete={(color) => setSelectColor(color.hex)}
-                /> */}
               
-
+              <ColorPicker setColor={setColor} className={"w-[52px] h-[52px]"}/>
+              
               <div className="flex flex-col w-[80%] lg:w-[50%]">
                 <p className="text-[26px] font-semibold dark:text-white">
                   Write your tag :
