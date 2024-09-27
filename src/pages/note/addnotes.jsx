@@ -116,6 +116,7 @@ function AddNotes() {
               </div>
             </div>
             <PrimaryTextareaField
+              maxLength={"1500"}
               name="desc"
               placeholder="Write Your Content ... "
             />
