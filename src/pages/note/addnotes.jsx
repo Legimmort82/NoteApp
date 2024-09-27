@@ -31,6 +31,7 @@ function AddNotes() {
     },
     resolver: zodResolver(AddNoteSchema),
   });
+  console.log(methods.formState.isLoading);
   
   const date =
     new Date().getFullYear() +
@@ -121,11 +122,8 @@ function AddNotes() {
             <div className="w-40">
               <Button
                 onClick={() => handleSubmit}
-                disabled={methods.formState.isLoading}
               >
-                {" "}
                 save / edit
-                {/* {console.log(methods.formState.isDirty)} */}
               </Button>
             </div>
           </div>

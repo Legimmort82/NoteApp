@@ -131,9 +131,7 @@ const EditNote = () => {
             <div className="w-40">
               <Button
                 onClick={() => handleSubmit}
-                disabled={methods.formState.isLoading}
               >
-                {" "}
                 save / edit
               </Button>
             </div>
