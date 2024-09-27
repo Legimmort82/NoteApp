@@ -48,7 +48,7 @@ const PrimaryInput = forwardRef(
             focus ? "scale-[1.02]" : ""
           }`}
         />
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
       </div>
     );
   }
