@@ -110,8 +110,8 @@ const EditNote = () => {
               </div>
             </div>
             <div className="flex flex-col lg:flex-row lg:justify-between items-center mb-20 lg:mb-10">
-              
-              <ColorPicker setColor={setColor} className={"w-[52px] h-[52px]"}/>
+
+              <ColorPicker setColor={setColor} className={"w-[52px] h-[52px]"} />
 
               <div className="flex flex-col w-[80%] lg:w-[50%]">
                 <p className="text-[26px] font-semibold dark:text-white">
@@ -124,7 +124,7 @@ const EditNote = () => {
             </div>
 
             <PrimaryTextareaField
-              maxLength={"1500"}
+              maxLength={1500}
               name="desc"
               placeholder="Write Your Content ... "
             />
